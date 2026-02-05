@@ -1,0 +1,339 @@
+// PLG UK Hub - Digital Forms Platform
+// Multi-tenant schema with brand + site segmentation
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Brand {
+  MENHANCEMENTS
+  WAX_FOR_MEN
+  WAX_FOR_WOMEN
+  PLG_UK
+}
+
+enum Role {
+  ADMIN
+  PRACTITIONER
+  RECEPTION
+}
+
+enum SubmissionStatus {
+  DRAFT
+  SUBMITTED
+  SIGNED
+  LOCKED
+  AMENDED
+}
+
+enum RiskLevel {
+  NONE
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// ============================================
+// ORGANIZATIONS
+// ============================================
+
+model Site {
+  id        String   @id @default(cuid())
+  name      String
+  brand     Brand
+  address   String?
+  phone     String?
+  email     String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users       User[]
+  submissions FormSubmission[]
+  clients     Client[]
+
+  @@unique([name, brand])
+  @@index([brand])
+}
+
+// ============================================
+// AUTHENTICATION & USERS
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  passwordHash  String
+  role          Role
+  brand         Brand
+  siteId        String
+  site          Site      @relation(fields: [siteId], references: [id])
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+
+  submissions   FormSubmission[]
+  auditLogs     AuditLog[]
+  amendments    Amendment[]
+
+  @@index([brand, siteId])
+  @@index([role])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  @@index([userId])
+}
+
+// ============================================
+// CLIENTS
+// ============================================
+
+model Client {
+  id              String   @id @default(cuid())
+  clientId        String   @unique @default(cuid()) // External-facing ID
+  brand           Brand
+  siteId          String
+  site            Site     @relation(fields: [siteId], references: [id])
+
+  // Personal Information
+  firstName       String
+  lastName        String
+  email           String?
+  phone           String?
+  dateOfBirth     DateTime?
+  gender          String?
+
+  // Address
+  addressLine1    String?
+  addressLine2    String?
+  city            String?
+  postcode        String?
+  country         String?  @default("United Kingdom")
+
+  // Emergency Contact
+  emergencyName   String?
+  emergencyPhone  String?
+  emergencyRelation String?
+
+  // Preferences
+  marketingEmail  Boolean  @default(false)
+  marketingSms    Boolean  @default(false)
+  marketingPhone  Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  submissions     FormSubmission[]
+
+  @@index([brand, siteId])
+  @@index([email])
+  @@index([phone])
+  @@index([lastName, firstName])
+}
+
+// ============================================
+// FORM SUBMISSIONS
+// ============================================
+
+model FormSubmission {
+  id              String           @id @default(cuid())
+  formType        String           // e.g., "patient_registration", "consent_prp"
+  formVersion     String           @default("1.0")
+  brand           Brand
+  siteId          String
+  site            Site             @relation(fields: [siteId], references: [id])
+
+  // Client reference (optional - some forms are internal)
+  clientId        String?
+  client          Client?          @relation(fields: [clientId], references: [id])
+  appointmentId   String?          // External appointment system reference
+
+  // Submission data
+  data            Json             // The actual form data
+  status          SubmissionStatus @default(DRAFT)
+  riskLevel       RiskLevel        @default(NONE)
+  riskFlags       String[]         // Array of triggered risk flags
+
+  // Stop/Escalate flags
+  requiresEscalation Boolean       @default(false)
+  escalationReason   String?
+  escalatedAt        DateTime?
+  escalatedToId      String?
+
+  // Signature
+  signatureData   String?          // Base64 encoded signature image
+  signedAt        DateTime?
+  signedByName    String?          // Name as typed during signing
+  signedByIp      String?
+
+  // Practitioner who assisted/witnessed
+  practitionerId  String?
+  practitioner    User?            @relation(fields: [practitionerId], references: [id])
+
+  // Draft/Resume
+  draftSavedAt    DateTime?
+  resumeToken     String?          @unique
+
+  // Locking
+  isLocked        Boolean          @default(false)
+  lockedAt        DateTime?
+  lockedReason    String?
+
+  // PDF
+  pdfPath         String?
+  pdfGeneratedAt  DateTime?
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  submittedAt     DateTime?
+
+  auditLogs       AuditLog[]
+  amendments      Amendment[]
+
+  @@index([brand, siteId])
+  @@index([formType])
+  @@index([clientId])
+  @@index([appointmentId])
+  @@index([status])
+  @@index([riskLevel])
+  @@index([createdAt])
+}
+
+// ============================================
+// AMENDMENTS (for locked submissions)
+// ============================================
+
+model Amendment {
+  id                String         @id @default(cuid())
+  submissionId      String
+  submission        FormSubmission @relation(fields: [submissionId], references: [id])
+
+  reason            String
+  changedFields     Json           // { fieldName: { old: value, new: value } }
+  newData           Json           // The complete updated form data
+
+  // Signature for amendment
+  signatureData     String?
+  signedAt          DateTime?
+  signedByName      String?
+
+  // Who made the amendment
+  amendedById       String
+  amendedBy         User           @relation(fields: [amendedById], references: [id])
+
+  createdAt         DateTime       @default(now())
+
+  @@index([submissionId])
+}
+
+// ============================================
+// AUDIT TRAIL
+// ============================================
+
+model AuditLog {
+  id            String          @id @default(cuid())
+  submissionId  String?
+  submission    FormSubmission? @relation(fields: [submissionId], references: [id])
+
+  action        String          // 'CREATE', 'UPDATE', 'SIGN', 'LOCK', 'AMEND', 'EXPORT', 'VIEW'
+  userId        String?
+  user          User?           @relation(fields: [userId], references: [id])
+
+  // What changed
+  previousData  Json?
+  newData       Json?
+  changedFields String[]
+
+  // Context
+  ipAddress     String?
+  userAgent     String?
+
+  createdAt     DateTime        @default(now())
+
+  // Audit logs are immutable - no updatedAt
+  @@index([submissionId])
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+// ============================================
+// FILE STORAGE
+// ============================================
+
+model FileUpload {
+  id            String   @id @default(cuid())
+  submissionId  String?
+  fieldName     String   // Which form field this belongs to
+
+  originalName  String
+  storagePath   String   // Local path or S3 key
+  mimeType      String
+  sizeBytes     Int
+
+  uploadedById  String?
+  uploadedAt    DateTime @default(now())
+
+  @@index([submissionId])
+}
+
+// ============================================
+// DATA RETENTION
+// ============================================
+
+model DataRetentionPolicy {
+  id              String   @id @default(cuid())
+  formType        String   @unique
+  retentionDays   Int      // Number of days to retain
+  description     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ============================================
+// SAR (Subject Access Requests)
+// ============================================
+
+model SubjectAccessRequest {
+  id              String   @id @default(cuid())
+  requestorEmail  String
+  requestorPhone  String?
+  requestorName   String
+
+  // Status
+  status          String   @default("PENDING") // PENDING, PROCESSING, COMPLETED, REJECTED
+  processedAt     DateTime?
+  processedById   String?
+
+  // Export info
+  exportPath      String?
+  downloadToken   String?  @unique
+  downloadExpires DateTime?
+  downloadCount   Int      @default(0)
+
+  notes           String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([requestorEmail])
+  @@index([status])
+}

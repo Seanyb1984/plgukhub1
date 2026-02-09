@@ -17,77 +17,133 @@ export default async function HomePage() {
           <div className="text-2xl font-bold text-white">
             PLG UK Hub
           </div>
-          <Link
-            href="/login"
-            className="px-6 py-2.5 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition-colors"
-          >
-            Sign In
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/treatment-journey"
+              className="px-4 py-2 text-slate-300 hover:text-white transition-colors font-medium"
+            >
+              Treatment Journey
+            </Link>
+            <Link
+              href="/command-centre"
+              className="px-4 py-2 text-slate-300 hover:text-white transition-colors font-medium"
+            >
+              Command Centre
+            </Link>
+            <Link
+              href="/login"
+              className="px-6 py-2.5 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition-colors"
+            >
+              Sign In
+            </Link>
+          </div>
         </nav>
       </header>
 
       {/* Hero */}
       <main className="flex-1 flex items-center justify-center p-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/20 rounded-full text-teal-300 text-sm font-medium mb-6">
+            <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
+            CQC-Compliant Clinical Management
+          </div>
+
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Digital Forms Platform
+            Multi-Brand Clinical
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400">
+              Management Hub
+            </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Secure, compliant digital forms for clinical practices and service businesses.
-            Streamline consent, consultation notes, and operational documentation.
+            Unified treatment journeys for Menhancements, Wax for Men, and Wax for Women.
+            Phased clinical workflows with POM triage, digital consent, and automated aftercare.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link
-              href="/login"
-              className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors"
+              href="/treatment-journey"
+              className="px-8 py-4 bg-teal-600 text-white rounded-lg font-semibold text-lg hover:bg-teal-700 transition-colors"
             >
-              Get Started
+              Start Treatment Journey
             </Link>
             <Link
-              href="/forms"
+              href="/command-centre"
               className="px-8 py-4 bg-white/10 text-white rounded-lg font-semibold text-lg hover:bg-white/20 transition-colors border border-white/20"
             >
-              View Forms
+              Command Centre
             </Link>
           </div>
 
-          {/* Feature Cards */}
-          <div className="grid md:grid-cols-3 gap-6 text-left">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+          {/* Brand Cards */}
+          <div className="grid md:grid-cols-3 gap-6 text-left mb-12">
+            <div className="bg-gradient-to-br from-[#1a1a2e]/80 to-[#1a1a2e]/40 backdrop-blur-sm rounded-xl p-6 border border-[#c9a84c]/30">
+              <div className="w-12 h-12 bg-[#c9a84c]/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-[#c9a84c] text-xl font-bold">M</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Secure & Compliant</h3>
-              <p className="text-slate-400">
-                GDPR compliant with full audit trails, e-signatures, and secure data storage.
+              <h3 className="text-xl font-semibold text-white mb-2">Menhancements</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                Premium Medical Aesthetics. Full POM triage with prescriber verification,
+                facial mapping, and CQC-compliant consent flows.
               </p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="text-xs bg-[#c9a84c]/20 text-[#c9a84c] px-2 py-1 rounded">Botox</span>
+                <span className="text-xs bg-[#c9a84c]/20 text-[#c9a84c] px-2 py-1 rounded">Fillers</span>
+                <span className="text-xs bg-[#c9a84c]/20 text-[#c9a84c] px-2 py-1 rounded">PRP</span>
+                <span className="text-xs bg-[#c9a84c]/20 text-[#c9a84c] px-2 py-1 rounded">POM</span>
+              </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+            <div className="bg-gradient-to-br from-[#2b4162]/80 to-[#2b4162]/40 backdrop-blur-sm rounded-xl p-6 border border-[#4a90d9]/30">
+              <div className="w-12 h-12 bg-[#4a90d9]/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-[#4a90d9] text-xl font-bold">WM</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Fast & Mobile-First</h3>
-              <p className="text-slate-400">
-                Optimized for iPad and mobile devices with big tap targets and minimal clicks.
+              <h3 className="text-xl font-semibold text-white mb-2">Wax for Men</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                Professional male grooming. Streamlined consent, skin sensitivity screening,
+                and efficient batch tracking.
               </p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="text-xs bg-[#4a90d9]/20 text-[#4a90d9] px-2 py-1 rounded">Back & Chest</span>
+                <span className="text-xs bg-[#4a90d9]/20 text-[#4a90d9] px-2 py-1 rounded">Full Body</span>
+                <span className="text-xs bg-[#4a90d9]/20 text-[#4a90d9] px-2 py-1 rounded">Facial</span>
+              </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+            <div className="bg-gradient-to-br from-[#7c3a5e]/80 to-[#7c3a5e]/40 backdrop-blur-sm rounded-xl p-6 border border-[#d4758b]/30">
+              <div className="w-12 h-12 bg-[#d4758b]/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-[#d4758b] text-xl font-bold">WW</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Multi-Brand Support</h3>
-              <p className="text-slate-400">
-                Manage multiple brands and sites from a single platform with role-based access.
+              <h3 className="text-xl font-semibold text-white mb-2">Wax for Women</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                Professional beauty & waxing. Clean workflows with patch test tracking,
+                consent management, and aftercare automation.
               </p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="text-xs bg-[#d4758b]/20 text-[#d4758b] px-2 py-1 rounded">Brazilian</span>
+                <span className="text-xs bg-[#d4758b]/20 text-[#d4758b] px-2 py-1 rounded">Legs</span>
+                <span className="text-xs bg-[#d4758b]/20 text-[#d4758b] px-2 py-1 rounded">Facial</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature Grid */}
+          <div className="grid md:grid-cols-4 gap-4 text-left">
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+              <h4 className="text-sm font-semibold text-white mb-1">4-Phase Stepper</h4>
+              <p className="text-xs text-slate-400">Identification, POM Triage, Consent, Clinical Record, Close-out</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+              <h4 className="text-sm font-semibold text-white mb-1">Stop-Logic</h4>
+              <p className="text-xs text-slate-400">CQC safety screening with hard stops for blood disorders & allergies</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+              <h4 className="text-sm font-semibold text-white mb-1">Facial Mapping</h4>
+              <p className="text-xs text-slate-400">Canvas-based injection point tracking with longitudinal coordinates</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+              <h4 className="text-sm font-semibold text-white mb-1">Google Workspace</h4>
+              <p className="text-xs text-slate-400">Drive storage, Sheets protocols, Gmail aftercare automation</p>
             </div>
           </div>
         </div>

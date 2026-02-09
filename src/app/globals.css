@@ -1,26 +1,192 @@
 @import "tailwindcss";
 
+/* ============================================
+   PLG UK Hub - Brand Theme Variables
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  /* Default brand (PLG UK) */
+  --brand-primary: #0f172a;
+  --brand-primary-hover: #1e293b;
+  --brand-primary-fg: #ffffff;
+  --brand-secondary: #0d9488;
+  --brand-secondary-hover: #0f766e;
+  --brand-accent: #14b8a6;
+  --brand-bg: #f8fafc;
+  --brand-surface: #ffffff;
+  --brand-surface-hover: #f1f5f9;
+  --brand-border: #e2e8f0;
+  --brand-text: #0f172a;
+  --brand-text-muted: #64748b;
+  --brand-success: #059669;
+  --brand-warning: #d97706;
+  --brand-danger: #dc2626;
+  --brand-info: #0284c7;
+  --brand-step-active: #0d9488;
+  --brand-step-completed: #059669;
+  --brand-step-pending: #e2e8f0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-success: var(--brand-success);
+  --color-brand-warning: var(--brand-warning);
+  --color-brand-danger: var(--brand-danger);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   Menhancements Theme Override
+   ============================================ */
+
+[data-brand="MENHANCEMENTS"] {
+  --brand-primary: #1a1a2e;
+  --brand-primary-hover: #16213e;
+  --brand-primary-fg: #ffffff;
+  --brand-secondary: #c9a84c;
+  --brand-secondary-hover: #b8963a;
+  --brand-accent: #e2b04a;
+  --brand-bg: #f8f7f4;
+  --brand-surface: #ffffff;
+  --brand-surface-hover: #f5f3ef;
+  --brand-border: #d4cfc5;
+  --brand-text: #1a1a2e;
+  --brand-text-muted: #6b6b7b;
+  --brand-step-active: #c9a84c;
+  --brand-step-completed: #2d6a4f;
+  --brand-step-pending: #d4cfc5;
+}
+
+/* ============================================
+   Wax for Men Theme Override
+   ============================================ */
+
+[data-brand="WAX_FOR_MEN"] {
+  --brand-primary: #2b4162;
+  --brand-primary-hover: #1d3050;
+  --brand-primary-fg: #ffffff;
+  --brand-secondary: #4a90d9;
+  --brand-secondary-hover: #3a7ec5;
+  --brand-accent: #5da3ed;
+  --brand-bg: #f4f6f9;
+  --brand-surface: #ffffff;
+  --brand-surface-hover: #eef2f7;
+  --brand-border: #d1d9e6;
+  --brand-text: #1e293b;
+  --brand-text-muted: #64748b;
+  --brand-step-active: #4a90d9;
+  --brand-step-completed: #059669;
+  --brand-step-pending: #d1d9e6;
+}
+
+/* ============================================
+   Wax for Women Theme Override
+   ============================================ */
+
+[data-brand="WAX_FOR_WOMEN"] {
+  --brand-primary: #7c3a5e;
+  --brand-primary-hover: #6b2f50;
+  --brand-primary-fg: #ffffff;
+  --brand-secondary: #d4758b;
+  --brand-secondary-hover: #c46378;
+  --brand-accent: #e8a0b2;
+  --brand-bg: #fdf6f8;
+  --brand-surface: #ffffff;
+  --brand-surface-hover: #fdf0f3;
+  --brand-border: #ebd4db;
+  --brand-text: #3d1c2e;
+  --brand-text-muted: #8b6b7a;
+  --brand-step-active: #d4758b;
+  --brand-step-completed: #059669;
+  --brand-step-pending: #ebd4db;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+body {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ============================================
+   Stepper Animations
+   ============================================ */
+
+@keyframes phaseEnter {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.phase-enter {
+  animation: phaseEnter 0.3s ease-out;
+}
+
+/* ============================================
+   Hard Stop Pulse
+   ============================================ */
+
+@keyframes hardStopPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+  }
+}
+
+.hard-stop-pulse {
+  animation: hardStopPulse 2s infinite;
+}
+
+/* ============================================
+   Signature Pad Styling
+   ============================================ */
+
+.signature-canvas {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ============================================
+   Facial Mapping Overlay
+   ============================================ */
+
+.facial-mapping-point {
+  transition: transform 0.15s ease;
+}
+
+.facial-mapping-point:hover {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   Print Styles (for PDF/consent forms)
+   ============================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
 }

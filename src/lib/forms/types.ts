@@ -44,7 +44,11 @@ export type FieldType =
   | 'yesNo'
   | 'yesNoNa'
   | 'medicationList'
-  | 'allergyList';
+  | 'allergyList'
+  | 'camera'
+  | 'facialMapping'
+  | 'prescriberSelect'
+  | 'batchNumber';
 
 // ============================================
 // CONDITION TYPES

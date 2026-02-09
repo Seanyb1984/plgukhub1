@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en-GB" itemscope itemtype="https://schema.org/MedicalBusiness">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================================
+         MENHANCEMENTS FLAGSHIP HOMEPAGE
+         ============================================================
+         Information Architecture:
+         ─────────────────────────
+         S1.  Hero — category-defining, above-fold CTA
+         S2.  Trust strip — social proof ticker
+         S3.  Core treatments grid — service pathways
+         S4.  Why Menhancements — differentiators
+         S5.  Packages & bundles — Unlimitox
+         S6.  How it works — 4-step journey
+         S7.  Results / benefits — outcomes & stats
+         S8.  Practitioner credibility — team trust
+         S9.  FAQ — objection handling (FAQPage schema)
+         S10. Final CTA — conversion close
+         +    Sticky mobile booking bar
+         +    Consultation form section
+
+         SEO Meta:
+         Title: Menhancements | UK's Leading Male Sexual Wellness Clinic
+         Desc:  Premium male sexual wellness & enhancement clinic.
+                Shockwave Therapy, PRP, P-Shot, HoleTox™ & more.
+                Discreet, protocol-led treatments across the North.
+         H1:   CONFIDENCE ISN'T COSMETIC. IT'S MENHANCED.
+         H2s:  Treatments, Why Menhancements, Packages, How It Works,
+               Results, Our Practitioners, FAQ, Final CTA, Form
+         H3s:  Individual treatments, differentiator cards, FAQ items
+
+         Conversion Psychology per Section:
+         S1:  Immediate value prop + authority badge = pattern interrupt
+         S2:  Social proof via repetition = unconscious trust
+         S3:  Clear pathways reduce decision fatigue
+         S4:  Differentiators counter "why not Harley St?" objection
+         S5:  Anchoring + savings framing = perceived value
+         S6:  Process transparency reduces anxiety
+         S7:  Outcome focus shifts from cost to value
+         S8:  Authority transfer from practitioner credentials
+         S9:  Objection pre-handling reduces friction
+         S10: Urgency + simplicity = final conversion push
+
+         Internal Linking Strategy:
+         - Hero → /treatments/, #consultation-form
+         - Treatment cards → /sexual-wellness/shockwave-therapy/, etc.
+         - Unlimitox → /unlimitox/
+         - Locations → /locations/manchester/, /locations/leeds/, /locations/wilmslow/
+         - Nav → /treatments/, /sexual-wellness/, /unlimitox/, /locations/, /about/
+         - Footer → /about/, /contact/, /privacy-policy/, /terms/
+
+         Page Speed Notes:
+         - Single HTTP request for fonts (display=swap)
+         - No external JS frameworks
+         - CSS in single <style> block (inline for Elementor)
+         - Images use loading="lazy" except hero
+         - Animations use transform/opacity only (GPU composited)
+         - prefers-reduced-motion disables all motion
+         - IntersectionObserver for scroll reveals (no scroll listeners)
+         - Font preconnect for Google Fonts
+         ============================================================ -->
+
+    <!-- SEO Meta -->
+    <title>Menhancements | UK's Leading Male Sexual Wellness Clinic</title>
+    <meta name="description" content="Premium male sexual wellness & enhancement clinic. Shockwave Therapy, PRP, P-Shot, HoleTox™ & more. Discreet, protocol-led treatments. Clinics in Manchester, Leeds & Wilmslow.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://menhancements.co.uk/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Menhancements | UK's Leading Male Sexual Wellness Clinic">
+    <meta property="og:description" content="Premium male sexual wellness & enhancement clinic. Shockwave Therapy, PRP, P-Shot, HoleTox™. Discreet, protocol-led treatments across the North.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://menhancements.co.uk/">
+    <meta property="og:image" content="https://menhancements.co.uk/wp-content/uploads/2025/12/Hero-3.png">
+    <meta property="og:locale" content="en_GB">
+
+    <!-- Inline Schema: MedicalBusiness (on <html> via itemscope) -->
+    <meta itemprop="name" content="Menhancements">
+    <meta itemprop="description" content="UK's leading male sexual wellness and enhancement clinic. Protocol-led treatments delivered by expert practitioners.">
+    <meta itemprop="url" content="https://menhancements.co.uk/">
+    <meta itemprop="telephone" content="01612968826">
+    <meta itemprop="email" content="hello@menhancements.co.uk">
+    <meta itemprop="priceRange" content="££-£££">
+
+    <!-- Facebook Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '679082781912508');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=679082781912508&ev=PageView&noscript=1"
+    /></noscript>
+
+    <!-- Font Preconnect & Load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+    /* =============================================================
+       MENHANCEMENTS — SCOPED CSS
+       Prefix: mh- (Elementor-safe)
+       Approach: Mobile-first, CSS custom properties, GPU-composited
+       ============================================================= */
+
+    /* --- 1. CUSTOM PROPERTIES --- */
+    :root {
+        --mh-navy:        #041827;
+        --mh-navy-light:  #0a2d42;
+        --mh-bronze:      #c6986f;
+        --mh-bronze-dark: #b08660;
+        --mh-bronze-glow: rgba(198, 152, 111, 0.25);
+        --mh-neutral:     #eaeaea;
+        --mh-deep-grey:   #262626;
+        --mh-grey:        #666666;
+        --mh-light-bg:    #f5f3f0;
+        --mh-white:       #ffffff;
+        --mh-black:       #000000;
+        --mh-glass:       rgba(255, 255, 255, 0.05);
+        --mh-glass-border:rgba(255, 255, 255, 0.1);
+        --mh-radius:      8px;
+        --mh-radius-lg:   16px;
+        --mh-shadow:      0 10px 40px rgba(0, 0, 0, 0.08);
+        --mh-shadow-lg:   0 20px 60px rgba(0, 0, 0, 0.15);
+        --mh-transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --mh-font-heading:'League Spartan', sans-serif;
+        --mh-font-body:   'Montserrat', sans-serif;
+    }
+
+    /* --- 2. RESET & BASE --- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--mh-font-body);
+        color: var(--mh-navy);
+        line-height: 1.7;
+        background: var(--mh-white);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+
+    /* --- 3. TYPOGRAPHY --- */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--mh-font-heading);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.15;
+        font-weight: 700;
+    }
+    .mh-section__label {
+        display: inline-block;
+        color: var(--mh-bronze);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+    .mh-section__title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+    .mh-section__subtitle {
+        font-size: 1rem;
+        color: var(--mh-grey);
+        max-width: 600px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+
+    /* --- 4. LAYOUT --- */
+    .mh-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .mh-section {
+        padding: 4rem 0;
+    }
+    .mh-section--dark {
+        background: var(--mh-navy);
+        color: var(--mh-white);
+    }
+    .mh-section--dark .mh-section__subtitle {
+        color: rgba(255, 255, 255, 0.65);
+    }
+    .mh-section--light {
+        background: var(--mh-light-bg);
+    }
+    .mh-section__header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    /* --- 5. SCROLL REVEAL --- */
+    .mh-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s var(--mh-transition), transform 0.7s var(--mh-transition);
+    }
+    .mh-reveal--visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* --- 6. BUTTONS --- */
+    .mh-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem 2rem;
+        border-radius: 4px;
+        font-family: var(--mh-font-body);
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        border: none;
+        transition: all var(--mh-transition);
+        text-decoration: none;
+        gap: 0.5rem;
+    }
+    .mh-btn--primary {
+        background: var(--mh-bronze);
+        color: var(--mh-white);
+    }
+    .mh-btn--primary:hover {
+        background: var(--mh-bronze-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--mh-bronze-glow);
+    }
+    .mh-btn--ghost {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: var(--mh-white);
+    }
+    .mh-btn--ghost:hover {
+        border-color: var(--mh-white);
+        background: rgba(255, 255, 255, 0.08);
+    }
+    .mh-btn--navy {
+        background: var(--mh-navy);
+        color: var(--mh-white);
+    }
+    .mh-btn--navy:hover {
+        background: var(--mh-navy-light);
+        transform: translateY(-2px);
+    }
+    .mh-btn--full { width: 100%; }
+
+    /* CTA pulse animation */
+    .mh-btn--pulse {
+        animation: mhPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes mhPulse {
+        0%, 100% { box-shadow: 0 0 0 0 var(--mh-bronze-glow); }
+        50%      { box-shadow: 0 0 0 12px rgba(198, 152, 111, 0); }
+    }
+
+    /* --- 7. NAVIGATION --- */
+    .mh-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all var(--mh-transition);
+    }
+    .mh-nav--scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .mh-nav__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0.85rem 20px;
+    }
+    .mh-nav__logo {
+        font-family: var(--mh-font-heading);
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: 0.12em;
+        color: var(--mh-navy);
+        text-transform: uppercase;
+    }
+    .mh-nav__links {
+        display: none;
+        gap: 2rem;
+        align-items: center;
+    }
+    .mh-nav__link {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--mh-navy);
+        transition: color var(--mh-transition);
+        letter-spacing: 0.02em;
+    }
+    .mh-nav__link:hover { color: var(--mh-bronze); }
+
+    /* Mobile menu toggle */
+    .mh-nav__toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+    }
+    .mh-nav__toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--mh-navy);
+        transition: all var(--mh-transition);
+    }
+
+    /* ============================================================
+       S1. HERO
+       Psychology: Pattern interrupt + immediate authority + CTA
+       ============================================================ */
+    .mh-hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, var(--mh-navy) 0%, var(--mh-navy-light) 60%, #0d3550 100%);
+        padding: 100px 0 60px;
+        overflow: hidden;
+    }
+    /* Subtle radial glow */
+    .mh-hero::before {
+        content: '';
+        position: absolute;
+        top: 20%;
+        right: -10%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(ellipse, rgba(198, 152, 111, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    /* Hero background image */
+    .mh-hero::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 55%;
+        height: 100%;
+        background: url('https://menhancements.co.uk/wp-content/uploads/2025/12/Hero-3.png') center/cover no-repeat;
+        opacity: 0.2;
+        mask-image: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
+        -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
+        pointer-events: none;
+    }
+    .mh-hero__content {
+        position: relative;
+        z-index: 2;
+        max-width: 620px;
+    }
+    .mh-hero__badge {
+        display: inline-block;
+        background: rgba(198, 152, 111, 0.15);
+        color: var(--mh-bronze);
+        padding: 0.5rem 1.25rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(198, 152, 111, 0.2);
+    }
+    .mh-hero__title {
+        font-size: 2.5rem;
+        color: var(--mh-white);
+        margin-bottom: 1.25rem;
+        line-height: 1.08;
+    }
+    .mh-hero__title span { color: var(--mh-bronze); }
+    .mh-hero__subtitle {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 2rem;
+        font-weight: 300;
+        line-height: 1.7;
+    }
+    .mh-hero__ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    /* Hero stagger animation */
+    .mh-hero__badge,
+    .mh-hero__title,
+    .mh-hero__subtitle,
+    .mh-hero__ctas {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: mhStagger 0.8s ease forwards;
+    }
+    .mh-hero__badge   { animation-delay: 0.2s; }
+    .mh-hero__title   { animation-delay: 0.4s; }
+    .mh-hero__subtitle{ animation-delay: 0.6s; }
+    .mh-hero__ctas    { animation-delay: 0.8s; }
+    @keyframes mhStagger {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       S2. TRUST TICKER
+       Psychology: Repetition = unconscious familiarity & trust
+       ============================================================ */
+    .mh-ticker {
+        background: var(--mh-deep-grey);
+        padding: 0.9rem 0;
+        overflow: hidden;
+        border-top: 1px solid rgba(198, 152, 111, 0.15);
+    }
+    .mh-ticker__track {
+        display: flex;
+        animation: mhScroll 25s linear infinite;
+        white-space: nowrap;
+    }
+    .mh-ticker__item {
+        color: var(--mh-bronze);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        padding: 0 1.5rem;
+        text-transform: uppercase;
+        flex-shrink: 0;
+    }
+    .mh-ticker__dot {
+        color: rgba(198, 152, 111, 0.35);
+        padding: 0 0.5rem;
+        flex-shrink: 0;
+    }
+    @keyframes mhScroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       S3. TREATMENTS GRID
+       Psychology: Clear pathways reduce decision fatigue
+       ============================================================ */
+    .mh-treatments__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .mh-treatment-card {
+        background: var(--mh-white);
+        border-radius: var(--mh-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--mh-shadow);
+        transition: all var(--mh-transition);
+    }
+    .mh-treatment-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--mh-shadow-lg);
+    }
+    .mh-treatment-card__img {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+    }
+    .mh-treatment-card__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    .mh-treatment-card:hover .mh-treatment-card__img img {
+        transform: scale(1.05);
+    }
+    .mh-treatment-card__body {
+        padding: 1.75rem;
+    }
+    .mh-treatment-card__title {
+        font-size: 1.35rem;
+        color: var(--mh-navy);
+        margin-bottom: 0.35rem;
+    }
+    .mh-treatment-card__tagline {
+        color: var(--mh-bronze);
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+    }
+    .mh-treatment-list {
+        margin-bottom: 1.5rem;
+    }
+    .mh-treatment-list__item {
+        padding: 0.65rem 0;
+        border-bottom: 1px solid var(--mh-neutral);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .mh-treatment-list__link {
+        font-weight: 500;
+        font-size: 0.92rem;
+        color: var(--mh-navy);
+        transition: color var(--mh-transition);
+    }
+    .mh-treatment-list__link:hover { color: var(--mh-bronze); }
+    .mh-treatment-list__arrow {
+        color: var(--mh-bronze);
+        font-size: 1.1rem;
+        transition: transform var(--mh-transition);
+    }
+    .mh-treatment-list__item:hover .mh-treatment-list__arrow {
+        transform: translateX(4px);
+    }
+
+    /* ============================================================
+       S4. WHY MENHANCEMENTS
+       Psychology: Differentiators counter competitor comparison
+       ============================================================ */
+    .mh-why__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .mh-why-card {
+        background: var(--mh-glass);
+        border: 1px solid var(--mh-glass-border);
+        border-radius: var(--mh-radius-lg);
+        padding: 2rem;
+        transition: all var(--mh-transition);
+    }
+    .mh-why-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(198, 152, 111, 0.3);
+        transform: translateY(-4px);
+    }
+    .mh-why-card__icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--mh-radius);
+        background: var(--mh-bronze-glow);
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+    }
+    .mh-why-card__title {
+        font-size: 1.1rem;
+        color: var(--mh-white);
+        margin-bottom: 0.65rem;
+    }
+    .mh-why-card__text {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.65;
+        font-weight: 300;
+    }
+
+    /* ============================================================
+       S5. UNLIMITOX / PACKAGES
+       Psychology: Anchoring + savings framing = perceived value
+       ============================================================ */
+    .mh-package {
+        background: linear-gradient(135deg, var(--mh-navy) 0%, var(--mh-navy-light) 100%);
+        border-radius: var(--mh-radius-lg);
+        padding: 2.5rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .mh-package::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -30%;
+        width: 60%;
+        height: 200%;
+        background: radial-gradient(ellipse, rgba(198, 152, 111, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .mh-package__inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        position: relative;
+        z-index: 1;
+    }
+    .mh-package__label {
+        color: var(--mh-bronze);
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    .mh-package__name {
+        font-size: 2.5rem;
+        color: var(--mh-white);
+        margin-bottom: 0.5rem;
+    }
+    .mh-package__tagline {
+        color: var(--mh-bronze);
+        font-size: 1.15rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    .mh-package__desc {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+    }
+    .mh-package__price {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    .mh-package__amount {
+        font-family: var(--mh-font-heading);
+        font-size: 2.75rem;
+        color: var(--mh-white);
+        font-weight: 700;
+    }
+    .mh-package__period {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1rem;
+    }
+    .mh-package__savings {
+        background: var(--mh-bronze-glow);
+        color: var(--mh-bronze);
+        padding: 0.4rem 0.85rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .mh-package__ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .mh-package__benefits {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--mh-glass-border);
+        border-radius: var(--mh-radius);
+        padding: 1.75rem;
+    }
+    .mh-package__benefits-title {
+        color: var(--mh-white);
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        margin-bottom: 1.25rem;
+    }
+    .mh-package__benefits li {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.7rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        display: flex;
+        gap: 0.85rem;
+        font-size: 0.92rem;
+        align-items: flex-start;
+    }
+    .mh-package__benefits li:last-child { border-bottom: none; }
+    .mh-check {
+        color: var(--mh-bronze);
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    /* ============================================================
+       S6. HOW IT WORKS
+       Psychology: Process transparency reduces anxiety
+       ============================================================ */
+    .mh-steps {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        counter-reset: step;
+    }
+    .mh-step {
+        text-align: center;
+        position: relative;
+    }
+    .mh-step__number {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--mh-bronze-glow);
+        border: 2px solid var(--mh-bronze);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+        font-family: var(--mh-font-heading);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--mh-bronze);
+    }
+    .mh-step__title {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    .mh-step__text {
+        font-size: 0.9rem;
+        color: var(--mh-grey);
+        font-weight: 300;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    /* ============================================================
+       S7. RESULTS / BENEFITS
+       Psychology: Outcome focus shifts from cost to value
+       ============================================================ */
+    .mh-results__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .mh-stat {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: var(--mh-glass);
+        border: 1px solid var(--mh-glass-border);
+        border-radius: var(--mh-radius);
+        transition: all var(--mh-transition);
+    }
+    .mh-stat:hover {
+        border-color: rgba(198, 152, 111, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+    }
+    .mh-stat__number {
+        font-family: var(--mh-font-heading);
+        font-size: 2.5rem;
+        color: var(--mh-bronze);
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    .mh-stat__label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.65);
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    /* ============================================================
+       S8. PRACTITIONER CREDIBILITY
+       Psychology: Authority transfer from credentials
+       ============================================================ */
+    .mh-practitioners__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .mh-practitioner {
+        display: flex;
+        flex-direction: column;
+        background: var(--mh-white);
+        border-radius: var(--mh-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--mh-shadow);
+        transition: all var(--mh-transition);
+    }
+    .mh-practitioner:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--mh-shadow-lg);
+    }
+    .mh-practitioner__img {
+        height: 280px;
+        background: var(--mh-navy);
+        overflow: hidden;
+    }
+    .mh-practitioner__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .mh-practitioner__body {
+        padding: 1.75rem;
+        flex: 1;
+    }
+    .mh-practitioner__name {
+        font-size: 1.25rem;
+        color: var(--mh-navy);
+        margin-bottom: 0.25rem;
+    }
+    .mh-practitioner__role {
+        color: var(--mh-bronze);
+        font-weight: 500;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+    .mh-practitioner__bio {
+        font-size: 0.9rem;
+        color: var(--mh-grey);
+        font-weight: 300;
+    }
+
+    /* ============================================================
+       S9. FAQ
+       Psychology: Objection pre-handling reduces friction
+       ============================================================ */
+    .mh-faq__list {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .mh-faq-item {
+        border-bottom: 1px solid var(--mh-neutral);
+    }
+    .mh-faq-item__question {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 1.25rem 0;
+        font-family: var(--mh-font-heading);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--mh-navy);
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    .mh-faq-item__icon {
+        font-size: 1.5rem;
+        color: var(--mh-bronze);
+        transition: transform var(--mh-transition);
+        flex-shrink: 0;
+        line-height: 1;
+    }
+    .mh-faq-item--open .mh-faq-item__icon {
+        transform: rotate(45deg);
+    }
+    .mh-faq-item__answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .mh-faq-item--open .mh-faq-item__answer {
+        max-height: 300px;
+        padding-bottom: 1.25rem;
+    }
+    .mh-faq-item__answer p {
+        font-size: 0.92rem;
+        color: var(--mh-grey);
+        font-weight: 300;
+        line-height: 1.75;
+    }
+
+    /* ============================================================
+       S10. FINAL CTA
+       Psychology: Urgency + simplicity = final conversion push
+       ============================================================ */
+    .mh-final-cta {
+        background: linear-gradient(135deg, var(--mh-navy) 0%, var(--mh-navy-light) 100%);
+        padding: 5rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .mh-final-cta::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, rgba(198, 152, 111, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .mh-final-cta__title {
+        font-size: 2rem;
+        color: var(--mh-white);
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    .mh-final-cta__text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+        font-weight: 300;
+        position: relative;
+    }
+
+    /* ============================================================
+       CONSULTATION FORM
+       ============================================================ */
+    .mh-form-section {
+        background: var(--mh-light-bg);
+        padding: 5rem 0;
+        scroll-margin-top: 100px;
+    }
+    .mh-form-container {
+        background: var(--mh-white);
+        padding: 2rem 1.5rem;
+        border-radius: var(--mh-radius-lg);
+        box-shadow: var(--mh-shadow);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .mh-form__divider {
+        color: var(--mh-bronze);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 2rem 0 1rem;
+        border-bottom: 1px solid var(--mh-neutral);
+        padding-bottom: 0.5rem;
+        letter-spacing: 0.06em;
+    }
+    .mh-form__divider:first-of-type { margin-top: 0; }
+    .mh-form__row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .mh-field label {
+        display: block;
+        color: var(--mh-navy);
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+    .mh-field input,
+    .mh-field select,
+    .mh-field textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: var(--mh-font-body);
+        font-size: 0.95rem;
+        color: var(--mh-navy);
+        background: #fcfcfc;
+        transition: border-color var(--mh-transition), background var(--mh-transition);
+    }
+    .mh-field input:focus,
+    .mh-field select:focus,
+    .mh-field textarea:focus {
+        border-color: var(--mh-bronze);
+        outline: none;
+        background: var(--mh-white);
+    }
+    .mh-selection-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+        margin-top: 0.5rem;
+    }
+    .mh-selection-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+    .mh-selection-item input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--mh-bronze);
+        cursor: pointer;
+    }
+    .mh-selection-item span {
+        font-size: 0.88rem;
+        color: var(--mh-grey);
+    }
+    .mh-btn--submit {
+        width: 100%;
+        background: var(--mh-navy);
+        color: var(--mh-white);
+        font-family: var(--mh-font-heading);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 1rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.05rem;
+        cursor: pointer;
+        transition: background var(--mh-transition);
+        margin-top: 2rem;
+    }
+    .mh-btn--submit:hover {
+        background: var(--mh-bronze);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .mh-footer {
+        background: #021018;
+        padding: 3.5rem 0 1.5rem;
+        color: rgba(255, 255, 255, 0.55);
+    }
+    .mh-footer__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    .mh-footer__brand {
+        font-family: var(--mh-font-heading);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--mh-white);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+    }
+    .mh-footer__col h4 {
+        color: var(--mh-white);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        margin-bottom: 1rem;
+    }
+    .mh-footer__col li { margin-bottom: 0.5rem; }
+    .mh-footer__col a {
+        color: rgba(255, 255, 255, 0.55);
+        transition: color var(--mh-transition);
+        font-size: 0.88rem;
+    }
+    .mh-footer__col a:hover { color: var(--mh-bronze); }
+    .mh-footer__bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
+    /* ============================================================
+       STICKY MOBILE BOOKING BAR
+       ============================================================ */
+    .mh-sticky-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        background: var(--mh-navy);
+        padding: 0.75rem 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        border-top: 1px solid rgba(198, 152, 111, 0.2);
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+    }
+    .mh-sticky-bar--visible {
+        transform: translateY(0);
+    }
+    .mh-sticky-bar__text {
+        color: var(--mh-white);
+        font-size: 0.82rem;
+        font-weight: 500;
+    }
+    .mh-sticky-bar__text span {
+        display: block;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.72rem;
+        font-weight: 300;
+    }
+    .mh-sticky-bar__btn {
+        background: var(--mh-bronze);
+        color: var(--mh-white);
+        padding: 0.65rem 1.25rem;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.82rem;
+        white-space: nowrap;
+        transition: background var(--mh-transition);
+        flex-shrink: 0;
+    }
+    .mh-sticky-bar__btn:hover { background: var(--mh-bronze-dark); }
+
+    /* ============================================================
+       RESPONSIVE — TABLET (768px+)
+       ============================================================ */
+    @media (min-width: 768px) {
+        .mh-section { padding: 5rem 0; }
+        .mh-section__title { font-size: 2.25rem; }
+        .mh-hero__title { font-size: 3.25rem; }
+        .mh-treatments__grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .mh-why__grid { grid-template-columns: repeat(2, 1fr); }
+        .mh-steps { grid-template-columns: repeat(2, 1fr); }
+        .mh-results__grid { grid-template-columns: repeat(4, 1fr); }
+        .mh-practitioners__grid { grid-template-columns: repeat(2, 1fr); }
+        .mh-package__inner { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .mh-form__row { grid-template-columns: 1fr 1fr; }
+        .mh-form-container { padding: 3rem; }
+        .mh-footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        .mh-package { padding: 3.5rem; }
+        .mh-package__name { font-size: 3rem; }
+        .mh-final-cta__title { font-size: 2.5rem; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — DESKTOP (1024px+)
+       ============================================================ */
+    @media (min-width: 1024px) {
+        .mh-section { padding: 6rem 0; }
+        .mh-section__title { font-size: 2.5rem; }
+        .mh-hero__title { font-size: 3.75rem; }
+        .mh-nav__links { display: flex; }
+        .mh-nav__toggle { display: none; }
+        .mh-why__grid { grid-template-columns: repeat(4, 1fr); }
+        .mh-steps { grid-template-columns: repeat(4, 1fr); }
+        .mh-practitioners__grid { grid-template-columns: repeat(3, 1fr); }
+        .mh-treatment-card__img { height: 260px; }
+        .mh-sticky-bar { display: none; }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        .mh-reveal { opacity: 1; transform: none; }
+        .mh-hero__badge,
+        .mh-hero__title,
+        .mh-hero__subtitle,
+        .mh-hero__ctas { opacity: 1; transform: none; }
+        .mh-ticker__track { animation: none; }
+        html { scroll-behavior: auto; }
+    }
+    </style>
+</head>
+
+<!-- ============================================================
+     BODY — itemscope MedicalBusiness applied on <html>
+     ============================================================ -->
+<body>
+
+    <!-- ========================================================
+         NAVIGATION
+         ======================================================== -->
+    <nav class="mh-nav" role="navigation" aria-label="Main navigation">
+        <div class="mh-nav__inner">
+            <a href="/" class="mh-nav__logo" itemprop="name">MENHANCEMENTS</a>
+
+            <!-- Mobile toggle -->
+            <button class="mh-nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <!-- Desktop links -->
+            <ul class="mh-nav__links">
+                <li><a href="/treatments/" class="mh-nav__link">Treatments</a></li>
+                <li><a href="/sexual-wellness/" class="mh-nav__link">Sexual Wellness</a></li>
+                <li><a href="/unlimitox/" class="mh-nav__link">Unlimitox</a></li>
+                <li><a href="/locations/" class="mh-nav__link">Locations</a></li>
+                <li><a href="/about/" class="mh-nav__link">About</a></li>
+                <li><a href="#consultation-form" class="mh-btn mh-btn--primary">Book Consultation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- ========================================================
+         S1. HERO
+         Conversion: Pattern interrupt + immediate authority + CTA
+         ======================================================== -->
+    <section class="mh-hero" role="banner">
+        <div class="mh-container">
+            <div class="mh-hero__content">
+                <span class="mh-hero__badge">THE NORTH'S LEADING MALE SEXUAL WELLNESS CLINIC</span>
+
+                <!-- H1: Primary keyword target -->
+                <h1 class="mh-hero__title">CONFIDENCE ISN'T COSMETIC.<br>IT'S <span>MENHANCED.</span></h1>
+
+                <p class="mh-hero__subtitle">Protocol-led <strong>male sexual wellness</strong> and enhancement treatments. Designed by doctors, delivered by experts. Clinics in Manchester, Leeds &amp; Wilmslow.</p>
+
+                <div class="mh-hero__ctas">
+                    <a href="#consultation-form" class="mh-btn mh-btn--primary mh-btn--pulse">Book Free Consultation</a>
+                    <a href="/treatments/" class="mh-btn mh-btn--ghost">Explore Treatments</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S2. TRUST TICKER
+         Conversion: Repetition builds unconscious trust
+         ======================================================== -->
+    <div class="mh-ticker" aria-hidden="true">
+        <div class="mh-ticker__track">
+            <span class="mh-ticker__item">DISCREET</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">PROTOCOL-LED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">DOCTOR DESIGNED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">EXPERT PRACTITIONERS</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">MANCHESTER</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">LEEDS</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">WILMSLOW</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">MALE-FOCUSED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">PREMIUM</span><span class="mh-ticker__dot">•</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="mh-ticker__item">DISCREET</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">PROTOCOL-LED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">DOCTOR DESIGNED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">EXPERT PRACTITIONERS</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">MANCHESTER</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">LEEDS</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">WILMSLOW</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">MALE-FOCUSED</span><span class="mh-ticker__dot">•</span>
+            <span class="mh-ticker__item">PREMIUM</span><span class="mh-ticker__dot">•</span>
+        </div>
+    </div>
+
+
+    <!-- ========================================================
+         S3. CORE TREATMENTS GRID
+         Conversion: Clear pathways reduce decision fatigue
+         Schema: MedicalProcedure per treatment
+         ======================================================== -->
+    <section class="mh-section mh-section--dark" id="treatments">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">What We Do</span>
+                <h2 class="mh-section__title" style="color: var(--mh-white);">Sexual Wellness &amp; Male Enhancement Treatments</h2>
+                <p class="mh-section__subtitle">Clinically proven, discreet treatments designed exclusively for men.</p>
+            </div>
+
+            <div class="mh-treatments__grid">
+
+                <!-- Card 1: Sexual Wellness -->
+                <div class="mh-treatment-card mh-reveal" itemscope itemtype="https://schema.org/MedicalProcedure">
+                    <div class="mh-treatment-card__img">
+                        <img src="https://menhancements.co.uk/wp-content/uploads/2025/12/Sexual-wellness-card.png"
+                             alt="Sexual wellness treatments for men including shockwave therapy and PRP"
+                             loading="lazy"
+                             itemprop="image">
+                    </div>
+                    <div class="mh-treatment-card__body">
+                        <h3 class="mh-treatment-card__title" itemprop="name">Sexual Wellness</h3>
+                        <p class="mh-treatment-card__tagline">Performance. Presence. Confidence.</p>
+                        <meta itemprop="procedureType" content="https://schema.org/TherapeuticProcedure">
+                        <ul class="mh-treatment-list">
+                            <li class="mh-treatment-list__item">
+                                <a href="/sexual-wellness/shockwave-therapy/" class="mh-treatment-list__link">Shockwave Therapy</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                            <li class="mh-treatment-list__item">
+                                <a href="/sexual-wellness/prp-therapy/" class="mh-treatment-list__link">PRP Therapy (P-Shot)</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                            <li class="mh-treatment-list__item">
+                                <a href="/sexual-wellness/holetox/" class="mh-treatment-list__link">HoleTox&trade;</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                            <li class="mh-treatment-list__item">
+                                <a href="/sexual-wellness/intimate-skin-brightening/" class="mh-treatment-list__link">Intimate Skin Brightening</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                        </ul>
+                        <a href="/sexual-wellness/" class="mh-btn mh-btn--primary mh-btn--full">View All Sexual Wellness</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Facial Aesthetics -->
+                <div class="mh-treatment-card mh-reveal" itemscope itemtype="https://schema.org/MedicalProcedure">
+                    <div class="mh-treatment-card__img">
+                        <img src="https://menhancements.co.uk/wp-content/uploads/2025/12/FAcial-Card.png"
+                             alt="Male facial aesthetics including anti-wrinkle and dermal fillers"
+                             loading="lazy"
+                             itemprop="image">
+                    </div>
+                    <div class="mh-treatment-card__body">
+                        <h3 class="mh-treatment-card__title" itemprop="name">Facial Aesthetics</h3>
+                        <p class="mh-treatment-card__tagline">Refreshed. Not Frozen.</p>
+                        <meta itemprop="procedureType" content="https://schema.org/CosmeticProcedure">
+                        <ul class="mh-treatment-list">
+                            <li class="mh-treatment-list__item">
+                                <a href="/treatments/anti-wrinkle/" class="mh-treatment-list__link">Anti-Wrinkle Treatments</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                            <li class="mh-treatment-list__item">
+                                <a href="/treatments/dermal-fillers/" class="mh-treatment-list__link">Dermal Fillers</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                            <li class="mh-treatment-list__item">
+                                <a href="/treatments/prp-hair-restoration/" class="mh-treatment-list__link">PRP Hair Restoration</a>
+                                <span class="mh-treatment-list__arrow" aria-hidden="true">&rarr;</span>
+                            </li>
+                        </ul>
+                        <a href="/treatments/" class="mh-btn mh-btn--primary mh-btn--full">View All Facial Treatments</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S4. WHY MENHANCEMENTS
+         Conversion: Differentiators counter competitor comparison
+         ======================================================== -->
+    <section class="mh-section mh-section--dark" id="why-us" style="background: linear-gradient(180deg, var(--mh-navy) 0%, #061e30 100%);">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">The Difference</span>
+                <h2 class="mh-section__title" style="color: var(--mh-white);">Why Menhancements</h2>
+                <p class="mh-section__subtitle">Not another clinic. A protocol-led male wellness practice built for discretion, results, and trust.</p>
+            </div>
+
+            <div class="mh-why__grid">
+                <div class="mh-why-card mh-reveal">
+                    <div class="mh-why-card__icon">&#9878;</div>
+                    <h3 class="mh-why-card__title">Protocol-Led Treatments</h3>
+                    <p class="mh-why-card__text">Every treatment follows a clinically designed protocol. No guesswork, no one-size-fits-all. Bespoke plans built around your physiology.</p>
+                </div>
+
+                <div class="mh-why-card mh-reveal">
+                    <div class="mh-why-card__icon">&#9879;</div>
+                    <h3 class="mh-why-card__title">Male-Focused Specialists</h3>
+                    <p class="mh-why-card__text">We treat men exclusively. Our practitioners understand male anatomy, psychology, and the discretion you expect.</p>
+                </div>
+
+                <div class="mh-why-card mh-reveal">
+                    <div class="mh-why-card__icon">&#128274;</div>
+                    <h3 class="mh-why-card__title">Total Discretion</h3>
+                    <p class="mh-why-card__text">Private consultation rooms. Unmarked entrances where applicable. No waiting room crossover. Your visit stays yours.</p>
+                </div>
+
+                <div class="mh-why-card mh-reveal">
+                    <div class="mh-why-card__icon">&#9733;</div>
+                    <h3 class="mh-why-card__title">Doctor-Designed</h3>
+                    <p class="mh-why-card__text">All treatment protocols are designed and overseen by qualified medical professionals. Clinical governance is not optional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S5. PACKAGES — UNLIMITOX
+         Conversion: Anchoring + savings framing
+         ======================================================== -->
+    <section class="mh-section" id="packages">
+        <div class="mh-container">
+            <div class="mh-package mh-reveal">
+                <div class="mh-package__inner">
+                    <div>
+                        <p class="mh-package__label">NEW: THE NORTH'S FIRST</p>
+                        <h2 class="mh-package__name">UNLIMITOX</h2>
+                        <p class="mh-package__tagline">Your maintenance, on autopilot.</p>
+                        <p class="mh-package__desc">The UK's first unlimited anti-wrinkle subscription. Three areas maintained year-round for one fixed monthly price. No surprises. No top-up charges.</p>
+                        <div class="mh-package__price">
+                            <span class="mh-package__amount">&pound;59</span>
+                            <span class="mh-package__period">/month</span>
+                            <span class="mh-package__savings">Save Over &pound;300/year</span>
+                        </div>
+                        <div class="mh-package__ctas">
+                            <a href="/unlimitox/" class="mh-btn mh-btn--primary">Learn More</a>
+                            <a href="#consultation-form" class="mh-btn mh-btn--ghost">Join Now</a>
+                        </div>
+                    </div>
+                    <div class="mh-package__benefits">
+                        <h4 class="mh-package__benefits-title">WHAT'S INCLUDED</h4>
+                        <ul>
+                            <li><span class="mh-check">&#10003;</span> 3 areas maintained year-round</li>
+                            <li><span class="mh-check">&#10003;</span> Priority booking access</li>
+                            <li><span class="mh-check">&#10003;</span> Free top-ups within 2 weeks</li>
+                            <li><span class="mh-check">&#10003;</span> 10% off all filler treatments</li>
+                            <li><span class="mh-check">&#10003;</span> Cancel anytime &mdash; no lock-in</li>
+                            <li><span class="mh-check">&#10003;</span> Exclusive member pricing on all services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S6. HOW IT WORKS
+         Conversion: Process transparency reduces anxiety
+         ======================================================== -->
+    <section class="mh-section mh-section--light" id="how-it-works">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">Your Journey</span>
+                <h2 class="mh-section__title">How It Works</h2>
+                <p class="mh-section__subtitle">From first enquiry to lasting results &mdash; four simple steps.</p>
+            </div>
+
+            <div class="mh-steps">
+                <div class="mh-step mh-reveal">
+                    <div class="mh-step__number">01</div>
+                    <h3 class="mh-step__title">Free Consultation</h3>
+                    <p class="mh-step__text">Book a private, no-obligation consultation online or by phone. We discuss your goals in complete confidence.</p>
+                </div>
+                <div class="mh-step mh-reveal">
+                    <div class="mh-step__number">02</div>
+                    <h3 class="mh-step__title">Personalised Assessment</h3>
+                    <p class="mh-step__text">Your practitioner conducts a thorough assessment and designs a bespoke treatment protocol tailored to you.</p>
+                </div>
+                <div class="mh-step mh-reveal">
+                    <div class="mh-step__number">03</div>
+                    <h3 class="mh-step__title">Treatment Delivery</h3>
+                    <p class="mh-step__text">Treatments are delivered in our private clinical suites by expert practitioners using premium-grade equipment.</p>
+                </div>
+                <div class="mh-step mh-reveal">
+                    <div class="mh-step__number">04</div>
+                    <h3 class="mh-step__title">Ongoing Support</h3>
+                    <p class="mh-step__text">Post-treatment follow-up, progress tracking, and maintenance plans to ensure lasting results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S7. RESULTS / BENEFITS
+         Conversion: Outcome focus shifts from cost to value
+         ======================================================== -->
+    <section class="mh-section mh-section--dark" id="results">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">Proven Outcomes</span>
+                <h2 class="mh-section__title" style="color: var(--mh-white);">Results That Speak</h2>
+                <p class="mh-section__subtitle">Real data from real patients across our clinics.</p>
+            </div>
+
+            <div class="mh-results__grid mh-reveal">
+                <div class="mh-stat">
+                    <div class="mh-stat__number">2,500+</div>
+                    <div class="mh-stat__label">Treatments Delivered</div>
+                </div>
+                <div class="mh-stat">
+                    <div class="mh-stat__number">98%</div>
+                    <div class="mh-stat__label">Patient Satisfaction</div>
+                </div>
+                <div class="mh-stat">
+                    <div class="mh-stat__number">4.9</div>
+                    <div class="mh-stat__label">Average Review Score</div>
+                </div>
+                <div class="mh-stat">
+                    <div class="mh-stat__number">3</div>
+                    <div class="mh-stat__label">Clinics Across The North</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S8. PRACTITIONER CREDIBILITY
+         Conversion: Authority transfer from credentials
+         ======================================================== -->
+    <section class="mh-section" id="practitioners">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">Expert Team</span>
+                <h2 class="mh-section__title">Our Practitioners</h2>
+                <p class="mh-section__subtitle">Qualified medical professionals with specialist training in male aesthetics and sexual wellness.</p>
+            </div>
+
+            <div class="mh-practitioners__grid">
+                <!-- Practitioner 1 -->
+                <div class="mh-practitioner mh-reveal" itemscope itemtype="https://schema.org/Physician">
+                    <div class="mh-practitioner__img">
+                        <!-- Alt guidance: Replace with actual practitioner photo -->
+                        <img src="https://menhancements.co.uk/wp-content/uploads/2025/12/5-1.png"
+                             alt="Lead practitioner at Menhancements male wellness clinic"
+                             loading="lazy"
+                             itemprop="image">
+                    </div>
+                    <div class="mh-practitioner__body">
+                        <h3 class="mh-practitioner__name" itemprop="name">Clinical Director</h3>
+                        <p class="mh-practitioner__role" itemprop="jobTitle">Lead Aesthetics Practitioner</p>
+                        <p class="mh-practitioner__bio" itemprop="description">Qualified prescribing practitioner with advanced training in male sexual wellness therapies. Specialising in shockwave therapy and PRP treatments with over 1,000 procedures performed.</p>
+                    </div>
+                </div>
+
+                <!-- Practitioner 2 -->
+                <div class="mh-practitioner mh-reveal" itemscope itemtype="https://schema.org/Physician">
+                    <div class="mh-practitioner__img">
+                        <img src="https://menhancements.co.uk/wp-content/uploads/2025/12/4-1.png"
+                             alt="Senior practitioner specialising in male facial aesthetics"
+                             loading="lazy"
+                             itemprop="image">
+                    </div>
+                    <div class="mh-practitioner__body">
+                        <h3 class="mh-practitioner__name" itemprop="name">Senior Practitioner</h3>
+                        <p class="mh-practitioner__role" itemprop="jobTitle">Facial Aesthetics Specialist</p>
+                        <p class="mh-practitioner__bio" itemprop="description">Extensive experience in male facial aesthetics. Expert in anti-wrinkle treatments, dermal fillers, and PRP hair restoration. Known for natural, understated results.</p>
+                    </div>
+                </div>
+
+                <!-- Practitioner 3 -->
+                <div class="mh-practitioner mh-reveal" itemscope itemtype="https://schema.org/Physician">
+                    <div class="mh-practitioner__img">
+                        <img src="https://menhancements.co.uk/wp-content/uploads/2025/12/3-1.png"
+                             alt="Practitioner at Menhancements clinic"
+                             loading="lazy"
+                             itemprop="image">
+                    </div>
+                    <div class="mh-practitioner__body">
+                        <h3 class="mh-practitioner__name" itemprop="name">Wellness Practitioner</h3>
+                        <p class="mh-practitioner__role" itemprop="jobTitle">Sexual Wellness Specialist</p>
+                        <p class="mh-practitioner__bio" itemprop="description">Specialising in intimate treatments including HoleTox&trade; and intimate skin brightening. Committed to patient comfort, discretion, and clinical excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S9. FAQ
+         Conversion: Objection pre-handling reduces friction
+         Schema: FAQPage
+         ======================================================== -->
+    <section class="mh-section mh-section--light" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="mh-container">
+            <div class="mh-section__header mh-reveal">
+                <span class="mh-section__label">Common Questions</span>
+                <h2 class="mh-section__title">Frequently Asked Questions</h2>
+                <p class="mh-section__subtitle">Everything you need to know before booking.</p>
+            </div>
+
+            <div class="mh-faq__list">
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">Is the consultation really free?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Yes. Every consultation at Menhancements is completely free and comes with zero obligation. We believe you should be able to explore your options, ask questions, and make an informed decision without any financial pressure. You will never be pushed into a treatment.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">How discreet is the process?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Discretion is fundamental to everything we do. Our clinics feature private consultation rooms, and our booking systems are fully confidential. Communication is handled through your preferred method — WhatsApp, text, email, or phone. No information is shared without your explicit consent.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">What qualifications do your practitioners have?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">All Menhancements practitioners are qualified medical professionals with specialist training in male aesthetics and sexual wellness. Our treatment protocols are designed and overseen by doctors, and all staff maintain ongoing professional development in their respective specialisms.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">How many sessions will I need?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">This depends on the treatment and your individual goals. Shockwave therapy typically involves 6 sessions over 6 weeks. PRP treatments may require 3 sessions spaced 4-6 weeks apart. Anti-wrinkle treatments show results immediately. Your practitioner will outline a clear treatment plan during your free consultation.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">Is there any downtime after treatment?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Most of our treatments involve minimal to zero downtime. Shockwave therapy, for example, requires no recovery period at all. PRP treatments may involve minor sensitivity for 24-48 hours. Anti-wrinkle treatments allow you to return to normal activities immediately. Specific aftercare will be explained before any procedure.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">Do you offer payment plans?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Yes. We understand that investing in your wellbeing should be accessible. We offer flexible payment options and our Unlimitox subscription makes ongoing anti-wrinkle maintenance affordable at just &pound;59 per month. Speak with our team during your consultation to discuss the best payment option for you.</p>
+                    </div>
+                </div>
+
+                <div class="mh-faq-item mh-reveal" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="mh-faq-item__question" aria-expanded="false">
+                        <span itemprop="name">Which clinic should I attend?</span>
+                        <span class="mh-faq-item__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="mh-faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">We operate three clinics across the North: Manchester city centre, Leeds, and Wilmslow in Cheshire. All locations offer the same premium standard of care and full treatment menu. Choose whichever is most convenient — you can even switch between locations.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         S10. FINAL CTA
+         Conversion: Urgency + simplicity = final push
+         ======================================================== -->
+    <section class="mh-final-cta">
+        <div class="mh-container" style="position: relative; z-index: 1;">
+            <div class="mh-reveal">
+                <span class="mh-section__label">Take The First Step</span>
+                <h2 class="mh-final-cta__title">YOUR CONFIDENCE. YOUR TERMS.</h2>
+                <p class="mh-final-cta__text">Book a free, private, no-obligation consultation with one of our expert practitioners.</p>
+                <a href="#consultation-form" class="mh-btn mh-btn--primary mh-btn--pulse">Book Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         CONSULTATION FORM
+         ======================================================== -->
+    <section class="mh-form-section" id="consultation-form">
+        <div class="mh-container">
+            <div class="mh-form-container mh-reveal">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <span class="mh-section__label">Get Started</span>
+                    <h2 class="mh-section__title">Start Your Consultation</h2>
+                    <p class="mh-section__subtitle">Private. Discreet. Clinically led. Free &amp; no-obligation.</p>
+                </div>
+
+                <form id="mh-consultation-form" action="https://assets.mailerlite.com/jsonp/1922386/forms/173841955370828957/subscribe" method="POST">
+
+                    <div class="mh-form__divider">Your Details</div>
+                    <div class="mh-form__row">
+                        <div class="mh-field">
+                            <label for="mh-fname">First Name *</label>
+                            <input type="text" id="mh-fname" name="fields[first_name]" required placeholder="First name" autocomplete="given-name">
+                        </div>
+                        <div class="mh-field">
+                            <label for="mh-lname">Last Name *</label>
+                            <input type="text" id="mh-lname" name="fields[last_name]" required placeholder="Last name" autocomplete="family-name">
+                        </div>
+                    </div>
+                    <div class="mh-form__row" style="margin-top: 0.75rem;">
+                        <div class="mh-field">
+                            <label for="mh-email">Email Address *</label>
+                            <input type="email" id="mh-email" name="fields[email]" required placeholder="email@example.com" autocomplete="email">
+                        </div>
+                        <div class="mh-field">
+                            <label for="mh-phone">Mobile Number *</label>
+                            <input type="tel" id="mh-phone" name="fields[phone]" required placeholder="Mobile number" autocomplete="tel">
+                        </div>
+                    </div>
+
+                    <div class="mh-form__divider">Preferred Contact Method</div>
+                    <div class="mh-selection-grid">
+                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="WhatsApp" required><span>WhatsApp</span></label>
+                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Text Message"><span>Text Message</span></label>
+                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Email"><span>Email</span></label>
+                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Phone Call"><span>Phone Call</span></label>
+                    </div>
+
+                    <div class="mh-form__divider">Treatments You're Interested In</div>
+                    <div class="mh-selection-grid">
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Shockwave"><span>Shockwave Therapy</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="P-Shot"><span>PRP Therapy (P-Shot)</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="HoleTox"><span>HoleTox&trade;</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Intimate Brightening"><span>Intimate Skin Brightening</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Anti-Wrinkle"><span>Anti-Wrinkle</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Dermal Fillers"><span>Dermal Fillers</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="PRP Hair"><span>PRP Hair Restoration</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Unlimitox"><span>Unlimitox Subscription</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Consultation"><span>General Consultation</span></label>
+                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Other" id="mh-other-check"><span>Other</span></label>
+                    </div>
+                    <div id="mh-other-box" class="mh-field" style="display:none; margin-top: 0.75rem;">
+                        <label for="mh-other-text">Please specify</label>
+                        <textarea id="mh-other-text" name="fields[other_specify]" rows="2" placeholder="Tell us more..."></textarea>
+                    </div>
+
+                    <div class="mh-form__divider">How Ready Are You?</div>
+                    <div class="mh-selection-grid">
+                        <label class="mh-selection-item"><input type="radio" name="fields[readiness]" value="Exploring" required><span>Just exploring</span></label>
+                        <label class="mh-selection-item"><input type="radio" name="fields[readiness]" value="Ready to Book"><span>Ready to book soon</span></label>
+                    </div>
+
+                    <div class="mh-form__divider">Preferred Studio &amp; Timing</div>
+                    <div class="mh-form__row">
+                        <div class="mh-field">
+                            <label for="mh-date">Hoping to Begin By *</label>
+                            <input type="date" id="mh-date" name="fields[preferred_date]" required>
+                        </div>
+                        <div class="mh-field">
+                            <label for="mh-location">Preferred Location *</label>
+                            <select id="mh-location" name="fields[preferred_location]" required>
+                                <option value="">Select a clinic</option>
+                                <option value="Manchester">Manchester</option>
+                                <option value="Leeds">Leeds</option>
+                                <option value="Wilmslow">Wilmslow</option>
+                                <option value="Wigan">Wigan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mh-form__divider">Additional Information</div>
+                    <div class="mh-field">
+                        <label for="mh-notes">Notes (Optional)</label>
+                        <textarea id="mh-notes" name="fields[message]" rows="3" placeholder="Anything else you'd like us to know..."></textarea>
+                    </div>
+
+                    <button type="submit" class="mh-btn--submit">Request Free Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+    <footer class="mh-footer" role="contentinfo">
+        <div class="mh-container">
+            <div class="mh-footer__grid">
+                <div class="mh-footer__col">
+                    <div class="mh-footer__brand">MENHANCEMENTS</div>
+                    <p style="max-width: 300px; font-size: 0.88rem; line-height: 1.65;">The North's leading male sexual wellness and aesthetics practice. Protocol-led treatments delivered with expertise and discretion.</p>
+                </div>
+                <div class="mh-footer__col">
+                    <h4>TREATMENTS</h4>
+                    <ul>
+                        <li><a href="/sexual-wellness/shockwave-therapy/">Shockwave Therapy</a></li>
+                        <li><a href="/sexual-wellness/prp-therapy/">PRP Therapy (P-Shot)</a></li>
+                        <li><a href="/sexual-wellness/holetox/">HoleTox&trade;</a></li>
+                        <li><a href="/treatments/prp-hair-restoration/">PRP Hair Restoration</a></li>
+                        <li><a href="/sexual-wellness/intimate-skin-brightening/">Intimate Skin Brightening</a></li>
+                    </ul>
+                </div>
+                <div class="mh-footer__col">
+                    <h4>LOCATIONS</h4>
+                    <ul>
+                        <li><a href="/locations/manchester/">Manchester</a></li>
+                        <li><a href="/locations/leeds/">Leeds</a></li>
+                        <li><a href="/locations/wilmslow/">Wilmslow</a></li>
+                    </ul>
+                </div>
+                <div class="mh-footer__col">
+                    <h4>CONTACT</h4>
+                    <ul>
+                        <li><a href="tel:01612968826" itemprop="telephone">0161 296 8826</a></li>
+                        <li><a href="mailto:hello@menhancements.co.uk" itemprop="email">hello@menhancements.co.uk</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mh-footer__bottom">
+                <p>&copy; 2025 Menhancements. All rights reserved. A PLG UK brand.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========================================================
+         STICKY MOBILE BOOKING BAR
+         Appears after scrolling past hero on mobile (<1024px)
+         ======================================================== -->
+    <div class="mh-sticky-bar" id="mh-sticky-bar" role="complementary" aria-label="Book consultation">
+        <div class="mh-sticky-bar__text">
+            Book Free Consultation
+            <span>Private &amp; no-obligation</span>
+        </div>
+        <a href="#consultation-form" class="mh-sticky-bar__btn">Book Now</a>
+    </div>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         - Scroll reveal (IntersectionObserver)
+         - Nav scroll state
+         - FAQ accordion
+         - Sticky bar visibility
+         - Form validation
+         - Smooth scroll
+         ======================================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        /* ---------------------------------------------------
+           1. SCROLL REVEAL (IntersectionObserver)
+           GPU-composited, no scroll event listeners
+           --------------------------------------------------- */
+        var revealElements = document.querySelectorAll('.mh-reveal');
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('mh-reveal--visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach(function(el) {
+                revealObserver.observe(el);
+            });
+        } else {
+            /* Fallback: show all immediately */
+            revealElements.forEach(function(el) {
+                el.classList.add('mh-reveal--visible');
+            });
+        }
+
+        /* ---------------------------------------------------
+           2. NAV SCROLL STATE
+           --------------------------------------------------- */
+        var nav = document.querySelector('.mh-nav');
+        var lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            var currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                nav.classList.add('mh-nav--scrolled');
+            } else {
+                nav.classList.remove('mh-nav--scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        /* ---------------------------------------------------
+           3. STICKY MOBILE BAR
+           Show after scrolling past hero
+           --------------------------------------------------- */
+        var stickyBar = document.getElementById('mh-sticky-bar');
+        var hero = document.querySelector('.mh-hero');
+        if (stickyBar && hero && 'IntersectionObserver' in window) {
+            var stickyObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) {
+                        stickyBar.classList.add('mh-sticky-bar--visible');
+                    } else {
+                        stickyBar.classList.remove('mh-sticky-bar--visible');
+                    }
+                });
+            }, { threshold: 0 });
+            stickyObserver.observe(hero);
+        }
+
+        /* ---------------------------------------------------
+           4. FAQ ACCORDION
+           --------------------------------------------------- */
+        var faqButtons = document.querySelectorAll('.mh-faq-item__question');
+        faqButtons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var item = this.parentElement;
+                var isOpen = item.classList.contains('mh-faq-item--open');
+                var expanded = this.getAttribute('aria-expanded') === 'true';
+
+                /* Close all others */
+                document.querySelectorAll('.mh-faq-item--open').forEach(function(openItem) {
+                    openItem.classList.remove('mh-faq-item--open');
+                    openItem.querySelector('.mh-faq-item__question').setAttribute('aria-expanded', 'false');
+                });
+
+                /* Toggle current */
+                if (!isOpen) {
+                    item.classList.add('mh-faq-item--open');
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        /* ---------------------------------------------------
+           5. FORM: "Other" checkbox toggle
+           --------------------------------------------------- */
+        var otherCheck = document.getElementById('mh-other-check');
+        var otherBox = document.getElementById('mh-other-box');
+        if (otherCheck && otherBox) {
+            otherCheck.addEventListener('change', function() {
+                otherBox.style.display = this.checked ? 'block' : 'none';
+            });
+        }
+
+        /* ---------------------------------------------------
+           6. FORM VALIDATION
+           Ensure at least one treatment selected
+           --------------------------------------------------- */
+        var form = document.getElementById('mh-consultation-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                var checked = document.querySelectorAll('input[name="fields[interests][]"]:checked');
+                if (checked.length === 0) {
+                    e.preventDefault();
+                    alert('Please select at least one treatment you are interested in.');
+                    return false;
+                }
+            });
+        }
+
+        /* ---------------------------------------------------
+           7. SMOOTH ANCHOR SCROLLING
+           --------------------------------------------------- */
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        /* ---------------------------------------------------
+           8. MOBILE NAV TOGGLE (basic)
+           --------------------------------------------------- */
+        var toggle = document.querySelector('.mh-nav__toggle');
+        var navLinks = document.querySelector('.mh-nav__links');
+        if (toggle && navLinks) {
+            toggle.addEventListener('click', function() {
+                var expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !expanded);
+                if (!expanded) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'var(--mh-white)';
+                    navLinks.style.padding = '1rem 20px 1.5rem';
+                    navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+                    navLinks.style.gap = '1rem';
+                } else {
+                    navLinks.style.display = '';
+                    navLinks.style.flexDirection = '';
+                    navLinks.style.position = '';
+                    navLinks.style.top = '';
+                    navLinks.style.left = '';
+                    navLinks.style.width = '';
+                    navLinks.style.background = '';
+                    navLinks.style.padding = '';
+                    navLinks.style.boxShadow = '';
+                    navLinks.style.gap = '';
+                }
+            });
+        }
+
+    })();
+    </script>
+
+</body>
+</html>

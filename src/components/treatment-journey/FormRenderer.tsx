@@ -116,7 +116,7 @@ function Stepper({ phases, currentPhase, completedPhases, stoppedAtPhase, brand,
                         : isCurrent
                           ? theme.stepActive
                           : undefined,
-                    ringColor: isCurrent ? theme.stepActive : undefined,
+                    boxShadow: isCurrent ? `0 0 0 4px ${theme.stepActive}4d` : undefined,
                   }}
                 >
                   {isStopped ? (
@@ -1245,8 +1245,9 @@ export function FormRenderer({
   const [phaseErrors, setPhaseErrors] = useState<string[]>([]);
 
   // Phase data
-  const [selectedClient, setSelectedClient] = useState<{ id: string; firstName: string; lastName: string; email?: string; phone?: string } | null>(
-    (initialData?.client as typeof selectedClient) ?? null
+  type ClientSelection = { id: string; firstName: string; lastName: string; email?: string; phone?: string } | null;
+  const [selectedClient, setSelectedClient] = useState<ClientSelection>(
+    (initialData?.client as ClientSelection) ?? null
   );
   const [isNewClient, setIsNewClient] = useState(false);
   const [newClientData, setNewClientData] = useState<{ firstName: string; lastName: string; email?: string; phone?: string; dateOfBirth?: string } | null>(null);

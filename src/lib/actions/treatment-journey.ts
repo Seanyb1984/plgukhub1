@@ -403,7 +403,7 @@ export async function submitGovernanceFormAction(data: {
       brand: data.brand as 'MENHANCEMENTS' | 'WAX_FOR_MEN' | 'WAX_FOR_WOMEN' | 'PLG_UK',
       siteId: data.siteId,
       completedById: data.completedById,
-      data: data.formData,
+      data: data.formData as Record<string, unknown> & object,
       signatureData: data.signatureData,
       isCompliant: data.isCompliant,
       issues: data.issues,

@@ -1010,6 +1010,97 @@
     .mh-btn--submit:hover {
         background: var(--mh-bronze);
     }
+    .mh-btn--submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+
+    /* Consent checkbox */
+    .mh-consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+        cursor: pointer;
+    }
+    .mh-consent input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--mh-bronze);
+        flex-shrink: 0;
+        margin-top: 2px;
+        cursor: pointer;
+    }
+    .mh-consent__text {
+        font-size: 0.8rem;
+        color: var(--mh-grey);
+        line-height: 1.55;
+        font-weight: 300;
+    }
+    .mh-consent__text a {
+        color: var(--mh-bronze);
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    /* Contact method button-style radios */
+    .mh-contact-btn {
+        background: var(--mh-light-bg) !important;
+        border: 2px solid transparent;
+        border-radius: 6px !important;
+        padding: 0.75rem 1rem !important;
+        text-align: center;
+        transition: all var(--mh-transition) !important;
+    }
+    .mh-contact-btn:hover {
+        border-color: var(--mh-bronze) !important;
+        background: var(--mh-white) !important;
+    }
+    .mh-contact-btn input[type="radio"]:checked ~ .mh-contact-btn__label {
+        color: var(--mh-navy);
+        font-weight: 600;
+    }
+    .mh-contact-btn:has(input:checked) {
+        border-color: var(--mh-bronze);
+        background: var(--mh-white) !important;
+        box-shadow: 0 0 0 3px var(--mh-bronze-glow);
+    }
+    .mh-contact-btn__label {
+        font-size: 0.88rem;
+    }
+    .mh-contact-btn__label em {
+        font-style: normal;
+        font-size: 0.75rem;
+        color: var(--mh-bronze);
+        display: block;
+        margin-top: 2px;
+    }
+
+    /* Inline form error */
+    .mh-form__error {
+        color: #c0392b;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    /* Success state */
+    .mh-form-success__icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--mh-bronze-glow);
+        border: 2px solid var(--mh-bronze);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 2rem;
+        color: var(--mh-bronze);
+        font-weight: 700;
+    }
 
     /* ============================================================
        FOOTER
@@ -1647,99 +1738,109 @@
 
     <!-- ========================================================
          CONSULTATION FORM
+         Streamlined 6-field form → Zapier webhook → HubSpot
+         CC: enquiries@menhancements.co.uk on every submission
          ======================================================== -->
     <section class="mh-form-section" id="consultation-form">
         <div class="mh-container">
-            <div class="mh-form-container mh-reveal">
+
+            <!-- Form state: visible when not yet submitted -->
+            <div class="mh-form-container mh-reveal" id="mh-form-wrapper">
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <span class="mh-section__label">Get Started</span>
-                    <h2 class="mh-section__title">Start Your Consultation</h2>
+                    <h2 class="mh-section__title">Start Your Enquiry</h2>
                     <p class="mh-section__subtitle">Private. Discreet. Clinically led. Free &amp; no-obligation.</p>
                 </div>
 
-                <form id="mh-consultation-form" action="https://assets.mailerlite.com/jsonp/1922386/forms/173841955370828957/subscribe" method="POST">
+                <form id="mh-consultation-form" novalidate>
 
+                    <!-- ── Section 1: Client Details ── -->
                     <div class="mh-form__divider">Your Details</div>
+                    <div class="mh-field" style="margin-bottom: 0.75rem;">
+                        <label for="mh-fullname">Full Name *</label>
+                        <input type="text" id="mh-fullname" name="full_name" required placeholder="Your full name" autocomplete="name">
+                    </div>
                     <div class="mh-form__row">
                         <div class="mh-field">
-                            <label for="mh-fname">First Name *</label>
-                            <input type="text" id="mh-fname" name="fields[first_name]" required placeholder="First name" autocomplete="given-name">
-                        </div>
-                        <div class="mh-field">
-                            <label for="mh-lname">Last Name *</label>
-                            <input type="text" id="mh-lname" name="fields[last_name]" required placeholder="Last name" autocomplete="family-name">
-                        </div>
-                    </div>
-                    <div class="mh-form__row" style="margin-top: 0.75rem;">
-                        <div class="mh-field">
                             <label for="mh-email">Email Address *</label>
-                            <input type="email" id="mh-email" name="fields[email]" required placeholder="email@example.com" autocomplete="email">
+                            <input type="email" id="mh-email" name="email" required placeholder="email@example.com" autocomplete="email">
                         </div>
                         <div class="mh-field">
                             <label for="mh-phone">Mobile Number *</label>
-                            <input type="tel" id="mh-phone" name="fields[phone]" required placeholder="Mobile number" autocomplete="tel">
+                            <input type="tel" id="mh-phone" name="phone" required placeholder="+44 7700 000000" autocomplete="tel">
                         </div>
                     </div>
 
-                    <div class="mh-form__divider">Preferred Contact Method</div>
-                    <div class="mh-selection-grid">
-                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="WhatsApp" required><span>WhatsApp</span></label>
-                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Text Message"><span>Text Message</span></label>
-                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Email"><span>Email</span></label>
-                        <label class="mh-selection-item"><input type="radio" name="fields[contact_preference]" value="Phone Call"><span>Phone Call</span></label>
-                    </div>
-
-                    <div class="mh-form__divider">Treatments You're Interested In</div>
-                    <div class="mh-selection-grid">
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Shockwave"><span>Shockwave Therapy</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="P-Shot"><span>PRP Therapy (P-Shot)</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="HoleTox"><span>HoleTox&trade;</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Intimate Brightening"><span>Intimate Skin Brightening</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Anti-Wrinkle"><span>Anti-Wrinkle</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Dermal Fillers"><span>Dermal Fillers</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="PRP Hair"><span>PRP Hair Restoration</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Unlimitox"><span>Unlimitox Subscription</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Consultation"><span>General Consultation</span></label>
-                        <label class="mh-selection-item"><input type="checkbox" name="fields[interests][]" value="Other" id="mh-other-check"><span>Other</span></label>
-                    </div>
-                    <div id="mh-other-box" class="mh-field" style="display:none; margin-top: 0.75rem;">
-                        <label for="mh-other-text">Please specify</label>
-                        <textarea id="mh-other-text" name="fields[other_specify]" rows="2" placeholder="Tell us more..."></textarea>
-                    </div>
-
-                    <div class="mh-form__divider">How Ready Are You?</div>
-                    <div class="mh-selection-grid">
-                        <label class="mh-selection-item"><input type="radio" name="fields[readiness]" value="Exploring" required><span>Just exploring</span></label>
-                        <label class="mh-selection-item"><input type="radio" name="fields[readiness]" value="Ready to Book"><span>Ready to book soon</span></label>
-                    </div>
-
-                    <div class="mh-form__divider">Preferred Studio &amp; Timing</div>
-                    <div class="mh-form__row">
-                        <div class="mh-field">
-                            <label for="mh-date">Hoping to Begin By *</label>
-                            <input type="date" id="mh-date" name="fields[preferred_date]" required>
-                        </div>
-                        <div class="mh-field">
-                            <label for="mh-location">Preferred Location *</label>
-                            <select id="mh-location" name="fields[preferred_location]" required>
-                                <option value="">Select a clinic</option>
-                                <option value="Manchester">Manchester</option>
-                                <option value="Leeds">Leeds</option>
-                                <option value="Wilmslow">Wilmslow</option>
-                                <option value="Wigan">Wigan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mh-form__divider">Additional Information</div>
+                    <!-- ── Section 2: Primary Interest ── -->
+                    <div class="mh-form__divider">Primary Interest</div>
                     <div class="mh-field">
-                        <label for="mh-notes">Notes (Optional)</label>
-                        <textarea id="mh-notes" name="fields[message]" rows="3" placeholder="Anything else you'd like us to know..."></textarea>
+                        <label for="mh-interest">What are you most interested in? *</label>
+                        <select id="mh-interest" name="primary_interest" required>
+                            <option value="">Select your primary interest</option>
+                            <option value="Facial Aesthetics (Anti-wrinkle / Fillers)">Facial Aesthetics (Anti-wrinkle / Fillers)</option>
+                            <option value="Sexual Wellness (Shockwave / P-Shot / Enhancement)">Sexual Wellness (Shockwave / P-Shot / Enhancement)</option>
+                            <option value="Hair Restoration (PRP)">Hair Restoration (PRP)</option>
+                            <option value="General Enquiry">General Enquiry</option>
+                        </select>
                     </div>
 
-                    <button type="submit" class="mh-btn--submit">Request Free Consultation</button>
+                    <!-- ── Section 3: Preferred Location ── -->
+                    <div class="mh-form__divider">Preferred Location</div>
+                    <div class="mh-field">
+                        <label for="mh-location">Which clinic would you like to attend? *</label>
+                        <select id="mh-location" name="preferred_location" required>
+                            <option value="">Select a clinic</option>
+                            <option value="Manchester (Flagship)">Manchester (Flagship)</option>
+                            <option value="Leeds">Leeds</option>
+                            <option value="Wilmslow">Wilmslow</option>
+                        </select>
+                    </div>
+
+                    <!-- ── Section 4: Preferred Contact Method ── -->
+                    <div class="mh-form__divider">Preferred Contact Method</div>
+                    <div class="mh-selection-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                        <label class="mh-selection-item mh-contact-btn">
+                            <input type="radio" name="contact_method" value="WhatsApp" required>
+                            <span class="mh-contact-btn__label">WhatsApp <em>(discreet)</em></span>
+                        </label>
+                        <label class="mh-selection-item mh-contact-btn">
+                            <input type="radio" name="contact_method" value="Email">
+                            <span class="mh-contact-btn__label">Email</span>
+                        </label>
+                        <label class="mh-selection-item mh-contact-btn">
+                            <input type="radio" name="contact_method" value="Phone Call">
+                            <span class="mh-contact-btn__label">Phone Call</span>
+                        </label>
+                    </div>
+
+                    <!-- ── Section 5: Compliance Consent ── -->
+                    <div class="mh-form__divider">Privacy &amp; Consent</div>
+                    <label class="mh-consent">
+                        <input type="checkbox" id="mh-consent" name="consent" required>
+                        <span class="mh-consent__text">I have read and agree to the <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>. By submitting this form, I consent to Menhancements (PLG UK) contacting me regarding my enquiry and providing relevant brand updates via my preferred contact method.</span>
+                    </label>
+
+                    <!-- ── Submit ── -->
+                    <button type="submit" class="mh-btn--submit" id="mh-submit-btn">
+                        <span id="mh-submit-text">Submit Enquiry</span>
+                        <span id="mh-submit-loading" style="display:none;">Sending&hellip;</span>
+                    </button>
+
+                    <!-- Inline error message -->
+                    <p id="mh-form-error" class="mh-form__error" style="display:none;"></p>
                 </form>
             </div>
+
+            <!-- Success state: shown after successful submission -->
+            <div class="mh-form-container mh-form-success" id="mh-form-success" style="display:none;">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div class="mh-form-success__icon">&#10003;</div>
+                    <h2 class="mh-section__title" style="margin-top: 1.5rem;">Thank You</h2>
+                    <p class="mh-section__subtitle" style="max-width: 500px; margin: 1rem auto 1.5rem;">Your enquiry has been received. A specialist will reach out to you within 24 hours via your chosen contact method.</p>
+                    <p style="font-size: 0.88rem; color: var(--mh-grey);">For urgent assistance, contact our Manchester flagship at <a href="tel:+441615644406" style="color: var(--mh-bronze); font-weight: 600;">+44 161 564 4406</a></p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1900,29 +2001,100 @@
         });
 
         /* ---------------------------------------------------
-           5. FORM: "Other" checkbox toggle
+           5. FORM SUBMISSION → ZAPIER WEBHOOK
+           Sends JSON payload to Zapier catch hook.
+           Zapier routes to: HubSpot + email CC.
+           Replace ZAPIER_WEBHOOK_URL with your actual
+           Zapier Webhooks catch hook URL.
            --------------------------------------------------- */
-        var otherCheck = document.getElementById('mh-other-check');
-        var otherBox = document.getElementById('mh-other-box');
-        if (otherCheck && otherBox) {
-            otherCheck.addEventListener('change', function() {
-                otherBox.style.display = this.checked ? 'block' : 'none';
-            });
-        }
+        var ZAPIER_WEBHOOK_URL = 'YOUR_ZAPIER_WEBHOOK_URL_HERE';
+        /* ↑ Replace with: https://hooks.zapier.com/hooks/catch/XXXXX/XXXXX/ */
 
-        /* ---------------------------------------------------
-           6. FORM VALIDATION
-           Ensure at least one treatment selected
-           --------------------------------------------------- */
         var form = document.getElementById('mh-consultation-form');
+        var formWrapper = document.getElementById('mh-form-wrapper');
+        var formSuccess = document.getElementById('mh-form-success');
+        var formError = document.getElementById('mh-form-error');
+        var submitBtn = document.getElementById('mh-submit-btn');
+        var submitText = document.getElementById('mh-submit-text');
+        var submitLoading = document.getElementById('mh-submit-loading');
+
         if (form) {
             form.addEventListener('submit', function(e) {
-                var checked = document.querySelectorAll('input[name="fields[interests][]"]:checked');
-                if (checked.length === 0) {
-                    e.preventDefault();
-                    alert('Please select at least one treatment you are interested in.');
-                    return false;
+                e.preventDefault();
+                formError.style.display = 'none';
+
+                /* Client-side validation */
+                var fullName = form.querySelector('[name="full_name"]').value.trim();
+                var email = form.querySelector('[name="email"]').value.trim();
+                var phone = form.querySelector('[name="phone"]').value.trim();
+                var interest = form.querySelector('[name="primary_interest"]').value;
+                var location = form.querySelector('[name="preferred_location"]').value;
+                var contactMethod = form.querySelector('[name="contact_method"]:checked');
+                var consent = form.querySelector('[name="consent"]').checked;
+
+                if (!fullName || !email || !phone || !interest || !location) {
+                    formError.textContent = 'Please complete all required fields.';
+                    formError.style.display = 'block';
+                    return;
                 }
+                if (!contactMethod) {
+                    formError.textContent = 'Please select your preferred contact method.';
+                    formError.style.display = 'block';
+                    return;
+                }
+                if (!consent) {
+                    formError.textContent = 'Please agree to the Privacy Policy to continue.';
+                    formError.style.display = 'block';
+                    return;
+                }
+
+                /* Build payload */
+                var payload = {
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    primary_interest: interest,
+                    preferred_location: location,
+                    contact_method: contactMethod.value,
+                    consent: true,
+                    submitted_at: new Date().toISOString(),
+                    source: 'menhancements-homepage',
+                    cc_email: 'enquiries@menhancements.co.uk'
+                };
+
+                /* UI: loading state */
+                submitBtn.disabled = true;
+                submitText.style.display = 'none';
+                submitLoading.style.display = 'inline';
+
+                /* Send to Zapier webhook */
+                fetch(ZAPIER_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    /* Show success state */
+                    formWrapper.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    /* Fire Facebook Pixel lead event */
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead', {
+                            content_name: interest,
+                            content_category: location
+                        });
+                    }
+                })
+                .catch(function() {
+                    formError.textContent = 'Something went wrong. Please try again or call us at +44 161 564 4406.';
+                    formError.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitLoading.style.display = 'none';
+                });
             });
         }
 

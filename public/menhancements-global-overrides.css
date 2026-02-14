@@ -26,18 +26,25 @@
 /* ── BODY & BASE ── */
 body { font-family: var(--mh-font-body) !important; color: var(--mh-navy) !important; background: var(--mh-white) !important; }
 
-/* ── ALL HEADINGS ── */
+/* ── ALL HEADINGS (default: navy on light bg) ── */
 h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: var(--mh-navy) !important; }
 
 /* ── SECTIONS — BACKGROUNDS ── */
 .mh-section { background: var(--mh-white) !important; }
 .mh-section--light { background: var(--mh-light-bg) !important; }
 .mh-section--dark { background: var(--mh-navy) !important; color: var(--mh-white) !important; }
+
+/* ── DARK CONTEXT HEADINGS — override bare h2 { navy } ── */
+/* These selectors (class + element) beat the bare element selector above */
 .mh-section--dark h1, .mh-section--dark h2, .mh-section--dark h3,
 .mh-section--dark h4, .mh-section--dark h5, .mh-section--dark h6 { color: var(--mh-white) !important; }
 .mh-section--dark p { color: rgba(255, 255, 255, 0.8) !important; }
 .mh-section--dark .mh-section__title { color: var(--mh-white) !important; }
 .mh-section--dark .mh-section__subtitle { color: rgba(255, 255, 255, 0.65) !important; }
+
+.mh-hero h1, .mh-hero h2, .mh-hero h3 { color: var(--mh-white) !important; }
+.mh-final-cta h1, .mh-final-cta h2, .mh-final-cta h3 { color: var(--mh-white) !important; }
+.mh-footer h1, .mh-footer h2, .mh-footer h3, .mh-footer h4 { color: var(--mh-white) !important; }
 
 /* ── HERO ── */
 .mh-hero { background: linear-gradient(105deg, var(--mh-navy) 20%, var(--mh-navy-light) 50%, #0d3550 100%) !important; }
@@ -67,6 +74,21 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: 
 /* ── BENEFIT / FEATURE LISTS ── */
 .mh-benefit-list li { color: var(--mh-navy) !important; }
 .mh-benefit-list__arrow { color: var(--mh-bronze) !important; }
+
+/* ── HOMEPAGE UNLIMITOX PACKAGE CARD (dark card) ── */
+.mh-package { background: linear-gradient(135deg, var(--mh-navy) 0%, var(--mh-navy-light) 100%) !important; }
+.mh-package h1, .mh-package h2, .mh-package h3, .mh-package h4 { color: var(--mh-white) !important; }
+.mh-package__label { color: var(--mh-bronze) !important; }
+.mh-package__name { color: var(--mh-white) !important; }
+.mh-package__amount { color: var(--mh-white) !important; }
+.mh-package__savings { color: var(--mh-bronze) !important; }
+.mh-package__benefits li { color: rgba(255, 255, 255, 0.8) !important; }
+.mh-package__benefits h4 { color: var(--mh-white) !important; }
+.mh-package p { color: rgba(255, 255, 255, 0.7) !important; }
+
+/* ── HOMEPAGE RESULTS / STATS (inside dark section) ── */
+.mh-stat__number { color: var(--mh-bronze) !important; }
+.mh-stat__label { color: rgba(255, 255, 255, 0.65) !important; }
 
 /* ── PRICING CARDS ── */
 .mh-price-card { background: var(--mh-white) !important; }
@@ -114,9 +136,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: 
 .mh-callout strong { color: var(--mh-bronze) !important; }
 .mh-callout p { color: var(--mh-grey) !important; }
 
-/* ── STATS ── */
-.mh-stat__number { color: var(--mh-bronze) !important; }
-.mh-stat__label { color: var(--mh-navy) !important; }
+/* ── HOMEPAGE STEPS (How It Works) ── */
+.mh-step__title { color: var(--mh-navy) !important; }
+.mh-step__text { color: var(--mh-grey) !important; }
+.mh-step__number { color: var(--mh-bronze) !important; }
 
 /* ── STUDIO / LOCATION CARDS ── */
 .mh-studio-card { background: var(--mh-white) !important; }
@@ -133,6 +156,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: 
 .mh-final-cta { background: linear-gradient(135deg, var(--mh-navy) 0%, var(--mh-navy-light) 100%) !important; color: #fff !important; }
 .mh-final-cta h2 { color: var(--mh-white) !important; }
 .mh-final-cta p { color: rgba(255, 255, 255, 0.7) !important; }
+.mh-final-cta .mh-section__title { color: var(--mh-white) !important; }
 
 /* ── FOOTER ── */
 .mh-footer { background: #021018 !important; color: rgba(255, 255, 255, 0.55) !important; }
@@ -159,3 +183,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: 
 /* ── TICKER ── */
 .mh-ticker { background: var(--mh-deep-grey) !important; }
 .mh-ticker__item { color: var(--mh-bronze) !important; }
+
+/* ── HOMEPAGE TREATMENT SHOWCASE (dark sections with cards) ── */
+.mh-showcase { background: var(--mh-white) !important; }
+.mh-showcase__title { color: var(--mh-navy) !important; }
+.mh-showcase__item { color: var(--mh-navy) !important; }

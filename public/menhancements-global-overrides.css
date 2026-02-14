@@ -99,11 +99,20 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--mh-font-heading) !important; color: 
 .mh-price-card__benefits li { color: var(--mh-navy) !important; }
 .mh-price-card__check { color: var(--mh-green) !important; }
 
-/* ── TREATMENT CARDS ── */
+/* ── TREATMENT CARDS (white cards, even inside dark sections) ── */
 .mh-treatment-card { background: var(--mh-white) !important; }
 .mh-treatment-card__title { color: var(--mh-navy) !important; }
 .mh-treatment-card__desc { color: var(--mh-grey) !important; }
 .mh-treatment-card__price { color: var(--mh-bronze) !important; }
+.mh-treatment-card__tagline { color: var(--mh-bronze) !important; }
+.mh-section--dark .mh-treatment-card h3,
+.mh-section--dark .mh-treatment-card__title { color: var(--mh-navy) !important; }
+.mh-section--dark .mh-treatment-card__tagline { color: var(--mh-bronze) !important; }
+.mh-section--dark .mh-treatment-card p { color: var(--mh-grey) !important; }
+.mh-section--dark .mh-treatment-list__link { color: var(--mh-navy) !important; }
+.mh-section--dark .mh-treatment-list__link:hover { color: var(--mh-bronze) !important; }
+.mh-section--dark .mh-treatment-list__arrow { color: var(--mh-bronze) !important; }
+.mh-section--dark .mh-treatment-list__item { border-color: var(--mh-neutral) !important; }
 
 /* ── COMPARISON TABLES ── */
 .mh-compare-table { background: var(--mh-white) !important; }

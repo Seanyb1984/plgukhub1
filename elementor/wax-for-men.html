@@ -1,0 +1,1484 @@
+<!--
+  WAX FOR MEN — Landing Page
+  Paste this into an Elementor HTML widget (full-width section, no padding)
+  Or use as a standalone HTML page in WordPress
+-->
+<style>
+  /* ============================================ */
+  /* RESET & BASE — Scoped to .wfm-landing */
+  /* ============================================ */
+  .wfm-landing {
+    --wfm-amber: #fbbf24;
+    --wfm-amber-light: #fcd34d;
+    --wfm-black: #0a0a0a;
+    --wfm-900: #171717;
+    --wfm-800: #262626;
+    --wfm-700: #404040;
+    --wfm-600: #525252;
+    --wfm-500: #737373;
+    --wfm-400: #a3a3a3;
+    --wfm-300: #d4d4d4;
+    --wfm-200: #e5e5e5;
+    --wfm-white: #ffffff;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--wfm-black);
+    color: var(--wfm-white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wfm-landing *,
+  .wfm-landing *::before,
+  .wfm-landing *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wfm-landing a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+  }
+
+  .wfm-landing img { max-width: 100%; display: block; }
+
+  .wfm-landing ::selection {
+    background: var(--wfm-amber);
+    color: var(--wfm-black);
+  }
+
+  /* ============================================ */
+  /* UTILITY CLASSES */
+  /* ============================================ */
+  .wfm-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-container {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+
+  .wfm-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--wfm-amber);
+    margin-bottom: 24px;
+  }
+
+  .wfm-label::before {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 1px;
+    background: var(--wfm-amber);
+  }
+
+  .wfm-section-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  .wfm-section-title span {
+    color: var(--wfm-600);
+  }
+
+  .wfm-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--wfm-amber);
+    color: var(--wfm-black);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  .wfm-btn-primary:hover {
+    background: var(--wfm-amber-light);
+    color: var(--wfm-black);
+  }
+
+  .wfm-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--wfm-white);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .wfm-btn-outline:hover {
+    border-color: var(--wfm-amber);
+    color: var(--wfm-amber);
+  }
+
+  /* ============================================ */
+  /* NAVIGATION */
+  /* ============================================ */
+  .wfm-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--wfm-800);
+  }
+
+  .wfm-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .wfm-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wfm-nav-logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--wfm-amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(3deg);
+  }
+
+  .wfm-nav-logo-icon span {
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--wfm-black);
+    transform: rotate(-3deg);
+  }
+
+  .wfm-nav-logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .wfm-nav-links {
+    display: none;
+    align-items: center;
+    gap: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    list-style: none;
+  }
+
+  .wfm-nav-links a { color: var(--wfm-500); }
+  .wfm-nav-links a:hover { color: var(--wfm-amber); }
+  .wfm-nav-links a.wfm-nav-highlight { color: var(--wfm-amber); }
+
+  @media (min-width: 768px) {
+    .wfm-nav-links { display: flex; }
+  }
+
+  /* ============================================ */
+  /* HERO */
+  /* ============================================ */
+  .wfm-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .wfm-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .wfm-hero-bg-block1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: var(--wfm-900);
+  }
+
+  .wfm-hero-bg-block2 {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 45%;
+    height: 70%;
+    background: rgba(23,23,23,0.5);
+    transform: skewX(-3deg);
+  }
+
+  .wfm-hero-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(251,191,36,0.5), transparent);
+  }
+
+  .wfm-hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding-bottom: 64px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-hero-content { padding-bottom: 96px; }
+  }
+
+  .wfm-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: flex-end;
+  }
+
+  @media (min-width: 1024px) {
+    .wfm-hero-grid {
+      grid-template-columns: 7fr 5fr;
+      gap: 24px;
+    }
+  }
+
+  .wfm-hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid rgba(251,191,36,0.4);
+    color: var(--wfm-amber);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .wfm-hero-title {
+    font-size: clamp(3rem, 8vw, 9rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  .wfm-hero-title .wfm-amber { color: var(--wfm-amber); margin-left: -4px; }
+
+  .wfm-hero-desc {
+    margin-top: 32px;
+    max-width: 480px;
+    font-size: 18px;
+    color: var(--wfm-400);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-hero-desc { font-size: 20px; }
+  }
+
+  .wfm-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  /* Stats card */
+  .wfm-hero-stats {
+    background: var(--wfm-900);
+    border: 1px solid var(--wfm-800);
+    padding: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    .wfm-hero-stats { padding: 40px; }
+  }
+
+  .wfm-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .wfm-stat-value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+  }
+
+  .wfm-stat-value.amber { color: var(--wfm-amber); }
+
+  .wfm-stat-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wfm-600);
+    margin-top: 8px;
+  }
+
+  /* ============================================ */
+  /* PULL QUOTE */
+  /* ============================================ */
+  .wfm-quote {
+    position: relative;
+    padding: 96px 0;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-quote { padding: 128px 0; }
+  }
+
+  .wfm-quote-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--wfm-amber);
+  }
+
+  .wfm-quote-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-quote-grid {
+      grid-template-columns: auto 1fr;
+      gap: 0;
+    }
+  }
+
+  .wfm-quote-mark {
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--wfm-900);
+    line-height: 0.8;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-quote-mark { font-size: 12rem; }
+  }
+
+  .wfm-quote blockquote {
+    font-size: clamp(1.4rem, 3vw, 3rem);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--wfm-300);
+    font-style: italic;
+  }
+
+  .wfm-quote blockquote strong {
+    color: var(--wfm-white);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .wfm-quote-attr {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--wfm-600);
+  }
+
+  .wfm-quote-attr::before {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--wfm-amber);
+  }
+
+  /* ============================================ */
+  /* SERVICES */
+  /* ============================================ */
+  .wfm-services {
+    padding: 96px 0;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-services { padding: 128px 0; }
+  }
+
+  .wfm-services-header {
+    margin-bottom: 80px;
+  }
+
+  .wfm-services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-services-grid {
+      grid-template-columns: 7fr 5fr;
+      gap: 24px;
+    }
+  }
+
+  .wfm-service-card {
+    position: relative;
+    background: var(--wfm-900);
+    border: 1px solid var(--wfm-800);
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+
+  .wfm-service-card:hover {
+    border-color: rgba(251,191,36,0.3);
+  }
+
+  .wfm-service-card-inner {
+    padding: 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-service-featured .wfm-service-card-inner { padding: 48px; }
+  }
+
+  .wfm-service-number {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--wfm-900);
+    line-height: 1;
+    user-select: none;
+    z-index: 1;
+  }
+
+  .wfm-service-featured .wfm-service-number {
+    font-size: 7rem;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-service-featured .wfm-service-number { font-size: 10rem; }
+  }
+
+  .wfm-service-icon {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--wfm-amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .wfm-service-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--wfm-amber);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .wfm-service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .wfm-service-featured h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 16px;
+  }
+
+  .wfm-service-card p {
+    color: var(--wfm-400);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .wfm-service-featured p {
+    font-size: 18px;
+    max-width: 420px;
+    margin-bottom: 32px;
+  }
+
+  .wfm-service-areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .wfm-service-areas li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--wfm-300);
+    list-style: none;
+  }
+
+  .wfm-service-areas li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--wfm-amber);
+    flex-shrink: 0;
+  }
+
+  .wfm-service-tags {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--wfm-300);
+  }
+
+  .wfm-service-tags .sep {
+    color: var(--wfm-700);
+  }
+
+  /* Featured card spans 2 rows on desktop */
+  @media (min-width: 768px) {
+    .wfm-service-featured {
+      grid-row: span 2;
+    }
+  }
+
+  /* Full-width intimate card */
+  .wfm-service-wide {
+    grid-column: 1 / -1;
+  }
+
+  .wfm-service-wide .wfm-service-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-service-wide .wfm-service-card-inner {
+      flex-direction: row;
+      align-items: center;
+      padding: 48px;
+    }
+  }
+
+  .wfm-service-wide-num {
+    flex-shrink: 0;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--wfm-800);
+    line-height: 1;
+  }
+
+  .wfm-service-wide-content {
+    flex: 1;
+  }
+
+  .wfm-service-wide-content h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .wfm-service-wide-content p {
+    color: var(--wfm-400);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .wfm-btn-border {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 1px solid var(--wfm-amber);
+    color: var(--wfm-amber);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+  }
+
+  .wfm-btn-border:hover {
+    background: var(--wfm-amber);
+    color: var(--wfm-black);
+  }
+
+  .wfm-btn-border svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  /* ============================================ */
+  /* PROCESS */
+  /* ============================================ */
+  .wfm-process {
+    position: relative;
+    padding: 96px 0;
+    background: rgba(23,23,23,0.5);
+  }
+
+  @media (min-width: 768px) {
+    .wfm-process { padding: 128px 0; }
+  }
+
+  .wfm-process-border {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--wfm-800);
+  }
+
+  .wfm-process-border.top { top: 0; }
+  .wfm-process-border.bottom { bottom: 0; }
+
+  .wfm-process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  @media (min-width: 1024px) {
+    .wfm-process-grid {
+      grid-template-columns: 4fr 8fr;
+      gap: 48px;
+    }
+  }
+
+  .wfm-process-sidebar {
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .wfm-process-sidebar {
+      position: sticky;
+      top: 128px;
+      align-self: start;
+    }
+  }
+
+  .wfm-process-sidebar p {
+    color: var(--wfm-400);
+    font-size: 18px;
+    line-height: 1.7;
+    margin-top: 24px;
+  }
+
+  .wfm-step {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--wfm-800);
+    transition: border-color 0.25s ease;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-step { gap: 40px; padding: 48px 0; }
+  }
+
+  .wfm-step:hover {
+    border-bottom-color: rgba(251,191,36,0.3);
+  }
+
+  .wfm-step-num {
+    flex-shrink: 0;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    color: var(--wfm-800);
+    line-height: 1;
+    transition: color 0.25s ease;
+  }
+
+  .wfm-step:hover .wfm-step-num {
+    color: var(--wfm-amber);
+  }
+
+  .wfm-step h3 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    transition: color 0.25s ease;
+  }
+
+  .wfm-step:hover h3 {
+    color: var(--wfm-amber);
+  }
+
+  .wfm-step p {
+    color: var(--wfm-400);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ============================================ */
+  /* PRICING */
+  /* ============================================ */
+  .wfm-pricing {
+    padding: 96px 0;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-pricing { padding: 128px 0; }
+  }
+
+  .wfm-pricing-header {
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-pricing-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .wfm-pricing-header p {
+    color: var(--wfm-400);
+    font-size: 18px;
+    max-width: 420px;
+  }
+
+  .wfm-pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--wfm-800);
+  }
+
+  @media (min-width: 768px) {
+    .wfm-pricing-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 1024px) {
+    .wfm-pricing-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  .wfm-price-item {
+    background: var(--wfm-black);
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.25s ease;
+  }
+
+  .wfm-price-item:hover {
+    background: var(--wfm-900);
+  }
+
+  .wfm-price-item.featured {
+    border-left: 2px solid var(--wfm-amber);
+  }
+
+  .wfm-price-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .wfm-price-item.featured h3 {
+    color: var(--wfm-amber);
+  }
+
+  .wfm-price-item .duration {
+    font-size: 11px;
+    color: var(--wfm-600);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  .wfm-price-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+
+  .wfm-price-value .currency {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--wfm-600);
+    margin-right: 2px;
+  }
+
+  /* UnlimiWax CTA strip */
+  .wfm-unlimiwax-cta {
+    margin-top: 48px;
+    background: var(--wfm-amber);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-unlimiwax-cta {
+      padding: 48px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .wfm-unlimiwax-cta h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 900;
+    color: var(--wfm-black);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .wfm-unlimiwax-cta p {
+    color: rgba(0,0,0,0.6);
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .wfm-btn-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--wfm-black);
+    color: var(--wfm-amber);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+  }
+
+  .wfm-btn-dark:hover {
+    background: var(--wfm-900);
+    color: var(--wfm-amber);
+  }
+
+  .wfm-btn-dark svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  /* ============================================ */
+  /* TRUST */
+  /* ============================================ */
+  .wfm-trust {
+    position: relative;
+    padding: 96px 0;
+    background: rgba(23,23,23,0.5);
+  }
+
+  @media (min-width: 768px) {
+    .wfm-trust { padding: 128px 0; }
+  }
+
+  .wfm-trust-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-trust-grid {
+      grid-template-columns: 5fr 7fr;
+      gap: 48px;
+    }
+  }
+
+  .wfm-trust-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .wfm-trust-cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  .wfm-trust-card {
+    border: 1px solid var(--wfm-800);
+    padding: 24px;
+    transition: border-color 0.25s ease;
+  }
+
+  .wfm-trust-card:hover {
+    border-color: rgba(251,191,36,0.3);
+  }
+
+  .wfm-trust-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .wfm-trust-card p {
+    color: var(--wfm-400);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ============================================ */
+  /* FINAL CTA */
+  /* ============================================ */
+  .wfm-cta {
+    position: relative;
+    padding: 128px 0;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-cta { padding: 160px 0; }
+  }
+
+  .wfm-cta-bg1 {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 40%;
+    height: 100%;
+    background: rgba(251,191,36,0.03);
+    transform: skewX(6deg);
+  }
+
+  .wfm-cta-bg2 {
+    position: absolute;
+    bottom: 0;
+    right: 5%;
+    width: 30%;
+    height: 60%;
+    background: rgba(251,191,36,0.02);
+    transform: skewX(-12deg);
+  }
+
+  .wfm-cta-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .wfm-cta h2 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 32px;
+  }
+
+  .wfm-cta h2 .amber { color: var(--wfm-amber); }
+
+  .wfm-cta p {
+    color: var(--wfm-400);
+    font-size: 20px;
+    max-width: 480px;
+    margin: 0 auto 48px;
+  }
+
+  .wfm-cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .wfm-cta-actions { flex-direction: row; justify-content: center; }
+  }
+
+  /* ============================================ */
+  /* FOOTER */
+  /* ============================================ */
+  .wfm-footer {
+    border-top: 1px solid var(--wfm-800);
+    padding: 48px 0;
+  }
+
+  .wfm-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .wfm-footer-grid {
+      grid-template-columns: 4fr 2fr 2fr 4fr;
+      gap: 32px;
+    }
+  }
+
+  .wfm-footer-brand p {
+    color: var(--wfm-600);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  .wfm-footer h4 {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wfm-400);
+    margin-bottom: 16px;
+  }
+
+  .wfm-footer-links {
+    list-style: none;
+  }
+
+  .wfm-footer-links li {
+    margin-bottom: 8px;
+  }
+
+  .wfm-footer-links a {
+    font-size: 14px;
+    color: var(--wfm-600);
+  }
+
+  .wfm-footer-links a:hover {
+    color: var(--wfm-amber);
+  }
+
+  .wfm-footer-bottom {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--wfm-800);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 640px) {
+    .wfm-footer-bottom { flex-direction: row; }
+  }
+
+  .wfm-footer-bottom span {
+    font-size: 12px;
+    color: var(--wfm-700);
+  }
+
+  .wfm-footer-bottom .tagline {
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+</style>
+
+<div class="wfm-landing">
+
+  <!-- NAVIGATION -->
+  <nav class="wfm-nav">
+    <div class="wfm-container wfm-nav-inner">
+      <a href="#" class="wfm-nav-logo">
+        <div class="wfm-nav-logo-icon"><span>W</span></div>
+        <span class="wfm-nav-logo-text">Wax for Men</span>
+      </a>
+      <ul class="wfm-nav-links">
+        <li><a href="#wfm-services">Services</a></li>
+        <li><a href="#wfm-process">Process</a></li>
+        <li><a href="#wfm-pricing">Pricing</a></li>
+        <li><a href="#wfm-unlimiwax" class="wfm-nav-highlight">UnlimiWax</a></li>
+      </ul>
+      <a href="/book" class="wfm-btn-primary" style="padding:10px 24px;">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="wfm-hero">
+    <div class="wfm-hero-bg">
+      <div class="wfm-hero-bg-block1"></div>
+      <div class="wfm-hero-bg-block2"></div>
+    </div>
+    <div class="wfm-hero-accent"></div>
+
+    <div class="wfm-hero-content wfm-container">
+      <div class="wfm-hero-grid">
+        <div>
+          <div class="wfm-hero-badge">Professional Male Grooming</div>
+          <h1 class="wfm-hero-title">
+            Sharp<br>Clean<br><span class="wfm-amber">Defined</span>
+          </h1>
+          <p class="wfm-hero-desc">
+            Expert male waxing by specialists who understand male skin and hair growth.
+            No awkwardness. No compromises. Just results.
+          </p>
+          <div class="wfm-hero-actions">
+            <a href="/book" class="wfm-btn-primary">
+              Book Appointment
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#wfm-unlimiwax" class="wfm-btn-outline">Unlimited Waxing &rarr;</a>
+          </div>
+        </div>
+
+        <div class="wfm-hero-stats">
+          <div class="wfm-stats-grid">
+            <div>
+              <div class="wfm-stat-value amber">15K+</div>
+              <div class="wfm-stat-label">Treatments Completed</div>
+            </div>
+            <div>
+              <div class="wfm-stat-value">4.9</div>
+              <div class="wfm-stat-label">Client Rating</div>
+            </div>
+            <div>
+              <div class="wfm-stat-value">8+</div>
+              <div class="wfm-stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="wfm-stat-value amber">100%</div>
+              <div class="wfm-stat-label">Male Specialists</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="wfm-quote">
+    <div class="wfm-quote-bar"></div>
+    <div class="wfm-container">
+      <div class="wfm-quote-grid">
+        <div class="wfm-quote-mark">&ldquo;</div>
+        <div>
+          <blockquote>
+            Male grooming isn&rsquo;t vanity.
+            <strong>It&rsquo;s precision.</strong>
+            It&rsquo;s the discipline of presenting your best self to the world.
+          </blockquote>
+          <div class="wfm-quote-attr">The Wax for Men Philosophy</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="wfm-services" class="wfm-services">
+    <div class="wfm-container">
+      <div class="wfm-services-header">
+        <div class="wfm-label">Our Services</div>
+        <h2 class="wfm-section-title">Every Area<br><span>Covered</span></h2>
+      </div>
+
+      <div class="wfm-services-grid">
+        <!-- Body Waxing (Featured) -->
+        <div class="wfm-service-card wfm-service-featured">
+          <div class="wfm-service-number">01</div>
+          <div class="wfm-service-card-inner">
+            <div class="wfm-service-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3>Body Waxing</h3>
+            <p>Full body waxing services including back, chest, stomach, shoulders, and arms.
+            Clean lines and smooth results using premium hot and strip wax systems.</p>
+            <ul class="wfm-service-areas">
+              <li>Full Back</li>
+              <li>Chest</li>
+              <li>Shoulders</li>
+              <li>Stomach</li>
+              <li>Full Arms</li>
+              <li>Half Arms</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Leg Waxing -->
+        <div class="wfm-service-card">
+          <div class="wfm-service-number">02</div>
+          <div class="wfm-service-card-inner">
+            <div class="wfm-service-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <h3>Leg Waxing</h3>
+            <p>Full and half leg waxing for athletes, cyclists, swimmers, and men who demand clean definition.</p>
+            <div class="wfm-service-tags">
+              <span>Full Legs</span>
+              <span class="sep">|</span>
+              <span>Half Legs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Face & Detail -->
+        <div class="wfm-service-card">
+          <div class="wfm-service-number">03</div>
+          <div class="wfm-service-card-inner">
+            <div class="wfm-service-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </div>
+            <h3>Face &amp; Detail</h3>
+            <p>Precision eyebrow shaping and facial detail work for sharp, well-groomed presentation.</p>
+            <div class="wfm-service-tags">
+              <span>Eyebrows</span>
+              <span class="sep">|</span>
+              <span>Underarms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intimate (Full Width) -->
+        <div class="wfm-service-card wfm-service-wide">
+          <div class="wfm-service-card-inner">
+            <div class="wfm-service-wide-num">04</div>
+            <div class="wfm-service-wide-content">
+              <h3>Intimate Waxing</h3>
+              <p>Professional, discreet intimate waxing in a comfortable environment. Our specialists are trained
+              exclusively in male intimate waxing with the highest hygiene and safety standards.</p>
+            </div>
+            <a href="/book" class="wfm-btn-border">
+              Enquire
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="wfm-process" class="wfm-process">
+    <div class="wfm-process-border top"></div>
+    <div class="wfm-process-border bottom"></div>
+    <div class="wfm-container">
+      <div class="wfm-process-grid">
+        <div class="wfm-process-sidebar">
+          <div class="wfm-label">The Process</div>
+          <h2 class="wfm-section-title">How It<br><span>Works</span></h2>
+          <p>Every visit follows our structured protocol to ensure consistency, safety, and the best possible results.</p>
+        </div>
+        <div>
+          <div class="wfm-step">
+            <div class="wfm-step-num">01</div>
+            <div>
+              <h3>Consultation</h3>
+              <p>We review your medical history, previous waxing experience, and any skin sensitivities. First-timers get a thorough walkthrough of what to expect.</p>
+            </div>
+          </div>
+          <div class="wfm-step">
+            <div class="wfm-step-num">02</div>
+            <div>
+              <h3>Contraindications Check</h3>
+              <p>A quick screening ensures your skin is ready for treatment. We check for sunburn, medications, recent procedures, and any conditions that could affect results.</p>
+            </div>
+          </div>
+          <div class="wfm-step">
+            <div class="wfm-step-num">03</div>
+            <div>
+              <h3>Preparation</h3>
+              <p>The treatment area is cleaned and prepped with pre-wax oil. We select the right wax system for your skin and hair type &mdash; hot wax, strip wax, or combination.</p>
+            </div>
+          </div>
+          <div class="wfm-step">
+            <div class="wfm-step-num">04</div>
+            <div>
+              <h3>Treatment</h3>
+              <p>Precise, efficient waxing with expert technique. We work methodically to minimise discomfort and maximise clean results.</p>
+            </div>
+          </div>
+          <div class="wfm-step">
+            <div class="wfm-step-num">05</div>
+            <div>
+              <h3>Aftercare</h3>
+              <p>Post-treatment products are applied and you receive detailed aftercare instructions covering the first 48 hours and ongoing maintenance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="wfm-pricing" class="wfm-pricing">
+    <div class="wfm-container">
+      <div class="wfm-pricing-header">
+        <div>
+          <div class="wfm-label">Pricing</div>
+          <h2 class="wfm-section-title">Transparent<br><span>Pricing</span></h2>
+        </div>
+        <p>No hidden costs. No membership required. Pay per session or go unlimited with UnlimiWax.</p>
+      </div>
+
+      <div class="wfm-pricing-grid">
+        <div class="wfm-price-item"><div><h3>Full Back</h3><div class="duration">30 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>25</div></div>
+        <div class="wfm-price-item"><div><h3>Chest</h3><div class="duration">25 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>25</div></div>
+        <div class="wfm-price-item"><div><h3>Shoulders</h3><div class="duration">15 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>15</div></div>
+        <div class="wfm-price-item"><div><h3>Stomach</h3><div class="duration">15 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>15</div></div>
+        <div class="wfm-price-item"><div><h3>Full Legs</h3><div class="duration">45 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>35</div></div>
+        <div class="wfm-price-item"><div><h3>Half Legs</h3><div class="duration">25 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>22</div></div>
+        <div class="wfm-price-item"><div><h3>Full Arms</h3><div class="duration">25 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>22</div></div>
+        <div class="wfm-price-item"><div><h3>Underarms</h3><div class="duration">10 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>12</div></div>
+        <div class="wfm-price-item"><div><h3>Eyebrows</h3><div class="duration">10 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>10</div></div>
+        <div class="wfm-price-item"><div><h3>Intimate Standard</h3><div class="duration">30 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>35</div></div>
+        <div class="wfm-price-item"><div><h3>Intimate Full</h3><div class="duration">40 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>45</div></div>
+        <div class="wfm-price-item featured"><div><h3>Full Body</h3><div class="duration">90 min</div></div><div class="wfm-price-value"><span class="currency">&pound;</span>120</div></div>
+      </div>
+
+      <!-- UnlimiWax CTA -->
+      <div id="wfm-unlimiwax" class="wfm-unlimiwax-cta">
+        <div>
+          <h3>Go Unlimited with UnlimiWax</h3>
+          <p>One monthly fee. Unlimited waxing. No per-session costs.</p>
+        </div>
+        <a href="/unlimiwax" class="wfm-btn-dark">
+          Learn More
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="wfm-trust">
+    <div class="wfm-process-border top"></div>
+    <div class="wfm-container">
+      <div class="wfm-trust-grid">
+        <div>
+          <div class="wfm-label">Why Trust Us</div>
+          <h2 class="wfm-section-title">Standards<br><span>Matter</span></h2>
+        </div>
+        <div class="wfm-trust-cards">
+          <div class="wfm-trust-card">
+            <h3>Male Specialists Only</h3>
+            <p>Every therapist is trained exclusively in male waxing, understanding the specific needs of male skin and hair growth patterns.</p>
+          </div>
+          <div class="wfm-trust-card">
+            <h3>Clinical Hygiene</h3>
+            <p>Single-use applicators, medical-grade sanitation, and strict cross-contamination protocols on every treatment.</p>
+          </div>
+          <div class="wfm-trust-card">
+            <h3>Full Screening</h3>
+            <p>Digital pre-treatment checks cover medications, skin conditions, and medical history before every session.</p>
+          </div>
+          <div class="wfm-trust-card">
+            <h3>GDPR Compliant</h3>
+            <p>All client data stored securely with full audit trails, electronic signatures, and data retention policies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="wfm-cta">
+    <div class="wfm-cta-bg1"></div>
+    <div class="wfm-cta-bg2"></div>
+    <div class="wfm-container wfm-cta-content">
+      <h2>Ready to Get<br><span class="amber">Started?</span></h2>
+      <p>Book your first appointment or sign up for UnlimiWax unlimited membership.</p>
+      <div class="wfm-cta-actions">
+        <a href="/book" class="wfm-btn-primary" style="padding:20px 40px;">Book Appointment</a>
+        <a href="/unlimiwax" class="wfm-btn-outline" style="padding:20px 40px;">Explore UnlimiWax</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="wfm-footer">
+    <div class="wfm-container">
+      <div class="wfm-footer-grid">
+        <div class="wfm-footer-brand">
+          <a href="#" class="wfm-nav-logo" style="margin-bottom:0;">
+            <div class="wfm-nav-logo-icon" style="width:32px;height:32px;"><span style="font-size:12px;">W</span></div>
+            <span style="font-size:14px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Wax for Men</span>
+          </a>
+          <p>Professional male waxing services.<br>Part of the PLG UK family of brands.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul class="wfm-footer-links">
+            <li><a href="#wfm-services">Body Waxing</a></li>
+            <li><a href="#wfm-services">Leg Waxing</a></li>
+            <li><a href="#wfm-services">Face &amp; Detail</a></li>
+            <li><a href="#wfm-services">Intimate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul class="wfm-footer-links">
+            <li><a href="/unlimiwax">UnlimiWax</a></li>
+            <li><a href="/login">Client Portal</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in Touch</h4>
+          <a href="/book" class="wfm-btn-border">Book Appointment</a>
+        </div>
+      </div>
+      <div class="wfm-footer-bottom">
+        <span>&copy; 2026 PLG UK. All rights reserved.</span>
+        <span class="tagline">Precision. Confidence. Results.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>

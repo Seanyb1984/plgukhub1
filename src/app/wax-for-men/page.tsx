@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'WAX FOR MEN | Premium Male Waxing',
-  description: 'Professional male waxing services. Precision. Confidence. Results.',
+  title: 'Treatments - Wax for Men - Male Waxing Services',
+  description: 'Professional male waxing services. Private rooms, specialist therapists, and premium wax blends. Intimate waxing, body waxing, facials and massage.',
 };
 
 export default function WaxForMenLanding() {
@@ -154,7 +154,7 @@ export default function WaxForMenLanding() {
       </section>
 
       {/* ============================================ */}
-      {/* SERVICES — Asymmetric magazine grid */}
+      {/* SERVICES — The Menu */}
       {/* ============================================ */}
       <section id="services" className="relative py-24 md:py-32">
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
@@ -162,135 +162,175 @@ export default function WaxForMenLanding() {
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Our Services</span>
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Treatments</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
-              Every Area<br />
-              <span className="text-neutral-600">Covered</span>
+              The Menu
             </h2>
+            <p className="text-neutral-400 text-lg mt-6 max-w-2xl">
+              Precision grooming for men. Private rooms, specialist therapists, and premium wax blends that reduce discomfort.
+            </p>
           </div>
 
-          {/* Service grid — magazine asymmetric layout */}
-          <div className="grid grid-cols-12 gap-4 md:gap-6">
-            {/* Large featured card */}
-            <div className="col-span-12 md:col-span-7 row-span-2 group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/5 -skew-x-12" />
-              <div className="p-8 md:p-12">
-                <div className="text-[7rem] md:text-[10rem] font-black text-neutral-900 leading-none absolute -top-6 -right-4 select-none group-hover:text-neutral-800 transition-colors">01</div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 border-2 border-amber-400 flex items-center justify-center mb-8">
-                    <svg className="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4">Body Waxing</h3>
-                  <p className="text-neutral-400 text-lg leading-relaxed mb-8 max-w-md">
-                    Full body waxing services including back, chest, stomach, shoulders, and arms.
-                    Clean lines and smooth results using premium hot and strip wax systems.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Full Back</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Chest</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Shoulders</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Stomach</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Full Arms</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-amber-400" />
-                      <span className="text-neutral-300">Half Arms</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Service cards — 3-column grid with images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            {/* Top-right card */}
-            <div className="col-span-12 md:col-span-5 group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            {/* Intimate Waxing */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/intimate.png"
+                  alt="Male Intimate Waxing Studio"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
               <div className="p-8">
-                <div className="text-[5rem] font-black text-neutral-900 leading-none absolute -top-2 -right-2 select-none group-hover:text-neutral-800 transition-colors">02</div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 border-2 border-amber-400 flex items-center justify-center mb-6">
-                    <svg className="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Leg Waxing</h3>
-                  <p className="text-neutral-400 leading-relaxed mb-4">
-                    Full and half leg waxing for athletes, cyclists, swimmers, and men who demand clean definition.
-                  </p>
-                  <div className="flex gap-4 text-sm">
-                    <span className="text-neutral-300">Full Legs</span>
-                    <span className="text-neutral-600">|</span>
-                    <span className="text-neutral-300">Half Legs</span>
-                  </div>
-                </div>
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Intimate Waxing</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Our signature service. Performed by male specialists who do thousands of these treatments a year. Discreet, professional, and hygiene-focused.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Intimate Wax
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
 
-            {/* Bottom-right card */}
-            <div className="col-span-12 md:col-span-5 group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            {/* Back, Chest & Abs */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/back.png"
+                  alt="Male Back Waxing"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
               <div className="p-8">
-                <div className="text-[5rem] font-black text-neutral-900 leading-none absolute -top-2 -right-2 select-none group-hover:text-neutral-800 transition-colors">03</div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 border-2 border-amber-400 flex items-center justify-center mb-6">
-                    <svg className="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Face & Detail</h3>
-                  <p className="text-neutral-400 leading-relaxed mb-4">
-                    Precision eyebrow shaping and facial detail work for sharp, well-groomed presentation.
-                  </p>
-                  <div className="flex gap-4 text-sm">
-                    <span className="text-neutral-300">Eyebrows</span>
-                    <span className="text-neutral-600">|</span>
-                    <span className="text-neutral-300">Underarms</span>
-                  </div>
-                </div>
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Back, Chest & Abs</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Achieve a defined physique or simply feel cleaner. Waxing lasts weeks longer than shaving and avoids the itch of blunt stubble regrowth.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Body Wax
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
 
-            {/* Full-width intimate card */}
-            <div className="col-span-12 group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
-              <div className="p-8 md:p-12 flex flex-col md:flex-row md:items-center gap-8">
-                <div className="flex-shrink-0">
-                  <div className="text-[5rem] font-black text-neutral-800 leading-none select-none">04</div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-3">Intimate Waxing</h3>
-                  <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
-                    Professional, discreet intimate waxing in a comfortable environment. Our specialists are trained
-                    exclusively in male intimate waxing with the highest hygiene and safety standards.
-                  </p>
-                </div>
-                <div className="flex-shrink-0">
-                  <Link
-                    href="/login"
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
-                  >
-                    Enquire
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
+            {/* Legs & Arms */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/arms-and-legs-1.png"
+                  alt="Male Leg Waxing"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Legs & Arms</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Popular with cyclists, swimmers, and bodybuilders. We can remove everything for muscle definition or thin out density.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Sports Wax
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
+
+            {/* Face & Detail */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/beard-after.png"
+                  alt="Male Grooming Face"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Face & Detail</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Small details make the biggest difference. Sharp brows and clean ears instantly refresh your appearance.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Face Wax
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Body Clippering */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/banana-edit-1763779858589.png"
+                  alt="Body Clippering"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Body Clippering</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Not ready to wax? We offer professional body clippering to shorten and tidy hair without full removal. Ideal for a natural, groomed look.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Clippering
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Facials & Massage */}
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/facials2-1.png"
+                  alt="Male Facials"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-3">Facials & Massage</h3>
+                <p className="text-neutral-400 leading-relaxed mb-6">
+                  Skin health and muscle recovery. Our facials are designed for male skin (thicker, more oil production), and our massages target deep tension.
+                </p>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                >
+                  Book Treatment
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -557,10 +597,12 @@ export default function WaxForMenLanding() {
             <div className="col-span-6 md:col-span-2">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-neutral-500">
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Body Waxing</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Leg Waxing</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors">Intimate Waxing</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors">Back, Chest & Abs</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors">Legs & Arms</a></li>
                 <li><a href="#services" className="hover:text-amber-400 transition-colors">Face & Detail</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Intimate</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors">Body Clippering</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors">Facials & Massage</a></li>
               </ul>
             </div>
             <div className="col-span-6 md:col-span-2">

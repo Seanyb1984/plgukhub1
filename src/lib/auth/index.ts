@@ -4,6 +4,11 @@ import { compare } from 'bcryptjs';
 import { prisma } from '@/lib/db';
 import type { Brand, Role } from '@prisma/client';
 
+// ============================================
+// Auth.js v5 — Credentials Provider
+// Roles: ADMIN, PRESCRIBER, PRACTITIONER, STAFF
+// ============================================
+
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -69,7 +74,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
 
-        // Update last login
+        // Update last login timestamp
         await prisma.user.update({
           where: { id: user.id },
           data: { lastLoginAt: new Date() },
@@ -118,25 +123,37 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
 });
 
+// ============================================
 // Role-based permission helpers
+// ============================================
+
+/** PLG_UK brand admins can access all brands */
 export function canAccessBrand(userBrand: Brand, targetBrand: Brand): boolean {
-  // PLG_UK admins can access all brands
   if (userBrand === 'PLG_UK') return true;
   return userBrand === targetBrand;
 }
 
+/** Only ADMIN can manage users */
 export function canManageUsers(role: Role): boolean {
   return role === 'ADMIN';
 }
 
+/** ADMIN and PRACTITIONER can view all submissions */
 export function canViewAllSubmissions(role: Role): boolean {
   return role === 'ADMIN' || role === 'PRACTITIONER';
 }
 
+/** Only ADMIN can export data */
 export function canExportData(role: Role): boolean {
   return role === 'ADMIN';
 }
 
+/** ADMIN and PRACTITIONER can amend submissions */
 export function canAmendSubmission(role: Role): boolean {
   return role === 'ADMIN' || role === 'PRACTITIONER';
+}
+
+/** Check if role can access /admin routes */
+export function canAccessAdmin(role: Role): boolean {
+  return role === 'ADMIN' || role === 'PRESCRIBER';
 }

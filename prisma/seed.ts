@@ -142,7 +142,7 @@ async function main() {
         email: 'reception@menhancements.co.uk',
         name: 'Sarah Johnson',
         passwordHash,
-        role: 'RECEPTION',
+        role: 'STAFF',
         brand: 'MENHANCEMENTS',
         siteId: sites.find((s) => s.name === 'London Clinic' && s.brand === 'MENHANCEMENTS')!.id,
       },
@@ -180,7 +180,7 @@ async function main() {
         email: 'reception@waxformen.co.uk',
         name: 'Emma Davis',
         passwordHash,
-        role: 'RECEPTION',
+        role: 'STAFF',
         brand: 'WAX_FOR_MEN',
         siteId: sites.find((s) => s.name === 'London Studio')!.id,
       },
@@ -206,7 +206,7 @@ async function main() {
         email: 'reception@waxforwomen.co.uk',
         name: 'Amy White',
         passwordHash,
-        role: 'RECEPTION',
+        role: 'STAFF',
         brand: 'WAX_FOR_WOMEN',
         siteId: sites.find((s) => s.name === 'London Salon')!.id,
       },
@@ -236,12 +236,15 @@ async function main() {
         addressLine1: '42 Baker Street',
         city: 'London',
         postcode: 'W1U 3BW',
-        brand: 'MENHANCEMENTS',
+        brands: ['MENHANCEMENTS'],
         siteId: sites.find((s) => s.name === 'London Clinic' && s.brand === 'MENHANCEMENTS')!.id,
         emergencyName: 'Jane Smith',
         emergencyPhone: '07700 900002',
         emergencyRelation: 'Wife',
+        isProspect: false,
+        marketingConsent: true,
         marketingEmail: true,
+        status: 'ACTIVE',
       },
     }),
     prisma.client.upsert({
@@ -258,8 +261,10 @@ async function main() {
         addressLine1: '15 Oxford Street',
         city: 'London',
         postcode: 'W1D 2DW',
-        brand: 'MENHANCEMENTS',
+        brands: ['MENHANCEMENTS'],
         siteId: sites.find((s) => s.name === 'London Clinic' && s.brand === 'MENHANCEMENTS')!.id,
+        isProspect: true,
+        marketingConsent: false,
       },
     }),
 
@@ -278,9 +283,12 @@ async function main() {
         addressLine1: '8 Regent Street',
         city: 'London',
         postcode: 'SW1Y 4PE',
-        brand: 'WAX_FOR_MEN',
+        brands: ['WAX_FOR_MEN'],
         siteId: sites.find((s) => s.name === 'London Studio')!.id,
+        isProspect: false,
+        marketingConsent: true,
         marketingSms: true,
+        status: 'ACTIVE',
       },
     }),
 
@@ -299,10 +307,13 @@ async function main() {
         addressLine1: '23 Bond Street',
         city: 'London',
         postcode: 'W1S 4EG',
-        brand: 'WAX_FOR_WOMEN',
+        brands: ['WAX_FOR_WOMEN'],
         siteId: sites.find((s) => s.name === 'London Salon')!.id,
+        isProspect: false,
+        marketingConsent: true,
         marketingEmail: true,
         marketingSms: true,
+        status: 'ACTIVE',
       },
     }),
     prisma.client.upsert({
@@ -319,13 +330,51 @@ async function main() {
         addressLine1: '56 High Street',
         city: 'London',
         postcode: 'W8 4AA',
-        brand: 'WAX_FOR_WOMEN',
+        brands: ['WAX_FOR_WOMEN'],
         siteId: sites.find((s) => s.name === 'London Salon')!.id,
+        isProspect: true,
+        marketingConsent: false,
       },
     }),
   ]);
 
   console.log(`Created ${clients.length} demo clients`);
+
+  // ============================================
+  // CREATE DEMO INQUIRIES
+  // ============================================
+  console.log('Creating demo inquiries...');
+
+  const inquiries = await Promise.all([
+    prisma.inquiry.create({
+      data: {
+        name: 'James Carter',
+        email: 'james.carter@example.com',
+        phone: '07700 900010',
+        brand: 'MENHANCEMENTS',
+        message: 'Interested in Botox treatment for forehead lines.',
+      },
+    }),
+    prisma.inquiry.create({
+      data: {
+        name: 'Sarah Mitchell',
+        email: 'sarah.mitchell@example.com',
+        phone: '07700 900011',
+        brand: 'WAX_FOR_WOMEN',
+        message: 'Would like to book a full leg wax, first time client.',
+      },
+    }),
+    prisma.inquiry.create({
+      data: {
+        name: 'Tom Edwards',
+        email: 'tom.edwards@example.com',
+        brand: 'WAX_FOR_MEN',
+        message: 'Enquiry about back and shoulder waxing prices.',
+      },
+    }),
+  ]);
+
+  console.log(`Created ${inquiries.length} demo inquiries`);
 
   // ============================================
   // CREATE DEMO SUBMISSIONS
@@ -559,7 +608,7 @@ async function main() {
   console.log('\nDemo accounts:');
   console.log('  Admin:        admin@plguk.co.uk / password123');
   console.log('  Practitioner: practitioner@menhancements.co.uk / password123');
-  console.log('  Reception:    reception@menhancements.co.uk / password123');
+  console.log('  Staff:        reception@menhancements.co.uk / password123');
 }
 
 main()

@@ -72,8 +72,9 @@ export function formatBrand(brand: string): string {
 export function formatRole(role: string): string {
   const roleLabels: Record<string, string> = {
     ADMIN: 'Administrator',
+    PRESCRIBER: 'Prescriber',
     PRACTITIONER: 'Practitioner',
-    RECEPTION: 'Reception',
+    STAFF: 'Staff',
   };
   return roleLabels[role] || role;
 }

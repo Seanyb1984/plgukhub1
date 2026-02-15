@@ -23,9 +23,9 @@ enum Brand {
 
 enum Role {
   ADMIN
-  PRACTITIONER
-  RECEPTION
   PRESCRIBER
+  PRACTITIONER
+  STAFF
 }
 
 enum SubmissionStatus {
@@ -170,6 +170,8 @@ model Client {
   id              String       @id @default(cuid())
   clientId        String       @unique @default(cuid()) // External-facing ID
   status          ClientStatus @default(PROSPECT)
+  isProspect      Boolean      @default(true)     // True until first treatment completed
+  marketingConsent Boolean     @default(false)     // GDPR marketing opt-in
 
   // Brands this client has records with (can span multiple brands)
   brands          Brand[]
@@ -226,6 +228,31 @@ model Client {
   @@index([phone])
   @@index([lastName, firstName])
   @@index([siteId])
+}
+
+// ============================================
+// INQUIRIES (Lead capture → Client conversion)
+// ============================================
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  brand       Brand
+  message     String?
+
+  // Conversion tracking
+  isConverted Boolean  @default(false)
+  convertedAt DateTime?
+  convertedClientId String?  // Links to the Client created on conversion
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([brand])
+  @@index([isConverted])
+  @@index([email])
 }
 
 // ============================================

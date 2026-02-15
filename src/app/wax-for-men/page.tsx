@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function WaxForMenLanding() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-zinc-300 selection:text-black">
 
       {/* ============================================ */}
       {/* NAVIGATION — Minimal brutalist bar */}
@@ -15,25 +15,25 @@ export default function WaxForMenLanding() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-neutral-800">
         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-amber-400 rotate-3 flex items-center justify-center">
+            <div className="w-10 h-10 bg-zinc-300 rotate-3 flex items-center justify-center">
               <span className="text-black font-black text-sm -rotate-3">W</span>
             </div>
             <span className="text-lg font-bold tracking-[0.2em] uppercase">Wax for Men</span>
           </div>
           <div className="hidden md:flex items-center gap-10 text-sm font-medium tracking-wider uppercase text-neutral-400">
-            <a href="#services" className="hover:text-amber-400 transition-colors">Services</a>
-            <a href="#process" className="hover:text-amber-400 transition-colors">Process</a>
-            <a href="#pricing" className="hover:text-amber-400 transition-colors">Pricing</a>
+            <a href="#services" className="hover:text-zinc-300 transition-colors">Services</a>
+            <a href="#process" className="hover:text-zinc-300 transition-colors">Process</a>
+            <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
             <Link
               href="/wax-for-men/unlimiwax"
-              className="text-amber-400 hover:text-amber-300 transition-colors"
+              className="text-zinc-300 hover:text-zinc-200 transition-colors"
             >
               UnlimiWax
             </Link>
           </div>
           <Link
             href="/login"
-            className="px-6 py-2.5 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-colors"
+            className="px-6 py-2.5 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-colors"
           >
             Book Now
           </Link>
@@ -61,7 +61,7 @@ export default function WaxForMenLanding() {
             {/* Left column — Title block */}
             <div className="col-span-12 lg:col-span-7 mb-8 lg:mb-0">
               <div className="mb-6">
-                <span className="inline-block px-4 py-1.5 border border-amber-400/40 text-amber-400 text-xs font-bold tracking-[0.3em] uppercase">
+                <span className="inline-block px-4 py-1.5 border border-zinc-300/40 text-zinc-300 text-xs font-bold tracking-[0.3em] uppercase">
                   Professional Male Grooming
                 </span>
               </div>
@@ -69,7 +69,7 @@ export default function WaxForMenLanding() {
               <h1 className="text-[clamp(3rem,8vw,9rem)] font-black leading-[0.85] tracking-tighter uppercase">
                 <span className="block text-white">Sharp</span>
                 <span className="block text-white">Clean</span>
-                <span className="block text-amber-400 -ml-1">Defined</span>
+                <span className="block text-zinc-300 -ml-1">Defined</span>
               </h1>
 
               <div className="mt-8 max-w-lg">
@@ -82,7 +82,7 @@ export default function WaxForMenLanding() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/login"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-all"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-all"
                 >
                   Book Appointment
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@ export default function WaxForMenLanding() {
                 </Link>
                 <Link
                   href="/wax-for-men/unlimiwax"
-                  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-all"
                 >
                   Unlimited Waxing &rarr;
                 </Link>
@@ -103,7 +103,7 @@ export default function WaxForMenLanding() {
               <div className="bg-neutral-900 border border-neutral-800 p-8 lg:p-10">
                 <div className="grid grid-cols-2 gap-8">
                   <div>
-                    <div className="text-4xl md:text-5xl font-black text-amber-400">15K+</div>
+                    <div className="text-4xl md:text-5xl font-black text-zinc-300">15K+</div>
                     <div className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-500 mt-2">Treatments Completed</div>
                   </div>
                   <div>
@@ -115,7 +115,7 @@ export default function WaxForMenLanding() {
                     <div className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-500 mt-2">Years Experience</div>
                   </div>
                   <div>
-                    <div className="text-4xl md:text-5xl font-black text-amber-400">100%</div>
+                    <div className="text-4xl md:text-5xl font-black text-zinc-300">100%</div>
                     <div className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-500 mt-2">Male Specialists</div>
                   </div>
                 </div>
@@ -125,14 +125,14 @@ export default function WaxForMenLanding() {
         </div>
 
         {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-300/50 to-transparent" />
       </section>
 
       {/* ============================================ */}
       {/* EDITORIAL DIVIDER — Magazine pull quote */}
       {/* ============================================ */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute left-0 top-0 w-1 h-full bg-amber-400" />
+        <div className="absolute left-0 top-0 w-1 h-full bg-zinc-300" />
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-2 flex items-start">
@@ -145,7 +145,7 @@ export default function WaxForMenLanding() {
                 It&apos;s the discipline of presenting your best self to the world.
               </blockquote>
               <div className="mt-8 flex items-center gap-4">
-                <div className="w-12 h-px bg-amber-400" />
+                <div className="w-12 h-px bg-zinc-300" />
                 <span className="text-xs font-bold tracking-[0.3em] uppercase text-neutral-500">The Wax for Men Philosophy</span>
               </div>
             </div>
@@ -161,8 +161,8 @@ export default function WaxForMenLanding() {
           {/* Section header */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Treatments</span>
+              <div className="w-16 h-px bg-zinc-300" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">Treatments</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
               The Menu
@@ -176,7 +176,7 @@ export default function WaxForMenLanding() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* Intimate Waxing */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/intimate.png"
@@ -191,7 +191,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Intimate Wax
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,7 +202,7 @@ export default function WaxForMenLanding() {
             </div>
 
             {/* Back, Chest & Abs */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/back.png"
@@ -217,7 +217,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Body Wax
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -228,7 +228,7 @@ export default function WaxForMenLanding() {
             </div>
 
             {/* Legs & Arms */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/arms-and-legs-1.png"
@@ -243,7 +243,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Sports Wax
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,7 +254,7 @@ export default function WaxForMenLanding() {
             </div>
 
             {/* Face & Detail */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/beard-after.png"
@@ -269,7 +269,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Face Wax
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -280,7 +280,7 @@ export default function WaxForMenLanding() {
             </div>
 
             {/* Body Clippering */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/banana-edit-1763779858589.png"
@@ -295,7 +295,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Clippering
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -306,7 +306,7 @@ export default function WaxForMenLanding() {
             </div>
 
             {/* Facials & Massage */}
-            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-amber-400/30 transition-colors">
+            <div className="group relative bg-neutral-900 border border-neutral-800 overflow-hidden hover:border-zinc-300/30 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src="https://www.waxformen.co.uk/wp-content/uploads/2025/11/facials2-1.png"
@@ -321,7 +321,7 @@ export default function WaxForMenLanding() {
                 </p>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
                 >
                   Book Treatment
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -348,8 +348,8 @@ export default function WaxForMenLanding() {
             <div className="col-span-12 lg:col-span-4">
               <div className="lg:sticky lg:top-32">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-px bg-amber-400" />
-                  <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">The Process</span>
+                  <div className="w-16 h-px bg-zinc-300" />
+                  <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">The Process</span>
                 </div>
                 <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase leading-none mb-6">
                   How It<br />
@@ -394,13 +394,13 @@ export default function WaxForMenLanding() {
                 ].map((step) => (
                   <div
                     key={step.num}
-                    className="group border-b border-neutral-800 py-10 md:py-12 flex gap-6 md:gap-10 items-start hover:border-amber-400/30 transition-colors"
+                    className="group border-b border-neutral-800 py-10 md:py-12 flex gap-6 md:gap-10 items-start hover:border-zinc-300/30 transition-colors"
                   >
-                    <div className="flex-shrink-0 text-5xl md:text-6xl font-black text-neutral-800 group-hover:text-amber-400 transition-colors leading-none">
+                    <div className="flex-shrink-0 text-5xl md:text-6xl font-black text-neutral-800 group-hover:text-zinc-300 transition-colors leading-none">
                       {step.num}
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3 group-hover:text-amber-400 transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3 group-hover:text-zinc-300 transition-colors">
                         {step.title}
                       </h3>
                       <p className="text-neutral-400 leading-relaxed max-w-xl">{step.desc}</p>
@@ -420,8 +420,8 @@ export default function WaxForMenLanding() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Pricing</span>
+              <div className="w-16 h-px bg-zinc-300" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">Pricing</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
@@ -452,11 +452,11 @@ export default function WaxForMenLanding() {
               <div
                 key={item.service}
                 className={`bg-neutral-950 p-8 flex items-center justify-between group hover:bg-neutral-900 transition-colors ${
-                  item.featured ? 'border-l-2 border-l-amber-400' : ''
+                  item.featured ? 'border-l-2 border-l-zinc-300' : ''
                 }`}
               >
                 <div>
-                  <h3 className={`text-lg font-bold uppercase tracking-tight ${item.featured ? 'text-amber-400' : 'text-white'}`}>
+                  <h3 className={`text-lg font-bold uppercase tracking-tight ${item.featured ? 'text-zinc-300' : 'text-white'}`}>
                     {item.service}
                   </h3>
                   <span className="text-xs text-neutral-500 tracking-wider">{item.duration}</span>
@@ -472,7 +472,7 @@ export default function WaxForMenLanding() {
           </div>
 
           {/* UnlimiWax CTA strip */}
-          <div className="mt-12 bg-amber-400 p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="mt-12 bg-zinc-300 p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h3 className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight">
                 Go Unlimited with UnlimiWax
@@ -483,7 +483,7 @@ export default function WaxForMenLanding() {
             </div>
             <Link
               href="/wax-for-men/unlimiwax"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-black text-amber-400 font-bold text-sm tracking-wider uppercase hover:bg-neutral-900 transition-colors flex-shrink-0"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-black text-zinc-300 font-bold text-sm tracking-wider uppercase hover:bg-neutral-900 transition-colors flex-shrink-0"
             >
               Learn More
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -503,8 +503,8 @@ export default function WaxForMenLanding() {
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 md:col-span-5">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-px bg-amber-400" />
-                <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Why Trust Us</span>
+                <div className="w-16 h-px bg-zinc-300" />
+                <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">Why Trust Us</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase leading-none">
                 Standards<br />
@@ -531,7 +531,7 @@ export default function WaxForMenLanding() {
                     desc: 'All client data stored securely with full audit trails, electronic signatures, and data retention policies.',
                   },
                 ].map((item) => (
-                  <div key={item.title} className="border border-neutral-800 p-6 hover:border-amber-400/30 transition-colors">
+                  <div key={item.title} className="border border-neutral-800 p-6 hover:border-zinc-300/30 transition-colors">
                     <h3 className="text-lg font-bold uppercase tracking-tight mb-3">{item.title}</h3>
                     <p className="text-neutral-400 text-sm leading-relaxed">{item.desc}</p>
                   </div>
@@ -547,14 +547,14 @@ export default function WaxForMenLanding() {
       {/* ============================================ */}
       <section className="relative py-32 md:py-40">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-[10%] w-[40%] h-full bg-amber-400/[0.03] skew-x-6" />
-          <div className="absolute bottom-0 right-[5%] w-[30%] h-[60%] bg-amber-400/[0.02] -skew-x-12" />
+          <div className="absolute top-0 left-[10%] w-[40%] h-full bg-zinc-300/[0.03] skew-x-6" />
+          <div className="absolute bottom-0 right-[5%] w-[30%] h-[60%] bg-zinc-300/[0.02] -skew-x-12" />
         </div>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 text-center">
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-none mb-8">
             Ready to Get<br />
-            <span className="text-amber-400">Started?</span>
+            <span className="text-zinc-300">Started?</span>
           </h2>
           <p className="text-neutral-400 text-xl max-w-lg mx-auto mb-12">
             Book your first appointment or sign up for UnlimiWax unlimited membership.
@@ -562,13 +562,13 @@ export default function WaxForMenLanding() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/login"
-              className="px-10 py-5 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-colors"
+              className="px-10 py-5 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-colors"
             >
               Book Appointment
             </Link>
             <Link
               href="/wax-for-men/unlimiwax"
-              className="px-10 py-5 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-colors"
+              className="px-10 py-5 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-colors"
             >
               Explore UnlimiWax
             </Link>
@@ -584,7 +584,7 @@ export default function WaxForMenLanding() {
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 md:col-span-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-amber-400 rotate-3 flex items-center justify-center">
+                <div className="w-8 h-8 bg-zinc-300 rotate-3 flex items-center justify-center">
                   <span className="text-black font-black text-xs -rotate-3">W</span>
                 </div>
                 <span className="text-sm font-bold tracking-[0.2em] uppercase">Wax for Men</span>
@@ -597,28 +597,28 @@ export default function WaxForMenLanding() {
             <div className="col-span-6 md:col-span-2">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-neutral-500">
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Intimate Waxing</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Back, Chest & Abs</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Legs & Arms</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Face & Detail</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Body Clippering</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Facials & Massage</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Intimate Waxing</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Back, Chest & Abs</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Legs & Arms</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Face & Detail</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Body Clippering</a></li>
+                <li><a href="#services" className="hover:text-zinc-300 transition-colors">Facials & Massage</a></li>
               </ul>
             </div>
             <div className="col-span-6 md:col-span-2">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-neutral-500">
-                <li><Link href="/wax-for-men/unlimiwax" className="hover:text-amber-400 transition-colors">UnlimiWax</Link></li>
-                <li><Link href="/login" className="hover:text-amber-400 transition-colors">Client Portal</Link></li>
-                <li><Link href="/privacy" className="hover:text-amber-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-amber-400 transition-colors">Terms</Link></li>
+                <li><Link href="/wax-for-men/unlimiwax" className="hover:text-zinc-300 transition-colors">UnlimiWax</Link></li>
+                <li><Link href="/login" className="hover:text-zinc-300 transition-colors">Client Portal</Link></li>
+                <li><Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms</Link></li>
               </ul>
             </div>
             <div className="col-span-12 md:col-span-4">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Get in Touch</h4>
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-amber-400 text-amber-400 text-sm font-bold tracking-wider uppercase hover:bg-amber-400 hover:text-black transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 text-zinc-300 text-sm font-bold tracking-wider uppercase hover:bg-zinc-300 hover:text-black transition-all"
               >
                 Book Appointment
               </Link>

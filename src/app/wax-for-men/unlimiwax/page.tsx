@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function UnlimiWaxLanding() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-zinc-300 selection:text-black">
 
       {/* ============================================ */}
       {/* NAVIGATION */}
@@ -17,22 +17,22 @@ export default function UnlimiWaxLanding() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/wax-for-men" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-amber-400 rotate-3 flex items-center justify-center">
+              <div className="w-10 h-10 bg-zinc-300 rotate-3 flex items-center justify-center">
                 <span className="text-black font-black text-sm -rotate-3">W</span>
               </div>
               <span className="text-lg font-bold tracking-[0.2em] uppercase">Wax for Men</span>
             </Link>
             <span className="text-neutral-600 mx-2">/</span>
-            <span className="text-amber-400 font-bold tracking-wider text-sm uppercase">UnlimiWax</span>
+            <span className="text-zinc-300 font-bold tracking-wider text-sm uppercase">UnlimiWax</span>
           </div>
           <div className="hidden md:flex items-center gap-10 text-sm font-medium tracking-wider uppercase text-neutral-400">
-            <a href="#how-it-works" className="hover:text-amber-400 transition-colors">How It Works</a>
-            <a href="#plans" className="hover:text-amber-400 transition-colors">Plans</a>
-            <a href="#calculator" className="hover:text-amber-400 transition-colors">Calculator</a>
+            <a href="#how-it-works" className="hover:text-zinc-300 transition-colors">How It Works</a>
+            <a href="#plans" className="hover:text-zinc-300 transition-colors">Plans</a>
+            <a href="#calculator" className="hover:text-zinc-300 transition-colors">Calculator</a>
           </div>
           <a
             href="#plans"
-            className="px-6 py-2.5 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-colors"
+            className="px-6 py-2.5 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-colors"
           >
             See Plans
           </a>
@@ -46,9 +46,9 @@ export default function UnlimiWaxLanding() {
         {/* Background geometry */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 w-[55%] h-full bg-neutral-900/60 -skew-x-6 origin-top-right" />
-          <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 via-amber-400/20 to-transparent" />
-          <div className="absolute top-[20%] right-[10%] w-64 h-64 border border-amber-400/10 rotate-12" />
-          <div className="absolute bottom-[15%] right-[25%] w-40 h-40 border border-amber-400/5 -rotate-6" />
+          <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-zinc-300 via-zinc-300/20 to-transparent" />
+          <div className="absolute top-[20%] right-[10%] w-64 h-64 border border-zinc-300/10 rotate-12" />
+          <div className="absolute bottom-[15%] right-[25%] w-40 h-40 border border-zinc-300/5 -rotate-6" />
         </div>
 
         <div className="relative z-10 w-full max-w-[1800px] mx-auto px-6 md:px-12">
@@ -56,7 +56,7 @@ export default function UnlimiWaxLanding() {
             {/* Left — Main messaging */}
             <div className="col-span-12 lg:col-span-7">
               <div className="mb-6 flex items-center gap-3">
-                <div className="px-3 py-1 bg-amber-400 text-black text-xs font-black tracking-wider uppercase">
+                <div className="px-3 py-1 bg-zinc-300 text-black text-xs font-black tracking-wider uppercase">
                   New
                 </div>
                 <span className="text-xs font-bold tracking-[0.3em] uppercase text-neutral-500">
@@ -67,13 +67,13 @@ export default function UnlimiWaxLanding() {
               <h1 className="text-[clamp(2.5rem,7vw,8rem)] font-black leading-[0.85] tracking-tighter uppercase">
                 <span className="block text-white">Stop Paying</span>
                 <span className="block text-white">Full Price</span>
-                <span className="block text-amber-400">Every Time</span>
+                <span className="block text-zinc-300">Every Time</span>
               </h1>
 
               <div className="mt-8 max-w-xl">
                 <p className="text-xl md:text-2xl text-neutral-300 leading-relaxed font-light">
                   Lock in <span className="text-white font-semibold">2026 prices</span> and save up to{' '}
-                  <span className="text-amber-400 font-bold">30%</span> on your regular waxing with a fixed
+                  <span className="text-zinc-300 font-bold">30%</span> on your regular waxing with a fixed
                   24-month plan. 0% APR. No catches.
                 </p>
               </div>
@@ -81,7 +81,7 @@ export default function UnlimiWaxLanding() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <a
                   href="#plans"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-all"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-all"
                 >
                   View Plans &amp; Pricing
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function UnlimiWaxLanding() {
                 </a>
                 <a
                   href="#how-it-works"
-                  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-all"
                 >
                   How It Works
                 </a>
@@ -128,7 +128,7 @@ export default function UnlimiWaxLanding() {
             {/* Right — Savings highlight card */}
             <div className="col-span-12 lg:col-span-5">
               <div className="bg-neutral-900 border border-neutral-800 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-400/10 -skew-x-12" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-zinc-300/10 -skew-x-12" />
 
                 {/* Featured example */}
                 <div className="p-8 md:p-10">
@@ -150,7 +150,7 @@ export default function UnlimiWaxLanding() {
 
                     <div className="flex items-center justify-between pb-6 border-b border-neutral-800">
                       <div>
-                        <div className="text-sm text-amber-400 font-bold mb-1">UnlimiWax Plan</div>
+                        <div className="text-sm text-zinc-300 font-bold mb-1">UnlimiWax Plan</div>
                         <div className="text-xs text-neutral-500">Same 26 sessions, fixed price</div>
                       </div>
                       <div className="text-right">
@@ -158,9 +158,9 @@ export default function UnlimiWaxLanding() {
                       </div>
                     </div>
 
-                    <div className="bg-amber-400/10 border border-amber-400/20 p-4 flex items-center justify-between">
-                      <span className="text-sm font-bold text-amber-400 uppercase tracking-wider">You Save</span>
-                      <span className="text-2xl font-black text-amber-400">&pound;390</span>
+                    <div className="bg-zinc-300/10 border border-zinc-300/20 p-4 flex items-center justify-between">
+                      <span className="text-sm font-bold text-zinc-300 uppercase tracking-wider">You Save</span>
+                      <span className="text-2xl font-black text-zinc-300">&pound;390</span>
                     </div>
                   </div>
 
@@ -186,7 +186,7 @@ export default function UnlimiWaxLanding() {
       {/* EDITORIAL PULL QUOTE — Inflation angle */}
       {/* ============================================ */}
       <section className="relative py-20 md:py-28">
-        <div className="absolute left-0 top-0 w-1 h-full bg-amber-400" />
+        <div className="absolute left-0 top-0 w-1 h-full bg-zinc-300" />
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-2 flex items-start">
@@ -198,11 +198,11 @@ export default function UnlimiWaxLanding() {
                 <span className="text-white font-semibold">buying wholesale</span>.
                 You&apos;re a regular. You know you&apos;ll be coming back every 4 weeks.
                 Why pay retail every time when you can{' '}
-                <span className="text-amber-400 font-bold">lock in today&apos;s prices</span>{' '}
+                <span className="text-zinc-300 font-bold">lock in today&apos;s prices</span>{' '}
                 for the next two years?
               </blockquote>
               <div className="mt-8 flex items-center gap-4">
-                <div className="w-12 h-px bg-amber-400" />
+                <div className="w-12 h-px bg-zinc-300" />
                 <span className="text-xs font-bold tracking-[0.3em] uppercase text-neutral-500">
                   Inflation-Proof Your Grooming
                 </span>
@@ -222,8 +222,8 @@ export default function UnlimiWaxLanding() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">How It Works</span>
+              <div className="w-16 h-px bg-zinc-300" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">How It Works</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
               Simple as<br />
@@ -253,12 +253,12 @@ export default function UnlimiWaxLanding() {
               },
             ].map((step) => (
               <div key={step.num} className="bg-neutral-950 p-8 md:p-12 group">
-                <div className="text-6xl md:text-7xl font-black text-neutral-800 group-hover:text-amber-400 transition-colors leading-none mb-8">
+                <div className="text-6xl md:text-7xl font-black text-neutral-800 group-hover:text-zinc-300 transition-colors leading-none mb-8">
                   {step.num}
                 </div>
                 <h3 className="text-2xl font-black uppercase tracking-tight mb-4">{step.title}</h3>
                 <p className="text-neutral-400 leading-relaxed mb-6">{step.desc}</p>
-                <div className="flex items-center gap-2 text-xs font-bold tracking-wider text-amber-400/70">
+                <div className="flex items-center gap-2 text-xs font-bold tracking-wider text-zinc-300/70">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -277,8 +277,8 @@ export default function UnlimiWaxLanding() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">Plans</span>
+              <div className="w-16 h-px bg-zinc-300" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">Plans</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
@@ -313,26 +313,26 @@ export default function UnlimiWaxLanding() {
 
                 <ul className="space-y-3 mb-8 text-sm text-neutral-400">
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     26 sessions (every 4 weeks)
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Choose: Back, Chest, or Legs
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Up to 30% off PAYG rates
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Price locked for 2 years
                   </li>
                 </ul>
 
                 <a
                   href="#apply"
-                  className="block w-full text-center px-6 py-4 border border-neutral-700 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-all"
+                  className="block w-full text-center px-6 py-4 border border-neutral-700 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-all"
                 >
                   Check Eligibility
                 </a>
@@ -340,12 +340,12 @@ export default function UnlimiWaxLanding() {
             </div>
 
             {/* Plan: Pro — Featured */}
-            <div className="group bg-neutral-900 border-2 border-amber-400 relative overflow-hidden">
-              <div className="bg-amber-400 py-2 text-center">
+            <div className="group bg-neutral-900 border-2 border-zinc-300 relative overflow-hidden">
+              <div className="bg-zinc-300 py-2 text-center">
                 <span className="text-xs font-black tracking-[0.3em] uppercase text-black">Most Popular</span>
               </div>
               <div className="p-8 md:p-10">
-                <div className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400 mb-3">Pro</div>
+                <div className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300 mb-3">Pro</div>
                 <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Multi-Area</h3>
                 <p className="text-neutral-500 text-sm mb-8">
                   Combine two or more areas for maximum savings on your regular routine.
@@ -355,7 +355,7 @@ export default function UnlimiWaxLanding() {
                   <div className="text-xs text-neutral-500 tracking-wider uppercase mb-2">From</div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-sm font-bold text-neutral-500">&pound;</span>
-                    <span className="text-5xl font-black text-amber-400">34</span>
+                    <span className="text-5xl font-black text-zinc-300">34</span>
                     <span className="text-sm text-neutral-500">/mo</span>
                   </div>
                   <div className="text-xs text-neutral-600 mt-1">over 24 months at 0% APR</div>
@@ -363,30 +363,30 @@ export default function UnlimiWaxLanding() {
 
                 <ul className="space-y-3 mb-8 text-sm text-neutral-400">
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     26 sessions per area
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     2+ areas combined
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Includes intimate waxing options
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Up to 30% off PAYG rates
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Priority booking
                   </li>
                 </ul>
 
                 <a
                   href="#apply"
-                  className="block w-full text-center px-6 py-4 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-colors"
+                  className="block w-full text-center px-6 py-4 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-colors"
                 >
                   Check Eligibility
                 </a>
@@ -414,26 +414,26 @@ export default function UnlimiWaxLanding() {
 
                 <ul className="space-y-3 mb-8 text-sm text-neutral-400">
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     26 full-body sessions
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     All areas: back, chest, legs, arms, intimate
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Maximum savings vs PAYG
                   </li>
                   <li className="flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-4 h-4 text-zinc-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     Priority booking + VIP perks
                   </li>
                 </ul>
 
                 <a
                   href="#apply"
-                  className="block w-full text-center px-6 py-4 border border-neutral-700 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-all"
+                  className="block w-full text-center px-6 py-4 border border-neutral-700 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-all"
                 >
                   Check Eligibility
                 </a>
@@ -468,7 +468,7 @@ export default function UnlimiWaxLanding() {
               </div>
               <div>
                 <div className="text-xs text-neutral-500 tracking-wider uppercase mb-1">Representative APR</div>
-                <div className="text-xl font-black text-amber-400">0% APR</div>
+                <div className="text-xl font-black text-zinc-300">0% APR</div>
               </div>
             </div>
             <p className="mt-6 text-xs text-neutral-600 leading-relaxed max-w-3xl">
@@ -492,8 +492,8 @@ export default function UnlimiWaxLanding() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-400" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">The Maths</span>
+              <div className="w-16 h-px bg-zinc-300" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">The Maths</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
               Do The<br />
@@ -545,7 +545,7 @@ export default function UnlimiWaxLanding() {
               const saving = paygTotal - unlimiwaxTotal;
               const monthly = (unlimiwaxTotal / 24).toFixed(2);
               return (
-                <div key={item.area} className="bg-neutral-950 border border-neutral-800 p-8 hover:border-amber-400/20 transition-colors">
+                <div key={item.area} className="bg-neutral-950 border border-neutral-800 p-8 hover:border-zinc-300/20 transition-colors">
                   <h3 className="text-lg font-black uppercase tracking-tight mb-6">{item.area}</h3>
 
                   <div className="space-y-3 text-sm">
@@ -559,8 +559,8 @@ export default function UnlimiWaxLanding() {
                     </div>
                     <div className="h-px bg-neutral-800" />
                     <div className="flex justify-between">
-                      <span className="text-amber-400 font-bold">You Save</span>
-                      <span className="text-amber-400 font-black">&pound;{saving.toLocaleString()}</span>
+                      <span className="text-zinc-300 font-bold">You Save</span>
+                      <span className="text-zinc-300 font-black">&pound;{saving.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -587,8 +587,8 @@ export default function UnlimiWaxLanding() {
             <div className="col-span-12 lg:col-span-4">
               <div className="lg:sticky lg:top-32">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-px bg-amber-400" />
-                  <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-400">FAQ</span>
+                  <div className="w-16 h-px bg-zinc-300" />
+                  <span className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">FAQ</span>
                 </div>
                 <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase leading-none">
                   Common<br />
@@ -640,17 +640,17 @@ export default function UnlimiWaxLanding() {
       {/* ============================================ */}
       <section id="apply" className="relative py-32 md:py-40">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-[5%] w-[50%] h-full bg-amber-400/[0.03] skew-x-6" />
-          <div className="absolute bottom-0 right-[10%] w-[35%] h-[50%] bg-amber-400/[0.02] -skew-x-12" />
+          <div className="absolute top-0 left-[5%] w-[50%] h-full bg-zinc-300/[0.03] skew-x-6" />
+          <div className="absolute bottom-0 right-[10%] w-[35%] h-[50%] bg-zinc-300/[0.02] -skew-x-12" />
         </div>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 text-center">
-          <div className="inline-block px-4 py-1.5 bg-amber-400 text-black text-xs font-black tracking-wider uppercase mb-8">
+          <div className="inline-block px-4 py-1.5 bg-zinc-300 text-black text-xs font-black tracking-wider uppercase mb-8">
             60-Second Eligibility Check
           </div>
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-none mb-6">
             Lock In Your<br />
-            <span className="text-amber-400">Price Today</span>
+            <span className="text-zinc-300">Price Today</span>
           </h2>
           <p className="text-neutral-400 text-xl max-w-lg mx-auto mb-4">
             Soft credit check. No impact on your score. Instant decision.
@@ -661,13 +661,13 @@ export default function UnlimiWaxLanding() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/login"
-              className="px-10 py-5 bg-amber-400 text-black font-bold text-sm tracking-wider uppercase hover:bg-amber-300 transition-colors"
+              className="px-10 py-5 bg-zinc-300 text-black font-bold text-sm tracking-wider uppercase hover:bg-zinc-200 transition-colors"
             >
               Check My Eligibility
             </Link>
             <Link
               href="/wax-for-men"
-              className="px-10 py-5 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-amber-400 hover:text-amber-400 transition-colors"
+              className="px-10 py-5 border-2 border-white/20 text-white font-bold text-sm tracking-wider uppercase hover:border-zinc-300 hover:text-zinc-300 transition-colors"
             >
               View All Services
             </Link>
@@ -683,12 +683,12 @@ export default function UnlimiWaxLanding() {
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 md:col-span-5">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-amber-400 rotate-3 flex items-center justify-center">
+                <div className="w-8 h-8 bg-zinc-300 rotate-3 flex items-center justify-center">
                   <span className="text-black font-black text-xs -rotate-3">W</span>
                 </div>
                 <span className="text-sm font-bold tracking-[0.2em] uppercase">Wax for Men</span>
                 <span className="text-neutral-600 mx-1">/</span>
-                <span className="text-amber-400 text-sm font-bold">UnlimiWax</span>
+                <span className="text-zinc-300 text-sm font-bold">UnlimiWax</span>
               </div>
               <p className="text-neutral-500 text-sm leading-relaxed mb-4">
                 Professional male waxing, financed sensibly.<br />
@@ -703,26 +703,26 @@ export default function UnlimiWaxLanding() {
             <div className="col-span-6 md:col-span-2">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Plans</h4>
               <ul className="space-y-2 text-sm text-neutral-500">
-                <li><a href="#plans" className="hover:text-amber-400 transition-colors">Essentials</a></li>
-                <li><a href="#plans" className="hover:text-amber-400 transition-colors">Pro</a></li>
-                <li><a href="#plans" className="hover:text-amber-400 transition-colors">Total</a></li>
-                <li><a href="#calculator" className="hover:text-amber-400 transition-colors">Calculator</a></li>
+                <li><a href="#plans" className="hover:text-zinc-300 transition-colors">Essentials</a></li>
+                <li><a href="#plans" className="hover:text-zinc-300 transition-colors">Pro</a></li>
+                <li><a href="#plans" className="hover:text-zinc-300 transition-colors">Total</a></li>
+                <li><a href="#calculator" className="hover:text-zinc-300 transition-colors">Calculator</a></li>
               </ul>
             </div>
             <div className="col-span-6 md:col-span-2">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-neutral-500">
-                <li><Link href="/privacy" className="hover:text-amber-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-amber-400 transition-colors">Terms of Service</Link></li>
-                <li><a href="#" className="hover:text-amber-400 transition-colors">Finance T&amp;Cs</a></li>
-                <li><a href="#" className="hover:text-amber-400 transition-colors">Complaints</a></li>
+                <li><Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link></li>
+                <li><a href="#" className="hover:text-zinc-300 transition-colors">Finance T&amp;Cs</a></li>
+                <li><a href="#" className="hover:text-zinc-300 transition-colors">Complaints</a></li>
               </ul>
             </div>
             <div className="col-span-12 md:col-span-3">
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4">Get Started</h4>
               <a
                 href="#apply"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-black text-sm font-bold tracking-wider uppercase hover:bg-amber-300 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-300 text-black text-sm font-bold tracking-wider uppercase hover:bg-zinc-200 transition-colors"
               >
                 Check Eligibility
               </a>

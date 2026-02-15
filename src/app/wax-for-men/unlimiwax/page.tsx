@@ -133,7 +133,7 @@ export default function UnlimiWaxLanding() {
                 {/* Featured example */}
                 <div className="p-8 md:p-10">
                   <div className="text-xs font-bold tracking-[0.3em] uppercase text-neutral-500 mb-6">
-                    Example: Hollywood Wax
+                    Example: Back + Chest &amp; Abs
                   </div>
 
                   {/* PAYG vs UnlimiWax comparison */}
@@ -144,7 +144,7 @@ export default function UnlimiWaxLanding() {
                         <div className="text-xs text-neutral-600">26 sessions over 2 years</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-black text-neutral-500 line-through">&pound;1,300</div>
+                        <div className="text-2xl font-black text-neutral-500 line-through">&pound;1,820</div>
                       </div>
                     </div>
 
@@ -154,13 +154,13 @@ export default function UnlimiWaxLanding() {
                         <div className="text-xs text-neutral-500">Same 26 sessions, fixed price</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-3xl font-black text-white">&pound;910</div>
+                        <div className="text-3xl font-black text-white">&pound;1,274</div>
                       </div>
                     </div>
 
                     <div className="bg-zinc-300/10 border border-zinc-300/20 p-4 flex items-center justify-between">
                       <span className="text-sm font-bold text-zinc-300 uppercase tracking-wider">You Save</span>
-                      <span className="text-2xl font-black text-zinc-300">&pound;390</span>
+                      <span className="text-2xl font-black text-zinc-300">&pound;546</span>
                     </div>
                   </div>
 
@@ -169,8 +169,8 @@ export default function UnlimiWaxLanding() {
                     <div className="text-xs text-neutral-500 tracking-wider uppercase mb-2">From just</div>
                     <div className="flex items-baseline justify-center gap-1">
                       <span className="text-lg font-bold text-neutral-500">&pound;</span>
-                      <span className="text-6xl font-black text-white">34</span>
-                      <span className="text-lg font-bold text-neutral-500">.12</span>
+                      <span className="text-6xl font-black text-white">53</span>
+                      <span className="text-lg font-bold text-neutral-500">.08</span>
                       <span className="text-sm text-neutral-500 ml-1">/mo</span>
                     </div>
                     <div className="text-xs text-neutral-600 mt-2">at 0% APR over 24 months</div>
@@ -456,15 +456,15 @@ export default function UnlimiWaxLanding() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div>
                 <div className="text-xs text-neutral-500 tracking-wider uppercase mb-1">Course Price</div>
-                <div className="text-xl font-black text-white">&pound;910.00</div>
+                <div className="text-xl font-black text-white">&pound;637.00</div>
               </div>
               <div>
                 <div className="text-xs text-neutral-500 tracking-wider uppercase mb-1">24 Monthly Payments</div>
-                <div className="text-xl font-black text-white">&pound;34.12</div>
+                <div className="text-xl font-black text-white">&pound;26.54</div>
               </div>
               <div>
                 <div className="text-xs text-neutral-500 tracking-wider uppercase mb-1">Total Payable</div>
-                <div className="text-xl font-black text-white">&pound;910.00</div>
+                <div className="text-xl font-black text-white">&pound;637.00</div>
               </div>
               <div>
                 <div className="text-xs text-neutral-500 tracking-wider uppercase mb-1">Representative APR</div>
@@ -472,10 +472,10 @@ export default function UnlimiWaxLanding() {
               </div>
             </div>
             <p className="mt-6 text-xs text-neutral-600 leading-relaxed max-w-3xl">
-              Representative example based on a Hollywood Wax course. 26 sessions over 24 months.
-              Pay-as-you-go price: &pound;50.00 per session (&pound;1,300.00 total). UnlimiWax course
-              price: &pound;910.00. 24 monthly payments of &pound;34.12. Total amount payable:
-              &pound;910.00. Representative 0% APR. Credit is subject to status and affordability.
+              Representative example based on a Back Wax course. 26 sessions over 24 months.
+              Pay-as-you-go price: &pound;35.00 per session (&pound;910.00 total). UnlimiWax course
+              price: &pound;637.00. 24 monthly payments of &pound;26.54. Total amount payable:
+              &pound;637.00. Representative 0% APR. Credit is subject to status and affordability.
               Terms and conditions apply.
             </p>
           </div>
@@ -504,38 +504,38 @@ export default function UnlimiWaxLanding() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                area: 'Full Back',
-                payg: 25,
-                sessions: 26,
-                discount: 0.30,
-              },
-              {
-                area: 'Chest',
-                payg: 25,
-                sessions: 26,
-                discount: 0.30,
-              },
-              {
-                area: 'Full Legs',
+                area: 'Back Wax',
                 payg: 35,
                 sessions: 26,
                 discount: 0.30,
               },
               {
-                area: 'Hollywood Wax',
-                payg: 50,
+                area: 'Chest & Abdomen',
+                payg: 35,
                 sessions: 26,
                 discount: 0.30,
               },
               {
-                area: 'Back + Chest',
-                payg: 50,
+                area: 'Full Legs',
+                payg: 40,
                 sessions: 26,
                 discount: 0.30,
               },
               {
-                area: 'Full Body',
-                payg: 120,
+                area: 'Penis & Scrotum',
+                payg: 40,
+                sessions: 26,
+                discount: 0.30,
+              },
+              {
+                area: 'Back + Chest & Abs',
+                payg: 70,
+                sessions: 26,
+                discount: 0.30,
+              },
+              {
+                area: 'Full Arms',
+                payg: 35,
                 sessions: 26,
                 discount: 0.30,
               },

@@ -434,42 +434,121 @@ export default function WaxForMenLanding() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800">
-            {[
-              { service: 'Full Back', price: '25', duration: '30 min' },
-              { service: 'Chest', price: '25', duration: '25 min' },
-              { service: 'Shoulders', price: '15', duration: '15 min' },
-              { service: 'Stomach', price: '15', duration: '15 min' },
-              { service: 'Full Legs', price: '35', duration: '45 min' },
-              { service: 'Half Legs', price: '22', duration: '25 min' },
-              { service: 'Full Arms', price: '22', duration: '25 min' },
-              { service: 'Underarms', price: '12', duration: '10 min' },
-              { service: 'Eyebrows', price: '10', duration: '10 min' },
-              { service: 'Intimate Standard', price: '35', duration: '30 min' },
-              { service: 'Intimate Full', price: '45', duration: '40 min' },
-              { service: 'Full Body', price: '120', duration: '90 min', featured: true },
-            ].map((item) => (
-              <div
-                key={item.service}
-                className={`bg-neutral-950 p-8 flex items-center justify-between group hover:bg-neutral-900 transition-colors ${
-                  item.featured ? 'border-l-2 border-l-zinc-300' : ''
-                }`}
-              >
-                <div>
-                  <h3 className={`text-lg font-bold uppercase tracking-tight ${item.featured ? 'text-zinc-300' : 'text-white'}`}>
-                    {item.service}
-                  </h3>
-                  <span className="text-xs text-neutral-500 tracking-wider">{item.duration}</span>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-black">
-                    <span className="text-sm font-bold text-neutral-500 mr-0.5">&pound;</span>
-                    {item.price}
-                  </div>
-                </div>
+          {/* Categorised pricing grid */}
+          {[
+            {
+              category: 'Back',
+              services: [
+                { service: 'Back Wax', price: '35', duration: '5–10 min' },
+                { service: 'Back & Shoulders', price: '40', duration: '5–10 min' },
+                { service: 'Back, Shoulders & Upper Arms', price: '55', duration: '5–15 min' },
+                { service: 'Lower Back', price: '20', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Chest & Abs',
+              services: [
+                { service: 'Chest & Abdomen', price: '35', duration: '5–10 min' },
+                { service: 'Chest, Stomach & Shoulders', price: '40', duration: '5–10 min' },
+                { service: 'Chest, Abdomen, Shoulders & Arms', price: '55', duration: '5–15 min' },
+                { service: 'Upper Chest Only', price: '25', duration: '5 min' },
+                { service: 'Abdomen Only', price: '20', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Arms',
+              services: [
+                { service: 'Full Arm', price: '35', duration: '10–20 min' },
+                { service: 'Half Arm', price: '25', duration: '10 min' },
+                { service: 'Hand Wax', price: '10', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Legs',
+              services: [
+                { service: 'Full Leg', price: '40', duration: '20 min' },
+                { service: 'Half Leg', price: '30', duration: '15 min' },
+                { service: 'Feet', price: '10', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Face & Head',
+              services: [
+                { service: 'Eyebrow Wax', price: '15', duration: '5–10 min' },
+                { service: 'Ear Wax', price: '10', duration: '5 min' },
+                { service: 'Nostril Wax', price: '10', duration: '5 min' },
+                { service: 'Cheek Wax', price: '10', duration: '10 min' },
+                { service: 'Neck Wax', price: '10', duration: '5 min' },
+                { service: 'Full Beard Wax', price: '25', duration: '30 min' },
+                { service: 'Scalp Wax — Full Head', price: '35', duration: '30 min' },
+              ],
+            },
+            {
+              category: 'Intimate',
+              services: [
+                { service: 'Speedo Line', price: '20', duration: '5 min' },
+                { service: 'Pubic Triangle', price: '40', duration: '10 min' },
+                { service: 'Penis & Scrotum', price: '40', duration: '10 min' },
+                { service: 'Buttocks', price: '40', duration: '5 min' },
+                { service: 'Crack Wax (Gluteal Crease)', price: '40', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Extras',
+              services: [
+                { service: 'Full Body Spray Tan', price: '25', duration: '15 min' },
+                { service: 'Eyebrow Tint', price: '10', duration: '15 min' },
+                { service: 'Eyelash Tint', price: '15', duration: '15 min' },
+                { service: 'Lash & Brow Tint', price: '20', duration: '15 min' },
+                { service: 'Patch Test', price: 'Free', duration: '5 min' },
+              ],
+            },
+            {
+              category: 'Upgrades',
+              services: [
+                { service: 'Healing Jelly Mask — Pubic Area', price: '+20', duration: '15 min' },
+                { service: 'Healing Jelly Mask — Buttocks', price: '+20', duration: '15 min' },
+                { service: 'Healing Jelly Mask — Back', price: '+20', duration: '15 min' },
+                { service: 'Healing Jelly Mask — Chest & Abdomen', price: '+20', duration: '15 min' },
+              ],
+            },
+          ].map((group) => (
+            <div key={group.category} className="mb-8">
+              <div className="flex items-center gap-4 mb-3">
+                <h3 className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-300">
+                  {group.category}
+                </h3>
+                <div className="flex-1 h-px bg-neutral-800" />
               </div>
-            ))}
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800">
+                {group.services.map((item) => (
+                  <div
+                    key={item.service}
+                    className="bg-neutral-950 p-6 flex items-center justify-between group hover:bg-neutral-900 transition-colors"
+                  >
+                    <div>
+                      <h4 className="text-base font-bold uppercase tracking-tight text-white">
+                        {item.service}
+                      </h4>
+                      <span className="text-xs text-neutral-500 tracking-wider">{item.duration}</span>
+                    </div>
+                    <div className="text-right flex-shrink-0 ml-4">
+                      <div className="text-xl font-black">
+                        {item.price === 'Free' ? (
+                          <span className="text-zinc-300 text-sm font-bold uppercase tracking-wider">Free</span>
+                        ) : (
+                          <>
+                            <span className="text-sm font-bold text-neutral-500 mr-0.5">&pound;</span>
+                            {item.price}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
 
           {/* UnlimiWax CTA strip */}
           <div className="mt-12 bg-zinc-300 p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">

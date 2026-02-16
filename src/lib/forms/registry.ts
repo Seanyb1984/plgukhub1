@@ -1,105 +1,73 @@
 import { FormDefinition, Brand } from './types';
-
-// Import all form definitions
 import { plgUkForms } from './definitions/plg-uk';
 import { menhancementsForms } from './definitions/menhancements';
 import { waxForMenForms } from './definitions/wax-for-men';
 import { waxForWomenForms } from './definitions/wax-for-women';
 
 // ============================================
-// FORM REGISTRY
+// FORM REGISTRY - THE SYSTEM BRAIN
 // ============================================
 
 class FormRegistry {
   private forms: Map<string, FormDefinition> = new Map();
 
+  // Registers a single form into the system
   register(form: FormDefinition): void {
-    if (this.forms.has(form.id)) {
-      console.warn(`Form "${form.id}" is already registered. Overwriting.`);
-    }
     this.forms.set(form.id, form);
   }
 
+  // Registers lists of forms
   registerAll(forms: FormDefinition[]): void {
     forms.forEach((form) => this.register(form));
   }
 
+  // Find a specific form by its ID
   get(formId: string): FormDefinition | undefined {
     return this.forms.get(formId);
   }
 
+  // List every single form available in the Hub
   getAll(): FormDefinition[] {
     return Array.from(this.forms.values());
   }
 
-  getByBrand(brand: Brand): FormDefinition[] {
+  // Filter forms by a specific brand
+  getByBrand(brand: Brand | 'ALL'): FormDefinition[] {
     return this.getAll().filter((form) => {
-      if (form.brand === 'ALL') return true;
-      if (Array.isArray(form.brand)) return form.brand.includes(brand);
-      return form.brand === brand;
+      return form.brand === 'ALL' || form.brand === brand;
     });
   }
 
-  getByCategory(category: string): FormDefinition[] {
-    return this.getAll().filter((form) => form.category === category);
-  }
-
+  // Group forms by Category
   getCategories(): string[] {
     const categories = new Set<string>();
-    this.getAll().forEach((form) => categories.add(form.category));
+    this.getAll().forEach((form) => {
+      if (form.category) categories.add(form.category);
+    });
     return Array.from(categories).sort();
-  }
-
-  getCategoriesByBrand(brand: Brand): string[] {
-    const categories = new Set<string>();
-    this.getByBrand(brand).forEach((form) => categories.add(form.category));
-    return Array.from(categories).sort();
-  }
-
-  search(query: string): FormDefinition[] {
-    const lowerQuery = query.toLowerCase();
-    return this.getAll().filter(
-      (form) =>
-        form.name.toLowerCase().includes(lowerQuery) ||
-        form.description?.toLowerCase().includes(lowerQuery) ||
-        form.category.toLowerCase().includes(lowerQuery)
-    );
   }
 }
 
-// Create singleton instance
+// Create the single instance used by the whole app
 export const formRegistry = new FormRegistry();
 
-// Register all forms on module load
-export function initializeFormRegistry(): void {
-  formRegistry.registerAll(plgUkForms);
-  formRegistry.registerAll(menhancementsForms);
-  formRegistry.registerAll(waxForMenForms);
-  formRegistry.registerAll(waxForWomenForms);
-}
-
-// Initialize immediately
-initializeFormRegistry();
+// ============================================
+// AUTO-INITIALIZATION - THE FIX
+// This ensures forms are loaded immediately upon import
+// ============================================
+formRegistry.registerAll(plgUkForms);
+formRegistry.registerAll(menhancementsForms);
+formRegistry.registerAll(waxForMenForms);
+formRegistry.registerAll(waxForWomenForms);
 
 // ============================================
-// HELPER FUNCTIONS
+// PUBLIC HELPER FUNCTIONS
 // ============================================
 
-export function getFormDefinition(formId: string): FormDefinition | undefined {
+export function getFormDefinition(formId: string) {
   return formRegistry.get(formId);
 }
 
-export function getAllForms(): FormDefinition[] {
+export function getAllForms() {
   return formRegistry.getAll();
-}
-
-export function getFormsByBrand(brand: Brand): FormDefinition[] {
-  return formRegistry.getByBrand(brand);
-}
-
-export function getFormCategories(brand?: Brand): string[] {
-  if (brand) {
-    return formRegistry.getCategoriesByBrand(brand);
-  }
-  return formRegistry.getCategories();
 }

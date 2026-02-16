@@ -1,7 +1,8 @@
 'use server';
 
 import { prisma } from '@/lib/db';
-import { auth } from '@/lib/auth';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 import { createAuditLog, getChangedFields } from '@/lib/audit';
 import { getFormDefinition, validateForm, evaluateStopConditions } from '@/lib/forms';
 import { generateResumeToken } from '@/lib/utils';

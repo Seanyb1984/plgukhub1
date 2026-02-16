@@ -1,276 +1,122 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
-import { getDashboardStats, getFormTypeStats } from '@/lib/search';
-import { formatBrand, formatDateTime, formatRiskLevel, getRiskLevelColor, getStatusColor } from '@/lib/utils';
-import Link from 'next/link';
+"use client";
 
-export default async function AdminDashboard() {
-  const session = await auth();
+import Link from "next/link";
+import { 
+  Plus, 
+  Search, 
+  ShieldCheck, 
+  Zap, 
+  AlertTriangle, 
+  TrendingUp, 
+  Calendar, 
+  ArrowRight, 
+  Activity,
+  FileText, // FIXED: Added missing icon
+  Package   // FIXED: Added missing icon
+} from "lucide-react";
 
-  if (!session?.user) {
-    redirect('/login');
-  }
-
-  const stats = await getDashboardStats(
-    session.user.brand === 'PLG_UK' ? undefined : session.user.brand,
-    session.user.role === 'ADMIN' ? undefined : session.user.siteId
-  );
-
-  const formTypeStats = await getFormTypeStats(
-    session.user.brand === 'PLG_UK' ? undefined : session.user.brand,
-    session.user.role === 'ADMIN' ? undefined : session.user.siteId
-  );
-
+export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <Link href="/admin" className="text-xl font-bold text-slate-900">
-                PLG UK Hub
-              </Link>
-              <span className="text-sm text-slate-500">
-                {formatBrand(session.user.brand)} - {session.user.siteName}
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-slate-600">{session.user.name}</span>
-              <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-full">
-                {session.user.role}
-              </span>
-              <Link
-                href="/api/auth/signout"
-                className="text-sm text-red-600 hover:text-red-700"
-              >
-                Sign Out
-              </Link>
-            </div>
+    <div className="space-y-10">
+      
+      {/* TOP ROW: KPIs */}
+      <div className="grid grid-cols-5 gap-6">
+        {[
+          { label: "New Leads", val: "12", color: "text-blue-600" },
+          { label: "Consults Today", val: "8", color: "text-slate-900" },
+          { label: "Treatments", val: "5", color: "text-slate-900" },
+          { label: "Follow Ups", val: "14", color: "text-slate-900" },
+          { label: "Open Incidents", val: "0", color: "text-green-500" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+            <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{kpi.label}</p>
+            <h4 className={`text-3xl font-black mt-1 ${kpi.color}`}>{kpi.val}</h4>
           </div>
-        </div>
-      </header>
+        ))}
+      </div>
 
-      {/* Navigation */}
-      <nav className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-8 h-12">
-            <Link
-              href="/admin"
-              className="flex items-center border-b-2 border-blue-600 text-blue-600 text-sm font-medium"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/admin/submissions"
-              className="flex items-center border-b-2 border-transparent text-slate-600 hover:text-slate-900 text-sm font-medium"
-            >
-              Submissions
-            </Link>
-            <Link
-              href="/admin/clients"
-              className="flex items-center border-b-2 border-transparent text-slate-600 hover:text-slate-900 text-sm font-medium"
-            >
-              Clients
-            </Link>
-            <Link
-              href="/admin/forms"
-              className="flex items-center border-b-2 border-transparent text-slate-600 hover:text-slate-900 text-sm font-medium"
-            >
-              New Form
-            </Link>
-            {session.user.role === 'ADMIN' && (
-              <Link
-                href="/admin/exports"
-                className="flex items-center border-b-2 border-transparent text-slate-600 hover:text-slate-900 text-sm font-medium"
-              >
-                Exports
-              </Link>
-            )}
-          </div>
-        </div>
-      </nav>
+      {/* MIDDLE ROW: QUICK ACTIONS (BIG BUTTONS) */}
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { name: "New Lead", icon: Plus, bg: "bg-blue-600 text-white", href: "/admin/enquiries/new" },
+          { name: "Start Consult", icon: FileText, bg: "bg-slate-900 text-white", href: "/forms/consultation" },
+          { name: "Finalise Consent", icon: ShieldCheck, bg: "bg-slate-900 text-white", href: "/forms/pre-consent" },
+          { name: "Log Treatment", icon: Activity, bg: "bg-slate-900 text-white", href: "/forms/post-treatment" },
+        ].map((btn) => (
+          <Link href={btn.href} key={btn.name} className={`${btn.bg} p-8 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 hover:scale-[1.02] transition-all shadow-xl group cursor-pointer`}>
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+              <btn.icon className="w-6 h-6" />
+            </div>
+            <span className="font-black uppercase tracking-widest text-xs">{btn.name}</span>
+          </Link>
+        ))}
+      </div>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="text-sm font-medium text-slate-500">Total Submissions</div>
-            <div className="text-3xl font-bold text-slate-900 mt-1">{stats.counts.total}</div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="text-sm font-medium text-slate-500">Today</div>
-            <div className="text-3xl font-bold text-slate-900 mt-1">{stats.counts.today}</div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="text-sm font-medium text-slate-500">This Week</div>
-            <div className="text-3xl font-bold text-slate-900 mt-1">{stats.counts.week}</div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="text-sm font-medium text-slate-500">This Month</div>
-            <div className="text-3xl font-bold text-slate-900 mt-1">{stats.counts.month}</div>
-          </div>
+      <div className="grid grid-cols-12 gap-10">
+        {/* RECENT ACTIVITY & ALERTS */}
+        <div className="col-span-8 space-y-6">
+           <h2 className="text-xl font-black uppercase tracking-tighter flex items-center gap-3">
+             <Calendar className="text-blue-600 w-5 h-5" /> Today's Clinical Schedule
+           </h2>
+           <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
+              <table className="w-full text-left">
+                <thead className="bg-slate-50 border-b border-slate-100">
+                  <tr>
+                    <th className="px-8 py-5 text-[10px] font-black uppercase text-slate-400">Time</th>
+                    <th className="px-8 py-5 text-[10px] font-black uppercase text-slate-400">Patient</th>
+                    <th className="px-8 py-5 text-[10px] font-black uppercase text-slate-400">Treatment</th>
+                    <th className="px-8 py-5 text-[10px] font-black uppercase text-slate-400">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {[
+                    { time: "09:30", name: "John Test", type: "Girth Enhancement", status: "Arrived" },
+                    { time: "11:00", name: "Sarah Smith", type: "Botox - 3 Areas", status: "Confirmed" },
+                    { time: "14:00", name: "Michael Ross", type: "LSWT Session 3", status: "In Treatment" },
+                  ].map((apt) => (
+                    <tr key={apt.time} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-8 py-6 font-black text-sm">{apt.time}</td>
+                      <td className="px-8 py-6 font-bold text-sm uppercase">{apt.name}</td>
+                      <td className="px-8 py-6 text-xs font-bold text-slate-500">{apt.type}</td>
+                      <td className="px-8 py-6">
+                        <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full font-black text-[9px] uppercase">{apt.status}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Recent High Risk */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-            <div className="px-6 py-4 border-b border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-900">High Risk Items</h2>
-            </div>
-            <div className="divide-y divide-slate-100">
-              {stats.recentHighRisk.length === 0 ? (
-                <div className="px-6 py-8 text-center text-slate-500">
-                  No high-risk items
+        {/* SIDEBAR: SYSTEM ALERTS */}
+        <div className="col-span-4 space-y-6">
+           <h2 className="text-xl font-black uppercase tracking-tighter flex items-center gap-3">
+             <AlertTriangle className="text-red-600 w-5 h-5" /> System Alerts
+           </h2>
+           <div className="bg-red-50 border-2 border-red-100 p-8 rounded-[2.5rem] space-y-4">
+              <div className="flex gap-4">
+                <div className="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center text-white shrink-0">
+                  <Package className="w-5 h-5" />
                 </div>
-              ) : (
-                stats.recentHighRisk.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={`/admin/submissions/${item.id}`}
-                    className="block px-6 py-4 hover:bg-slate-50 transition-colors"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="font-medium text-slate-900">
-                          {item.formType.replace(/_/g, ' ')}
-                        </div>
-                        <div className="text-sm text-slate-500">
-                          {item.client
-                            ? `${item.client.firstName} ${item.client.lastName}`
-                            : 'No client'}
-                        </div>
-                        <div className="text-xs text-slate-400 mt-1">
-                          {item.site.name}
-                        </div>
-                      </div>
-                      <span className={getRiskLevelColor(item.riskLevel)}>
-                        {formatRiskLevel(item.riskLevel)}
-                      </span>
-                    </div>
-                  </Link>
-                ))
-              )}
-            </div>
-          </div>
-
-          {/* Recent Incidents */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-            <div className="px-6 py-4 border-b border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-900">Recent Incidents</h2>
-            </div>
-            <div className="divide-y divide-slate-100">
-              {stats.recentIncidents.length === 0 ? (
-                <div className="px-6 py-8 text-center text-slate-500">
-                  No recent incidents
+                <div>
+                  <h4 className="font-black uppercase text-xs text-red-900">Batch Expiry Warning</h4>
+                  <p className="text-[10px] font-bold text-red-700 uppercase mt-1 leading-tight">Juvederm Volux (Batch #882) expires in 3 days.</p>
                 </div>
-              ) : (
-                stats.recentIncidents.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={`/admin/submissions/${item.id}`}
-                    className="block px-6 py-4 hover:bg-slate-50 transition-colors"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="font-medium text-slate-900">
-                          {item.formType.replace(/_/g, ' ')}
-                        </div>
-                        <div className="text-xs text-slate-500 mt-1">
-                          {item.site.name}
-                        </div>
-                      </div>
-                      <div className="text-xs text-slate-400">
-                        {formatDateTime(item.createdAt)}
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              )}
-            </div>
-          </div>
-
-          {/* Recent Complaints */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-            <div className="px-6 py-4 border-b border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-900">Recent Complaints</h2>
-            </div>
-            <div className="divide-y divide-slate-100">
-              {stats.recentComplaints.length === 0 ? (
-                <div className="px-6 py-8 text-center text-slate-500">
-                  No recent complaints
-                </div>
-              ) : (
-                stats.recentComplaints.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={`/admin/submissions/${item.id}`}
-                    className="block px-6 py-4 hover:bg-slate-50 transition-colors"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="font-medium text-slate-900">
-                          {item.client
-                            ? `${item.client.firstName} ${item.client.lastName}`
-                            : 'Anonymous'}
-                        </div>
-                        <div className="text-xs text-slate-500 mt-1">
-                          {item.site.name}
-                        </div>
-                      </div>
-                      <div className="text-xs text-slate-400">
-                        {formatDateTime(item.createdAt)}
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Status and Form Type Breakdown */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          {/* By Status */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-            <div className="px-6 py-4 border-b border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-900">By Status</h2>
-            </div>
-            <div className="p-6">
-              <div className="space-y-3">
-                {Object.entries(stats.byStatus).map(([status, count]) => (
-                  <div key={status} className="flex items-center justify-between">
-                    <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${getStatusColor(status)}`}>
-                      {status}
-                    </span>
-                    <span className="font-medium text-slate-900">{count}</span>
-                  </div>
-                ))}
               </div>
-            </div>
-          </div>
-
-          {/* Top Form Types */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-            <div className="px-6 py-4 border-b border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-900">Top Form Types</h2>
-            </div>
-            <div className="p-6">
-              <div className="space-y-3">
-                {formTypeStats.slice(0, 10).map((stat) => (
-                  <div key={stat.formType} className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 truncate max-w-[200px]">
-                      {stat.formType.replace(/_/g, ' ')}
-                    </span>
-                    <span className="font-medium text-slate-900">{stat.count}</span>
-                  </div>
-                ))}
+           </div>
+           
+           <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Growth Analytics</h3>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-600">Month-on-Month Revenue</span>
+                <span className="flex items-center gap-1 text-green-600 font-black text-sm"><TrendingUp className="w-4 h-4" /> +14%</span>
               </div>
-            </div>
-          </div>
+              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div className="bg-blue-600 h-full w-[70%]" />
+              </div>
+           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

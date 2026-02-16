@@ -1,75 +1,39 @@
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { compare } from 'bcryptjs';
-import { prisma } from '@/lib/db';
-import type { Brand, Role } from '@prisma/client';
+import NextAuth, { type NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcryptjs";
+import { prisma } from "@/lib/db";
+import type { Brand, Role } from "@prisma/client";
 
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      id: string;
-      email: string;
-      name: string;
-      role: Role;
-      brand: Brand;
-      siteId: string;
-      siteName: string;
-    };
-  }
+/* -----------------------------
+   NextAuth Config
+--------------------------------*/
 
-  interface User {
-    id: string;
-    email: string;
-    name: string;
-    role: Role;
-    brand: Brand;
-    siteId: string;
-    siteName: string;
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    id: string;
-    role: Role;
-    brand: Brand;
-    siteId: string;
-    siteName: string;
-  }
-}
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: "credentials",
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
+        if (!credentials?.email || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email: credentials.email },
           include: { site: true },
         });
 
-        if (!user || !user.isActive) {
-          return null;
-        }
+        if (!user || !user.isActive) return null;
 
-        const isPasswordValid = await compare(
-          credentials.password as string,
+        const valid = await compare(
+          credentials.password,
           user.passwordHash
         );
 
-        if (!isPasswordValid) {
-          return null;
-        }
+        if (!valid) return null;
 
-        // Update last login
         await prisma.user.update({
           where: { id: user.id },
           data: { lastLoginAt: new Date() },
@@ -87,6 +51,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/login",
+  },
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -98,45 +71,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
+
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.brand = token.brand;
-        session.user.siteId = token.siteId;
-        session.user.siteName = token.siteName;
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as Role;
+        session.user.brand = token.brand as Brand;
+        session.user.siteId = token.siteId as string;
+        session.user.siteName = token.siteName as string;
       }
       return session;
     },
   },
-  pages: {
-    signIn: '/login',
-  },
-  session: {
-    strategy: 'jwt',
-    maxAge: 24 * 60 * 60, // 24 hours
-  },
-});
+};
 
-// Role-based permission helpers
-export function canAccessBrand(userBrand: Brand, targetBrand: Brand): boolean {
-  // PLG_UK admins can access all brands
-  if (userBrand === 'PLG_UK') return true;
-  return userBrand === targetBrand;
-}
+/* -----------------------------
+   API Route Handler
+--------------------------------*/
 
-export function canManageUsers(role: Role): boolean {
-  return role === 'ADMIN';
-}
+const handler = NextAuth(authOptions);
 
-export function canViewAllSubmissions(role: Role): boolean {
-  return role === 'ADMIN' || role === 'PRACTITIONER';
-}
+export { handler as GET, handler as POST };
 
-export function canExportData(role: Role): boolean {
-  return role === 'ADMIN';
-}
+/* -----------------------------
+   Types
+--------------------------------*/
 
-export function canAmendSubmission(role: Role): boolean {
-  return role === 'ADMIN' || role === 'PRACTITIONER';
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      role: Role;
+      brand: Brand;
+      siteId: string;
+      siteName: string;
+    };
+  }
 }

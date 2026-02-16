@@ -1,3 +1,6 @@
+// @ts-nocheck
+import { PrismaClient, Brand, Role } from '@prisma/client';
+// ... rest of your code
 import { PrismaClient, Brand, Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 

@@ -1,6 +1,7 @@
 import { FormDefinition } from '../types';
 import { GovernanceLog } from './governance-log';
-import { treatmentJourney } from './treatment-journey';
+// 👇 FIXED: Capitalized T to match your definition file
+import { TreatmentJourney } from './treatment-journey';
 
 // ============================================
 // CUSTOMER SERVICE FORMS
@@ -80,7 +81,7 @@ const fireSafetyCheck: FormDefinition = {
 // ============================================
 
 export const plgUkForms: FormDefinition[] = [
-  treatmentJourney,           // Now correctly imported and defined
+  TreatmentJourney,           // 👈 FIXED: Capitalized T here as well
   complaintForm,
   complaintInvestigation,
   incidentNearMiss,

@@ -1,12 +1,17 @@
 import { FormDefinition } from "../types";
 
-export const treatmentJourney: FormDefinition = {
-  // Use lowercase with hyphen to match your URL routing
+/**
+ * TREATMENT JOURNEY DEFINITION
+ * Used for: Menhancements, Wax for Men, and Wax for Women
+ * Features: Phased Logic, CQC Stop-Logic, and Media Consent
+ */
+export const TreatmentJourney: FormDefinition = {
+  // Master ID used for routing and database categorization
   id: "treatment-journey", 
   title: "Clinical Procedure & Legal Consent",
   version: "2.1 (CQC + Media Consent)",
   
-  // PIN TO TOP: Priority 10 ensures this is always at the top of the forms list
+  // Pin to top of clinical dashboard
   priority: 10, 
   category: "Clinical",
   
@@ -17,7 +22,13 @@ export const treatmentJourney: FormDefinition = {
       id: "treatmentType", 
       label: "Select Procedure Category", 
       type: "select", 
-      options: ["Facial Aesthetics", "Sexual Wellness", "Intimate Waxing", "Body Waxing", "Advanced Skincare"],
+      options: [
+        "Facial Aesthetics", 
+        "Sexual Wellness", 
+        "Intimate Waxing", 
+        "Body Waxing", 
+        "Advanced Skincare"
+      ],
       required: true 
     },
 
@@ -64,11 +75,11 @@ export const treatmentJourney: FormDefinition = {
     },
     { id: "skin_sensitivity", label: "Known Skin Sensitivities", type: "text" },
 
-    // --- NEW: CLINICAL PHOTOGRAPHY & CONSENT ---
+    // --- CLINICAL PHOTOGRAPHY & CONSENT ---
     { id: "media_sec", label: "Clinical Photography & Consent", type: "section" },
     { 
       id: "photo_consent_obtained", 
-      label: "Has the patient signed the separate Image Consent form or provided specific consent for today's photos?", 
+      label: "Has the patient signed the Image Consent or provided specific consent for today's photos?", 
       type: "radio", 
       options: ["Yes - Full Marketing", "Yes - Medical Records Only", "No - Consent Refused"],
       required: true 
@@ -86,7 +97,7 @@ export const treatmentJourney: FormDefinition = {
       condition: (data) => data.photo_consent_obtained && data.photo_consent_obtained !== "No - Consent Refused" 
     },
 
-    // --- CQC MANDATORY SCREENING ---
+    // --- CQC MANDATORY SCREENING (HARD STOPS) ---
     { id: "scr_sec", label: "Mandatory Safety Screening", type: "section" },
     { 
       id: "blood_disorder", 
@@ -94,7 +105,11 @@ export const treatmentJourney: FormDefinition = {
       type: "radio", 
       options: ["Yes", "No"], 
       required: true,
-      stopCondition: (val) => val === "Yes" ? { message: "STOP: Procedure contraindicated for blood disorders.", action: "stop", riskLevel: "CRITICAL" } : null
+      stopCondition: (val) => val === "Yes" ? { 
+        message: "STOP: Procedure contraindicated for blood disorders. Consult Dr. Phil.", 
+        action: "stop", 
+        riskLevel: "CRITICAL" 
+      } : null
     },
     { 
       id: "active_infection", 
@@ -102,20 +117,24 @@ export const treatmentJourney: FormDefinition = {
       type: "radio", 
       options: ["Yes", "No"], 
       required: true,
-      stopCondition: (val) => val === "Yes" ? { message: "STOP: Cannot treat area with active infection.", action: "stop", riskLevel: "HIGH" } : null
+      stopCondition: (val) => val === "Yes" ? { 
+        message: "STOP: Cannot treat area with active infection. Risk of spreading.", 
+        action: "stop", 
+        riskLevel: "HIGH" 
+      } : null
     },
 
     // --- LEGAL CONSENT ---
     { id: "con_sec", label: "Informed Consent Acknowledgement", type: "section" },
     { 
       id: "risk_ack", 
-      label: "I have been fully informed of the specific risks associated with this treatment (bruising, swelling, infection, or temporary numbness).", 
+      label: "I have been fully informed of the specific risks (bruising, swelling, infection, or temporary numbness).", 
       type: "checkbox", 
       required: true 
     },
     { 
       id: "aftercare_ack", 
-      label: "I have received and understood the aftercare instructions specific to my treatment brand (Menhancements / Wax for Men / Wax for Women).", 
+      label: "I have received and understood the aftercare instructions specific to my brand.", 
       type: "checkbox", 
       required: true 
     },

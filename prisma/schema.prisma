@@ -8,6 +8,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL") // ✅ FIXED: Added this required line
 }
 
 // ============================================
@@ -53,7 +54,7 @@ enum ClientStatus {
 
 enum TreatmentPhase {
   IDENTIFICATION   // Phase 0
-  POM_TRIAGE       // Phase 1
+  POM_TRIAGE        // Phase 1
   LEGAL_CONSENT    // Phase 2
   CLINICAL_RECORD  // Phase 3
   CLOSE_OUT        // Phase 4
@@ -101,7 +102,7 @@ model Site {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users              User[]
+  users             User[]
   submissions        FormSubmission[]
   clients            Client[]
   treatmentJourneys  TreatmentJourney[]
@@ -131,9 +132,9 @@ model User {
   lastLoginAt   DateTime?
 
   submissions           FormSubmission[]
-  auditLogs             AuditLog[]
-  amendments            Amendment[]
-  treatmentJourneys     TreatmentJourney[]  @relation("PractitionerJourneys")
+  auditLogs              AuditLog[]
+  amendments             Amendment[]
+  treatmentJourneys      TreatmentJourney[]  @relation("PractitionerJourneys")
   prescribedJourneys    TreatmentJourney[]  @relation("PrescriberJourneys")
   episodes              TreatmentEpisode[]  @relation("EpisodePractitioner")
   prescribedEpisodes    TreatmentEpisode[]  @relation("EpisodePrescriber")
@@ -145,7 +146,7 @@ model User {
 }
 
 // ============================================
-// PRESCRIBERS (Dr. Phil and other registered prescribers)
+// PRESCRIBERS
 // ============================================
 
 model Prescriber {
@@ -154,12 +155,12 @@ model Prescriber {
   name                  String
   gmcNumber             String   @unique  // General Medical Council number
   prescriberType        String   @default("Doctor") // Doctor, Nurse Prescriber, Pharmacist
-  specialisations       String[] // e.g., ["Aesthetics", "Dermatology"]
+  specialisations        String[] // e.g., ["Aesthetics", "Dermatology"]
   isActive              Boolean  @default(true)
-  licenceVerifiedAt     DateTime?
+  licenceVerifiedAt      DateTime?
   licenceExpiresAt      DateTime?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 
   treatmentJourneys     TreatmentJourney[]
   treatmentEpisodes     TreatmentEpisode[]
@@ -178,7 +179,7 @@ model Session {
 }
 
 // ============================================
-// CLIENTS (Unified across all brands)
+// CLIENTS
 // ============================================
 
 model Client {
@@ -186,9 +187,9 @@ model Client {
   clientId        String       @unique @default(cuid()) // External-facing ID
   status          ClientStatus @default(PROSPECT)
   isProspect      Boolean      @default(true)     // True until first treatment completed
-  marketingConsent Boolean     @default(false)     // GDPR marketing opt-in
+  marketingConsent Boolean      @default(false)     // GDPR marketing opt-in
 
-  // Brands this client has records with (can span multiple brands)
+  // Brands this client has records with
   brands          Brand[]
 
   // Site of first registration
@@ -215,7 +216,7 @@ model Client {
   emergencyPhone  String?
   emergencyRelation String?
 
-  // Medical flags (for POM triage)
+  // Medical flags
   hasBloodDisorder    Boolean @default(false)
   isPregnant          Boolean @default(false)
   hasAllergies        Boolean @default(false)
@@ -247,7 +248,7 @@ model Client {
 }
 
 // ============================================
-// INQUIRIES (Lead capture → Client conversion)
+// INQUIRIES
 // ============================================
 
 model Inquiry {
@@ -272,82 +273,82 @@ model Inquiry {
 }
 
 // ============================================
-// TREATMENT EPISODES (Clinical Encounter Lifecycle)
+// TREATMENT EPISODES
 // ============================================
 
 model TreatmentEpisode {
-  id              String         @id @default(cuid())
-  episodeRef      String         @unique @default(cuid())  // Human-readable reference
-  brand           Brand
-  siteId          String
-  site            Site           @relation(fields: [siteId], references: [id])
-  status          EpisodeStatus  @default(OPEN)
+  id                String         @id @default(cuid())
+  episodeRef        String         @unique @default(cuid())  // Human-readable reference
+  brand             Brand
+  siteId            String
+  site              Site           @relation(fields: [siteId], references: [id])
+  status            EpisodeStatus  @default(OPEN)
 
   // Client
-  clientId        String
-  client          Client         @relation(fields: [clientId], references: [id])
+  clientId          String
+  client            Client         @relation(fields: [clientId], references: [id])
 
-  // Practitioner performing the treatment
-  practitionerId  String
-  practitioner    User           @relation("EpisodePractitioner", fields: [practitionerId], references: [id])
+  // Practitioner
+  practitionerId    String
+  practitioner      User           @relation("EpisodePractitioner", fields: [practitionerId], references: [id])
 
-  // Prescriber (required for POM/Menhancements)
-  isPom           Boolean        @default(false)
-  prescriberId    String?
-  prescriber      Prescriber?    @relation(fields: [prescriberId], references: [id])
-  prescriberUserId String?
-  prescriberUser  User?          @relation("EpisodePrescriber", fields: [prescriberUserId], references: [id])
-  gmcNumberAtTime String?        // Snapshot of GMC number at time of episode
-  faceToFaceDate  DateTime?      // Date of face-to-face consultation with prescriber
+  // Prescriber
+  isPom             Boolean        @default(false)
+  prescriberId      String?
+  prescriber        Prescriber?    @relation(fields: [prescriberId], references: [id])
+  prescriberUserId  String?
+  prescriberUser    User?          @relation("EpisodePrescriber", fields: [prescriberUserId], references: [id])
+  gmcNumberAtTime   String?        // Snapshot
+  faceToFaceDate    DateTime?      // Consultation date
 
-  // ---- Pre-Consent ----
-  medicalHistory      Json?      // Full medical history questionnaire responses
-  safetyScreening     Json?      // CQC screening answers (blood disorders, allergies, etc.)
-  safetyScreeningPass Boolean?   // Whether client passed safety screening
-  hardStopReason      String?    // If screening triggered a hard stop
-  dynamicRisks        Json?      // Auto-calculated risk flags from screening
-  consentDeclaration  String?    // "I confirm I have read and understood..."
-  signatureData       String?    // Base64 encoded client signature
-  signedByName        String?    // Name confirmed at signature
-  signedAt            DateTime?  // Timestamp of signature
-  beforePhotoIds      String[]   // References to ClinicalPhoto records
-  webcamCaptureData   String?    // Live webcam ID verification (Base64)
+  // Pre-Consent
+  medicalHistory      Json?      
+  safetyScreening      Json?      
+  safetyScreeningPass Boolean?   
+  hardStopReason      String?    
+  dynamicRisks        Json?      
+  consentDeclaration  String?    
+  signatureData        String?    
+  signedByName        String?    
+  signedAt            DateTime?  
+  beforePhotoIds      String[]   
+  webcamCaptureData    String?    
 
-  // ---- Treatment Record ----
-  treatmentType       String?    // e.g., "Botox", "Dermal Filler", "Brazilian Wax"
-  treatmentAreas      String[]   // e.g., ["Forehead", "Crow's Feet"]
-  productUsed         String?    // Product name
-  batchRegisterId     String?    // Links to BatchRegister for full traceability
-  batchRegister       BatchRegister? @relation(fields: [batchRegisterId], references: [id])
-  batchNumber         String?    // Snapshot of batch number at time of treatment
+  // Treatment Record
+  treatmentType       String?    
+  treatmentAreas      String[]   
+  productUsed         String?    
+  batchRegisterId      String?    
+  batchRegister        BatchRegister? @relation(fields: [batchRegisterId], references: [id])
+  batchNumber         String?    
   lotNumber           String?
-  dosage              String?    // e.g., "20 units"
-  injectionSites      Json?      // Facial mapping coordinates
+  dosage              String?    
+  injectionSites      Json?      
   clinicalNotes       String?
   complications       String?
 
-  // ---- Post-Treatment / Close-out ----
-  afterPhotoIds       String[]   // References to ClinicalPhoto records
-  aftercareProvided   Boolean    @default(false)
+  // Post-Treatment
+  afterPhotoIds       String[]   
+  aftercareProvided    Boolean    @default(false)
   aftercareEmailSent  Boolean    @default(false)
   aftercareEmailSentAt DateTime?
-  aftercareTemplateId String?    // Which KB template was used
+  aftercareTemplateId String?    
   followUpDate        DateTime?
   followUpNotes       String?
 
-  // ---- Record Locking ----
+  // Record Locking
   isLocked            Boolean    @default(false)
   lockedAt            DateTime?
   lockedById          String?
-  lockReason          String?    // "Treatment completed and signed off"
+  lockReason          String?    
 
   // Metadata
   openedAt            DateTime   @default(now())
-  completedAt         DateTime?
-  cancelledAt         DateTime?
+  completedAt          DateTime?
+  cancelledAt          DateTime?
   cancelReason        String?
-  createdAt           DateTime   @default(now())
-  updatedAt           DateTime   @updatedAt
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
 
   @@index([brand, siteId])
   @@index([clientId])
@@ -358,38 +359,34 @@ model TreatmentEpisode {
 }
 
 // ============================================
-// BATCH REGISTER (Product Traceability)
+// BATCH REGISTER
 // ============================================
 
 model BatchRegister {
   id              String   @id @default(cuid())
-  brand           Brand
+  brand            Brand
   siteId          String
 
-  // Product details
-  productName     String     // e.g., "Botox 100U", "Juvederm Ultra 3"
-  manufacturer    String?    // e.g., "Allergan", "Galderma"
-  batchNumber     String     // Manufacturer batch number
+  productName     String     
+  manufacturer    String?    
+  batchNumber     String     
   lotNumber       String?
-  expiryDate      DateTime   // Must not be expired at time of use
-  supplier        String?    // Where purchased from
+  expiryDate      DateTime   
+  supplier        String?    
 
-  // Inventory
-  quantityReceived  Int      @default(0)  // Units received
-  quantityUsed      Int      @default(0)  // Units consumed across episodes
-  quantityRemaining Int      @default(0)  // Auto-calculated: received - used
-  unitOfMeasure     String   @default("units") // "units", "ml", "vials"
+  quantityReceived  Int      @default(0)  
+  quantityUsed      Int      @default(0)  
+  quantityRemaining Int      @default(0)  
+  unitOfMeasure      String   @default("units") 
 
-  // Tracking
   receivedAt      DateTime   @default(now())
-  receivedById    String?    // Staff who received the stock
-  isActive        Boolean    @default(true) // False when batch fully used or expired
+  receivedById    String?    
+  isActive        Boolean    @default(true) 
   notes           String?
 
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 
-  // Episodes that used this batch
   episodes        TreatmentEpisode[]
 
   @@unique([batchNumber, productName, brand])
@@ -400,83 +397,73 @@ model BatchRegister {
 }
 
 // ============================================
-// TREATMENT JOURNEY (4-Phase Stepper - Legacy)
+// TREATMENT JOURNEY (Legacy)
 // ============================================
 
 model TreatmentJourney {
-  id              String                  @id @default(cuid())
-  journeyNumber   String                  @unique @default(cuid()) // Human-readable ref
-  brand           Brand
-  siteId          String
-  site            Site                    @relation(fields: [siteId], references: [id])
+  id                String                  @id @default(cuid())
+  journeyNumber     String                  @unique @default(cuid()) 
+  brand             Brand
+  siteId            String
+  site              Site                    @relation(fields: [siteId], references: [id])
 
-  // Client association
-  clientId        String
-  client          Client                  @relation(fields: [clientId], references: [id])
+  clientId          String
+  client            Client                  @relation(fields: [clientId], references: [id])
 
-  // Practitioner performing the treatment
-  practitionerId  String
-  practitioner    User                    @relation("PractitionerJourneys", fields: [practitionerId], references: [id])
+  practitionerId    String
+  practitioner      User                    @relation("PractitionerJourneys", fields: [practitionerId], references: [id])
 
-  // Current phase tracking
-  currentPhase    TreatmentPhase          @default(IDENTIFICATION)
-  status          TreatmentJourneyStatus  @default(IN_PROGRESS)
+  currentPhase      TreatmentPhase          @default(IDENTIFICATION)
+  status            TreatmentJourneyStatus  @default(IN_PROGRESS)
 
-  // ---- Phase 0: Identification ----
   identificationCompletedAt  DateTime?
 
-  // ---- Phase 1: POM Triage ----
-  isPomTreatment             Boolean     @default(false)
-  prescriberId               String?
-  prescriber                 Prescriber? @relation(fields: [prescriberId], references: [id])
-  prescriberUserId           String?
-  prescriberUser             User?       @relation("PrescriberJourneys", fields: [prescriberUserId], references: [id])
-  gmcNumberVerified          String?     // Verified GMC number at time of treatment
-  faceToFaceDate             DateTime?   // Date of face-to-face consultation
-  pomTriageCompletedAt       DateTime?
-  pomNotes                   String?
+  isPomTreatment              Boolean     @default(false)
+  prescriberId                String?
+  prescriber                  Prescriber? @relation(fields: [prescriberId], references: [id])
+  prescriberUserId            String?
+  prescriberUser              User?       @relation("PrescriberJourneys", fields: [prescriberUserId], references: [id])
+  gmcNumberVerified          String?     
+  faceToFaceDate              DateTime?   
+  pomTriageCompletedAt        DateTime?
+  pomNotes                    String?
 
-  // ---- Phase 2: Legal Consent ----
-  safetyScreeningData        Json?       // CQC screening responses
+  safetyScreeningData        Json?       
   safetyScreeningPassed      Boolean?
-  stopReason                 String?     // If screening triggers a hard stop
-  consentDeclaration         String?
-  signatureData              String?     // Base64 encoded signature
-  signedByName               String?
-  signedAt                   DateTime?
-  consentCompletedAt         DateTime?
+  stopReason                  String?     
+  consentDeclaration          String?
+  signatureData              String?     
+  signedByName                String?
+  signedAt                    DateTime?
+  consentCompletedAt          DateTime?
 
-  // ---- Phase 3: Clinical Record ----
-  treatmentType              String?     // e.g., "Botox", "Dermal Filler", "PRP"
-  treatmentArea              String[]    // e.g., ["Forehead", "Crow's Feet"]
-  productUsed                String?
-  batchNumber                String?     // Batch/Lot number for traceability
+  treatmentType               String?     
+  treatmentArea              String[]    
+  productUsed                 String?
+  batchNumber                String?     
   lotNumber                  String?
-  expiryDate                 DateTime?
-  dosage                     String?     // e.g., "20 units"
-  injectionSites             Json?       // Facial mapping coordinates JSON
+  expiryDate                  DateTime?
+  dosage                      String?     
+  injectionSites              Json?       
   clinicalNotes              String?
   complications              String?
   clinicalRecordCompletedAt  DateTime?
 
-  // ---- Phase 4: Close-out ----
   aftercareProvided          Boolean     @default(false)
-  aftercareEmailSent         Boolean     @default(false)
-  aftercareEmailSentAt       DateTime?
-  followUpDate               DateTime?
-  followUpNotes              String?
+  aftercareEmailSent          Boolean     @default(false)
+  aftercareEmailSentAt        DateTime?
+  followUpDate                DateTime?
+  followUpNotes               String?
   closeOutCompletedAt        DateTime?
 
-  // Metadata
   completedAt     DateTime?
   cancelledAt     DateTime?
   cancelReason    String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-  // Relations
   clinicalPhotos  ClinicalPhoto[]
-  auditLogs       AuditLog[]
+  auditLogs        AuditLog[]
 
   @@index([brand, siteId])
   @@index([clientId])
@@ -487,7 +474,7 @@ model TreatmentJourney {
 }
 
 // ============================================
-// CLINICAL PHOTOS (Before/After with Drive sync)
+// CLINICAL PHOTOS
 // ============================================
 
 model ClinicalPhoto {
@@ -497,18 +484,16 @@ model ClinicalPhoto {
   clientId            String
   client              Client   @relation(fields: [clientId], references: [id])
 
-  photoType           String   // "before" | "after"
-  phase               TreatmentPhase
-  imageData           String   // Base64 encoded or storage path
-  mimeType            String   @default("image/jpeg")
-  fileName            String?
+  photoType            String   // "before" | "after"
+  phase                TreatmentPhase
+  imageData            String   
+  mimeType             String   @default("image/jpeg")
+  fileName             String?
 
-  // Facial mapping overlay data
-  facialMappingData   Json?    // Injection point coordinates
+  facialMappingData    Json?    
 
-  // Google Drive sync
-  googleDriveFileId   String?
-  googleDriveSynced   Boolean  @default(false)
+  googleDriveFileId    String?
+  googleDriveSynced    Boolean  @default(false)
 
   capturedAt          DateTime @default(now())
   capturedById        String?
@@ -519,25 +504,25 @@ model ClinicalPhoto {
 }
 
 // ============================================
-// FORM SUBMISSIONS (existing enhanced)
+// FORM SUBMISSIONS
 // ============================================
 
 model FormSubmission {
   id              String           @id @default(cuid())
   formType        String
   formVersion     String           @default("1.0")
-  brand           Brand
+  brand            Brand
   siteId          String
   site            Site             @relation(fields: [siteId], references: [id])
 
   clientId        String?
   client          Client?          @relation(fields: [clientId], references: [id])
-  appointmentId   String?
+  appointmentId    String?
 
   data            Json
   status          SubmissionStatus @default(DRAFT)
-  riskLevel       RiskLevel        @default(NONE)
-  riskFlags       String[]
+  riskLevel        RiskLevel        @default(NONE)
+  riskFlags        String[]
 
   requiresEscalation Boolean       @default(false)
   escalationReason   String?
@@ -562,15 +547,14 @@ model FormSubmission {
   pdfPath         String?
   pdfGeneratedAt  DateTime?
 
-  // Google Drive sync
   googleDriveFileId  String?
 
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   submittedAt     DateTime?
 
-  auditLogs       AuditLog[]
-  amendments      Amendment[]
+  auditLogs        AuditLog[]
+  amendments       Amendment[]
 
   @@index([brand, siteId])
   @@index([formType])
@@ -582,7 +566,7 @@ model FormSubmission {
 }
 
 // ============================================
-// GOVERNANCE / COMMAND CENTRE
+// GOVERNANCE
 // ============================================
 
 model GovernanceLog {
@@ -592,23 +576,19 @@ model GovernanceLog {
   siteId        String
   site          Site               @relation(fields: [siteId], references: [id])
 
-  // Who completed this check
   completedById String
   completedBy   User               @relation(fields: [completedById], references: [id])
 
-  // Form data
-  data          Json               // Flexible JSON storage for each form type
+  data          Json               
   notes         String?
-  signatureData String?            // Base64 signature
+  signatureData String?            
 
-  // Compliance
   isCompliant   Boolean            @default(true)
-  issues        String[]           // Any issues found
+  issues        String[]           
   followUpRequired Boolean         @default(false)
   followUpDate  DateTime?
   followUpNotes String?
 
-  // Timestamps
   completedAt   DateTime           @default(now())
   createdAt     DateTime           @default(now())
   updatedAt     DateTime           @updatedAt
@@ -624,11 +604,11 @@ model StaffTraining {
   userId          String
   user            User     @relation(fields: [userId], references: [id])
 
-  trainingType    String   // e.g., "Fire Safety", "Infection Control", "CQC Compliance"
+  trainingType    String   
   trainingDate    DateTime
   expiryDate      DateTime?
-  certReference   String?
-  signatureData   String?  // Staff sign-off
+  certReference    String?
+  signatureData    String?  
   assessorName    String?
   assessorSignature String?
   notes           String?
@@ -647,12 +627,12 @@ model StaffTraining {
 
 model ComplianceAlert {
   id          String   @id @default(cuid())
-  source      String   // "MHRA", "CQC", "GMC"
+  source      String   
   title       String
   summary     String
   url         String?
-  relevance   String?  // Why this is relevant
-  severity    String   @default("INFO") // INFO, WARNING, ACTION_REQUIRED
+  relevance   String?  
+  severity    String   @default("INFO") 
   isRead      Boolean  @default(false)
   isDismissed Boolean  @default(false)
   scannedAt   DateTime @default(now())
@@ -665,22 +645,22 @@ model ComplianceAlert {
 }
 
 // ============================================
-// KNOWLEDGE BASE (Google Sheets cache)
+// KNOWLEDGE BASE
 // ============================================
 
 model KnowledgeBaseEntry {
-  id           String   @id @default(cuid())
-  category     String   // "aftercare_template", "clinical_protocol"
-  brand        Brand?
-  title        String
-  content      String   // Rich text content
-  version      String   @default("1.0")
-  sheetId      String?  // Google Sheets reference
-  sheetRange   String?  // Cell range
+  id            String   @id @default(cuid())
+  category      String   
+  brand         Brand?
+  title         String
+  content       String   
+  version       String   @default("1.0")
+  sheetId       String?  
+  sheetRange    String?  
   lastSyncedAt DateTime?
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([category])
   @@index([brand])
@@ -688,7 +668,7 @@ model KnowledgeBaseEntry {
 }
 
 // ============================================
-// AMENDMENTS (for locked submissions)
+// AMENDMENTS
 // ============================================
 
 model Amendment {
@@ -700,14 +680,14 @@ model Amendment {
   changedFields     Json
   newData           Json
 
-  signatureData     String?
+  signatureData      String?
   signedAt          DateTime?
   signedByName      String?
 
-  amendedById       String
-  amendedBy         User           @relation(fields: [amendedById], references: [id])
+  amendedById        String
+  amendedBy          User           @relation(fields: [amendedById], references: [id])
 
-  createdAt         DateTime       @default(now())
+  createdAt          DateTime       @default(now())
 
   @@index([submissionId])
 }
@@ -758,7 +738,6 @@ model FileUpload {
   mimeType      String
   sizeBytes     Int
 
-  // Google Drive sync
   googleDriveFileId String?
 
   uploadedById  String?

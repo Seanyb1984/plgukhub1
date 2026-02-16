@@ -5,7 +5,7 @@
 // Requires environment variables:
 //   GOOGLE_SERVICE_ACCOUNT_EMAIL
 //   GOOGLE_PRIVATE_KEY
-//   GOOGLE_DRIVE_ROOT_FOLDER_ID
+//   GOOGLE_DRIVE_PARENT_ID
 
 interface GoogleDriveConfig {
   serviceAccountEmail: string;
@@ -24,7 +24,7 @@ function getConfig(): GoogleDriveConfig {
   return {
     serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
     privateKey: (process.env.GOOGLE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
-    rootFolderId: process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID || '',
+    rootFolderId: process.env.GOOGLE_DRIVE_PARENT_ID || '',
   };
 }
 

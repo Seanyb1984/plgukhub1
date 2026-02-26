@@ -156,7 +156,7 @@ export async function uploadToClientFolder(
 
   const multipartBody = Buffer.concat([
     Buffer.from(`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n`),
-    Buffer.from(`--${boundary}\r\nContent-Type: ${mimeType}\r\nContent-Transfer-Encoding: base64\r\n\r\n`),
+    Buffer.from(`--${boundary}\r\nContent-Type: ${mimeType}\r\n\r\n`),
     buffer,
     Buffer.from(`\r\n--${boundary}--`),
   ]);

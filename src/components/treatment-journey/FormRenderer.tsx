@@ -727,13 +727,15 @@ interface Phase3Props {
   onChange: (data: Phase3Props['value']) => void;
   beforePhotos: string[];
   onPhotoCapture: (photoData: string) => void;
+  onPhotoDelete: (index: number) => void;
   onOpenFacialMapping: () => void;
   errors: string[];
 }
 
-function Phase3ClinicalRecord({ brand, value, onChange, beforePhotos, onPhotoCapture, onOpenFacialMapping, errors }: Phase3Props) {
+function Phase3ClinicalRecord({ brand, value, onChange, beforePhotos, onPhotoCapture, onPhotoDelete, onOpenFacialMapping, errors }: Phase3Props) {
   const theme = getBrandTheme(brand);
   const [showCamera, setShowCamera] = useState(false);
+  const [cameraError, setCameraError] = useState('');
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
@@ -745,26 +747,32 @@ function Phase3ClinicalRecord({ brand, value, onChange, beforePhotos, onPhotoCap
   const selectedTreatment = treatmentTypes.find((t) => t.id === value.treatmentType);
 
   const startCamera = useCallback(async () => {
+    setCameraError('');
     setShowCamera(true);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640, height: 480 } });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: 1280, height: 720 } });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     } catch {
-      // Camera not available
+      setCameraError('Camera unavailable or permission denied.');
+      setShowCamera(false);
     }
   }, []);
 
   const capturePhoto = useCallback(() => {
     if (videoRef.current && canvasRef.current) {
-      const ctx = canvasRef.current.getContext('2d');
-      if (ctx) {
-        canvasRef.current.width = videoRef.current.videoWidth;
-        canvasRef.current.height = videoRef.current.videoHeight;
-        ctx.drawImage(videoRef.current, 0, 0);
-        const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.85);
-        onPhotoCapture(dataUrl);
+      const w = videoRef.current.videoWidth;
+      const h = videoRef.current.videoHeight;
+      if (w > 0 && h > 0) {
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) {
+          canvasRef.current.width = w;
+          canvasRef.current.height = h;
+          ctx.drawImage(videoRef.current, 0, 0);
+          const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.85);
+          onPhotoCapture(dataUrl);
+        }
       }
     }
     // Stop camera
@@ -928,6 +936,10 @@ function Phase3ClinicalRecord({ brand, value, onChange, beforePhotos, onPhotoCap
           </div>
         </div>
 
+        {cameraError && (
+          <p className="text-sm text-red-600 mb-3">{cameraError}</p>
+        )}
+
         {showCamera && (
           <div className="mb-4 border rounded-lg overflow-hidden bg-black">
             <video ref={videoRef} autoPlay playsInline className="w-full max-h-80 object-contain" />
@@ -951,8 +963,16 @@ function Phase3ClinicalRecord({ brand, value, onChange, beforePhotos, onPhotoCap
         {beforePhotos.length > 0 ? (
           <div className="grid grid-cols-3 gap-2">
             {beforePhotos.map((photo, i) => (
-              <div key={i} className="aspect-square rounded-lg overflow-hidden border">
+              <div key={i} className="relative aspect-square rounded-lg overflow-hidden border group">
                 <img src={photo} alt={`Before photo ${i + 1}`} className="w-full h-full object-cover" />
+                <button
+                  type="button"
+                  onClick={() => onPhotoDelete(i)}
+                  className="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-600 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  aria-label="Delete photo"
+                >
+                  ×
+                </button>
               </div>
             ))}
           </div>
@@ -984,6 +1004,7 @@ interface Phase4Props {
   brand: Brand;
   afterPhotos: string[];
   onPhotoCapture: (photoData: string) => void;
+  onPhotoDelete: (index: number) => void;
   aftercareProvided: boolean;
   onAftercareChange: (provided: boolean) => void;
   sendAftercareEmail: boolean;
@@ -1002,6 +1023,7 @@ function Phase4CloseOut({
   brand,
   afterPhotos,
   onPhotoCapture,
+  onPhotoDelete,
   aftercareProvided,
   onAftercareChange,
   sendAftercareEmail,
@@ -1017,30 +1039,37 @@ function Phase4CloseOut({
 }: Phase4Props) {
   const theme = getBrandTheme(brand);
   const [showCamera, setShowCamera] = useState(false);
+  const [cameraError, setCameraError] = useState('');
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
   const startCamera = useCallback(async () => {
+    setCameraError('');
     setShowCamera(true);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640, height: 480 } });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: 1280, height: 720 } });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     } catch {
-      // Camera not available
+      setCameraError('Camera unavailable or permission denied.');
+      setShowCamera(false);
     }
   }, []);
 
   const capturePhoto = useCallback(() => {
     if (videoRef.current && canvasRef.current) {
-      const ctx = canvasRef.current.getContext('2d');
-      if (ctx) {
-        canvasRef.current.width = videoRef.current.videoWidth;
-        canvasRef.current.height = videoRef.current.videoHeight;
-        ctx.drawImage(videoRef.current, 0, 0);
-        const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.85);
-        onPhotoCapture(dataUrl);
+      const w = videoRef.current.videoWidth;
+      const h = videoRef.current.videoHeight;
+      if (w > 0 && h > 0) {
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) {
+          canvasRef.current.width = w;
+          canvasRef.current.height = h;
+          ctx.drawImage(videoRef.current, 0, 0);
+          const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.85);
+          onPhotoCapture(dataUrl);
+        }
       }
     }
     if (videoRef.current?.srcObject) {
@@ -1073,6 +1102,10 @@ function Phase4CloseOut({
           </Button>
         </div>
 
+        {cameraError && (
+          <p className="text-sm text-red-600 mb-3">{cameraError}</p>
+        )}
+
         {showCamera && (
           <div className="mb-4 border rounded-lg overflow-hidden bg-black">
             <video ref={videoRef} autoPlay playsInline className="w-full max-h-80 object-contain" />
@@ -1096,8 +1129,16 @@ function Phase4CloseOut({
         {afterPhotos.length > 0 ? (
           <div className="grid grid-cols-3 gap-2">
             {afterPhotos.map((photo, i) => (
-              <div key={i} className="aspect-square rounded-lg overflow-hidden border">
+              <div key={i} className="relative aspect-square rounded-lg overflow-hidden border group">
                 <img src={photo} alt={`After photo ${i + 1}`} className="w-full h-full object-cover" />
+                <button
+                  type="button"
+                  onClick={() => onPhotoDelete(i)}
+                  className="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-600 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  aria-label="Delete photo"
+                >
+                  ×
+                </button>
               </div>
             ))}
           </div>
@@ -1550,6 +1591,7 @@ export function FormRenderer({
             onChange={setClinicalData}
             beforePhotos={beforePhotos}
             onPhotoCapture={(photo) => setBeforePhotos((prev) => [...prev, photo])}
+            onPhotoDelete={(i) => setBeforePhotos((prev) => prev.filter((_, idx) => idx !== i))}
             onOpenFacialMapping={() => setShowFacialMapping(true)}
             errors={phaseErrors}
           />
@@ -1560,6 +1602,7 @@ export function FormRenderer({
             brand={brand}
             afterPhotos={afterPhotos}
             onPhotoCapture={(photo) => setAfterPhotos((prev) => [...prev, photo])}
+            onPhotoDelete={(i) => setAfterPhotos((prev) => prev.filter((_, idx) => idx !== i))}
             aftercareProvided={aftercareProvided}
             onAftercareChange={setAftercareProvided}
             sendAftercareEmail={sendAftercareEmail}

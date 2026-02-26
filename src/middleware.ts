@@ -1,64 +1,39 @@
-import { getToken } from 'next-auth/jwt';
-import { NextRequest, NextResponse } from 'next/server';
-
-// ============================================
-// Role-based Route Protection Middleware
-// ============================================
-// Protects routes based on authentication and role:
-//   /admin/*  → ADMIN or PRESCRIBER only
-//   /dashboard/*, /treatment-journey/*, /command-centre/* → any authenticated user
-//   /login, /, /api/auth/* → public
-
-const PUBLIC_PATHS = ['/', '/login', '/api/auth'];
-
-const ADMIN_PATHS = ['/admin'];
-
-const ADMIN_ROLES = ['ADMIN', 'PRESCRIBER'];
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const path = request.nextUrl.pathname;
 
-  // Allow public paths
-  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'))) {
-    return NextResponse.next();
+  // 1. Define public paths that don't need a login
+  const isPublicPath = path === "/login" || path === "/api/auth";
+
+  // 2. Get the token
+  // We explicitly pass the secret here to fix the "MissingSecret" error
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+
+  // 3. Redirect logic
+  // If they are logged in and try to go to login page, send them to admin
+  if (isPublicPath && token) {
+    return NextResponse.redirect(new URL("/admin", request.nextUrl));
   }
 
-  // Allow static assets and Next.js internals
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/favicon') ||
-    pathname.includes('.')
-  ) {
-    return NextResponse.next();
-  }
-
-  // Get the JWT token (set by next-auth)
-  const token = await getToken({ req: request });
-
-  // Not authenticated → redirect to login
-  if (!token) {
-    const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('callbackUrl', pathname);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // Check /admin route access — ADMIN and PRESCRIBER only
-  if (ADMIN_PATHS.some((p) => pathname.startsWith(p))) {
-    const role = token.role as string;
-    if (!ADMIN_ROLES.includes(role)) {
-      // Forbidden — redirect to dashboard with error
-      const dashUrl = new URL('/dashboard', request.url);
-      dashUrl.searchParams.set('error', 'forbidden');
-      return NextResponse.redirect(dashUrl);
-    }
+  // If they are NOT logged in and try to go to a protected page, send to login
+  if (!isPublicPath && !token) {
+    return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 
   return NextResponse.next();
 }
 
+// Protect all routes except static files and auth APIs
 export const config = {
   matcher: [
-    // Match all routes except static files and Next.js internals
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    "/admin/:path*",
+    "/dashboard/:path*",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

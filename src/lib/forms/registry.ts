@@ -5,6 +5,8 @@ import { plgUkForms } from './definitions/plg-uk';
 import { menhancementsForms } from './definitions/menhancements';
 import { waxForMenForms } from './definitions/wax-for-men';
 import { waxForWomenForms } from './definitions/wax-for-women';
+import { botoxForms } from './definitions/botox';
+import { dermalFillerForms } from './definitions/dermal-fillers';
 
 // ============================================
 // FORM REGISTRY
@@ -74,6 +76,8 @@ export const formRegistry = new FormRegistry();
 export function initializeFormRegistry(): void {
   formRegistry.registerAll(plgUkForms);
   formRegistry.registerAll(menhancementsForms);
+  formRegistry.registerAll(botoxForms);
+  formRegistry.registerAll(dermalFillerForms);
   formRegistry.registerAll(waxForMenForms);
   formRegistry.registerAll(waxForWomenForms);
 }

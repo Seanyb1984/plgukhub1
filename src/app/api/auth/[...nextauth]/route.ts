@@ -37,16 +37,11 @@ export const authOptions = {
           return null;
         }
 
-        // 3. EMERGENCY BYPASS (Set to 'true' to force login)
-        // Once you are in, we will build the UI to reset your password properly.
-        const isPasswordCorrect = true; 
-        
-        /* // Secure version for later:
+        // 3. Verify password against stored hash
         const isPasswordCorrect = await bcrypt.compare(
-          credentials.password as string, 
+          credentials.password as string,
           user.passwordHash
-        ); 
-        */
+        );
 
         if (!isPasswordCorrect) {
           console.log("Auth failed: Invalid password for:", user.email);

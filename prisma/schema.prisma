@@ -322,8 +322,9 @@ model TreatmentEpisode {
   batchRegister        BatchRegister? @relation(fields: [batchRegisterId], references: [id])
   batchNumber         String?    
   lotNumber           String?
-  dosage              String?    
-  injectionSites      Json?      
+  expiryDate          DateTime?
+  dosage              String?
+  injectionSites      Json?
   clinicalNotes       String?
   complications       String?
 

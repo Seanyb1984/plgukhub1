@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/auth';
 import { prisma } from '@/lib/db';
 
 // ============================================
 // POST /api/episodes — Create episode from pre-consent
 // ============================================
 export async function POST(request: NextRequest) {
-  const token = await getToken({ req: request });
-  if (!token) {
+  const session = await auth();
+  if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+  const token = session.user as any;
 
   try {
     const body = await request.json();
@@ -150,11 +151,7 @@ export async function POST(request: NextRequest) {
 // GET /api/episodes?ref=xxx — Lookup episode
 // ============================================
 export async function GET(request: NextRequest) {
-  const token = await getToken({ req: request });
-  if (!token) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+  // Public endpoint — returns only non-sensitive episode metadata for forms
   const { searchParams } = new URL(request.url);
   const ref = searchParams.get('ref');
 
@@ -195,10 +192,11 @@ export async function GET(request: NextRequest) {
 // PATCH /api/episodes — Complete treatment, lock record, trigger automations
 // ============================================
 export async function PATCH(request: NextRequest) {
-  const token = await getToken({ req: request });
-  if (!token) {
+  const session = await auth();
+  if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+  const token = session.user as any;
 
   try {
     const body = await request.json();

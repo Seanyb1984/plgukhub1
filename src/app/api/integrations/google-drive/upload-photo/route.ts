@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/auth';
 import { prisma } from '@/lib/db';
 import { uploadBeforePhoto, uploadAfterPhoto } from '@/lib/integrations/google-drive';
 
 export async function POST(request: NextRequest) {
-  const token = await getToken({ req: request });
-  if (!token) {
+  const session = await auth();
+  if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

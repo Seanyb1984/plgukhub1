@@ -1,5 +1,5 @@
-import { getToken } from 'next-auth/jwt';
-import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/auth';
+import { NextResponse } from 'next/server';
 
 // ============================================
 // Role-based Route Protection Middleware
@@ -9,14 +9,14 @@ import { NextRequest, NextResponse } from 'next/server';
 //   /dashboard/*, /treatment-journey/*, /command-centre/* → any authenticated user
 //   /login, /, /api/auth/* → public
 
-const PUBLIC_PATHS = ['/', '/login', '/api/auth'];
+const PUBLIC_PATHS = ['/', '/login', '/api/auth', '/forms'];
 
 const ADMIN_PATHS = ['/admin'];
 
 const ADMIN_ROLES = ['ADMIN', 'PRESCRIBER'];
 
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+export default auth((req) => {
+  const { pathname } = req.nextUrl;
 
   // Allow public paths
   if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'))) {
@@ -32,29 +32,29 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Get the JWT token (set by next-auth)
-  const token = await getToken({ req: request });
+  // req.auth contains the session (Auth.js v5)
+  const user = req.auth?.user;
 
   // Not authenticated → redirect to login
-  if (!token) {
-    const loginUrl = new URL('/login', request.url);
+  if (!user) {
+    const loginUrl = new URL('/login', req.url);
     loginUrl.searchParams.set('callbackUrl', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
   // Check /admin route access — ADMIN and PRESCRIBER only
   if (ADMIN_PATHS.some((p) => pathname.startsWith(p))) {
-    const role = token.role as string;
+    const role = (user as any)?.role as string;
     if (!ADMIN_ROLES.includes(role)) {
       // Forbidden — redirect to dashboard with error
-      const dashUrl = new URL('/dashboard', request.url);
+      const dashUrl = new URL('/dashboard', req.url);
       dashUrl.searchParams.set('error', 'forbidden');
       return NextResponse.redirect(dashUrl);
     }
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
   matcher: [

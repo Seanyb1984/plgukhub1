@@ -44,6 +44,7 @@ declare module 'next-auth/jwt' {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -57,7 +58,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email: (credentials.email as string).toLowerCase().trim() },
           include: { site: true },
         });
 
@@ -86,8 +87,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           name: user.name,
           role: user.role,
           brand: user.brand,
-          siteId: user.siteId,
-          siteName: user.site.name,
+          siteId: user.siteId ?? '',
+          siteName: user.site?.name ?? '',
         };
       },
     }),

@@ -26,7 +26,7 @@ export async function GET() {
   try {
     const user = await prisma.user.findUnique({
       where: { email: 'admin@plguk.co.uk' },
-      select: { id: true, email: true, role: true, passwordHash: true }
+      select: { id: true, email: true, role: true, passwordHash: true, isActive: true, siteId: true }
     });
 
     if (!user) {
@@ -35,6 +35,8 @@ export async function GET() {
     }
 
     results.user_found = 'OK: ' + user.email + ' role=' + user.role;
+    results.user_isActive = String((user as any).isActive ?? 'N/A');
+    results.user_siteId = (user as any).siteId ?? 'NULL';
     results.password_hash_present = user.passwordHash ? 'YES (len=' + user.passwordHash.length + ')' : 'NO';
     storedHash = user.passwordHash;
   } catch (e: any) {

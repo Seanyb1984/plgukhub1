@@ -4,6 +4,8 @@
 import { TreatmentJourneyClient } from './TreatmentJourneyClient';
 import { fetchPrescribersAction } from '@/lib/actions/treatment-journey';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Treatment Journey | PLG UK Hub',
   description: 'Multi-phase treatment journey with CQC compliance',

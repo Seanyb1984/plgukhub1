@@ -1,6 +1,8 @@
 // PLG UK Hub - Admin Command Centre Dashboard
 // Server Component — queries Prisma directly, defensive against DB being unavailable
 
+export const dynamic = 'force-dynamic';
+
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import Link from 'next/link';

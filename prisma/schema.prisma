@@ -7,8 +7,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") // ✅ FIXED: Added this required line
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
 }
 
 // ============================================
@@ -350,6 +351,8 @@ model TreatmentEpisode {
   createdAt            DateTime   @default(now())
   updatedAt            DateTime   @updatedAt
 
+  clinicalPhotos      ClinicalPhoto[]
+
   @@index([brand, siteId])
   @@index([clientId])
   @@index([practitionerId])
@@ -479,8 +482,10 @@ model TreatmentJourney {
 
 model ClinicalPhoto {
   id                  String   @id @default(cuid())
-  treatmentJourneyId  String
-  treatmentJourney    TreatmentJourney @relation(fields: [treatmentJourneyId], references: [id])
+  treatmentJourneyId  String?
+  treatmentJourney    TreatmentJourney? @relation(fields: [treatmentJourneyId], references: [id])
+  treatmentEpisodeId  String?
+  treatmentEpisode    TreatmentEpisode? @relation(fields: [treatmentEpisodeId], references: [id])
   clientId            String
   client              Client   @relation(fields: [clientId], references: [id])
 

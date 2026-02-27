@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
         for (let i = 0; i < beforePhotos.length; i++) {
           const photo = await tx.clinicalPhoto.create({
             data: {
-              treatmentJourneyId: ep.id, // Re-use the relation field
+              treatmentEpisodeId: ep.id,
               clientId: resolvedClientId,
               photoType: 'before',
               phase: 'LEGAL_CONSENT',
@@ -246,7 +246,7 @@ export async function PATCH(request: NextRequest) {
           for (let i = 0; i < afterPhotos.length; i++) {
             const photo = await tx.clinicalPhoto.create({
               data: {
-                treatmentJourneyId: episode.id,
+                treatmentEpisodeId: episode.id,
                 clientId: episode.clientId,
                 photoType: 'after',
                 phase: 'CLOSE_OUT',
@@ -299,7 +299,6 @@ export async function PATCH(request: NextRequest) {
             lockedAt: new Date(),
             lockedById: token.id as string,
             lockReason: 'Treatment completed and signed off',
-            expiryDate: expiryDate ? new Date(expiryDate) : null,
           },
         });
 

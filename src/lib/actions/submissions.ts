@@ -5,6 +5,7 @@ import { auth } from '@/lib/auth';
 import { createAuditLog, getChangedFields } from '@/lib/audit';
 import { getFormDefinition, validateForm, evaluateStopConditions } from '@/lib/forms';
 import { generateResumeToken } from '@/lib/utils';
+import { triggerEscalationWebhook } from '@/lib/integrations/zapier-webhook';
 import { revalidatePath } from 'next/cache';
 import type { Brand, SubmissionStatus, RiskLevel, Prisma } from '@prisma/client';
 
@@ -139,6 +140,35 @@ export async function createSubmission(
     });
 
     revalidatePath('/admin/submissions');
+
+    // Fire escalation webhook (non-blocking — never delays or blocks submission)
+    if (requiresEscalation) {
+      const formData = input.data as Record<string, unknown>;
+      triggerEscalationWebhook({
+        submission_id: submission.id,
+        form_type: input.formType,
+        brand: input.brand,
+        site_id: input.siteId,
+        timestamp: new Date().toISOString(),
+        risk_level: riskLevel,
+        escalation_reason: stopConditions
+          .filter((c) => c.action === 'escalate')
+          .map((c) => c.message)
+          .join('; '),
+        patient_id: input.clientId ?? null,
+        practitioner_id: session.user.id,
+        practitioner_name: session.user.name,
+        practitioner_email: session.user.email,
+        event_severity: formData.event_severity as string | undefined,
+        event_type: Array.isArray(formData.event_type)
+          ? (formData.event_type as string[]).join(', ')
+          : (formData.event_type as string | undefined),
+        event_description: formData.event_description as string | undefined,
+        complication_type: (formData.complication_type ??
+          formData.adverse_event_type ??
+          formData.event_type) as string | undefined,
+      });
+    }
 
     return {
       success: true,

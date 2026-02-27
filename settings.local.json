@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd C:\\\\Users\\\\sb\\\\Desktop\\\\menhancements-cqc-app:*)"
+    ]
+  }
+}

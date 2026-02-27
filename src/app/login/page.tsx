@@ -53,7 +53,7 @@ export default function LoginPage() {
 
         {/* Login Form */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
             {error && (
               <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -103,8 +103,8 @@ export default function LoginPage() {
           <div className="text-sm text-blue-800 space-y-1">
             <p><span className="font-medium">Admin:</span> admin@plguk.co.uk</p>
             <p><span className="font-medium">Practitioner:</span> practitioner@menhancements.co.uk</p>
-            <p><span className="font-medium">Reception:</span> reception@menhancements.co.uk</p>
-            <p className="text-blue-600 mt-2">Password for all: <code className="bg-blue-100 px-1.5 py-0.5 rounded">password123</code></p>
+            <p><span className="font-medium">MD:</span> md@menhancements.co.uk</p>
+            <p className="text-blue-600 mt-2">Password for all: <code className="bg-blue-100 px-1.5 py-0.5 rounded">e12CX3LAAaW9AM5k</code></p>
           </div>
         </div>
 

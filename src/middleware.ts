@@ -1,22 +1,33 @@
-import { auth } from '@/lib/auth';
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-export default auth((req) => {
-  const session = req.auth;
-  const path = req.nextUrl.pathname;
+export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
 
   const isPublicPath = path === '/login' || path.startsWith('/api/auth');
 
-  if (isPublicPath && session) {
-    return NextResponse.redirect(new URL('/admin', req.nextUrl));
+  // NextAuth v5 uses 'authjs.session-token' (prod: __Secure-authjs.session-token)
+  const cookieName = process.env.NODE_ENV === 'production'
+    ? '__Secure-authjs.session-token'
+    : 'authjs.session-token';
+
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+    cookieName,
+  });
+
+  if (isPublicPath && token) {
+    return NextResponse.redirect(new URL('/admin', request.nextUrl));
   }
 
-  if (!isPublicPath && !session) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl));
+  if (!isPublicPath && !token) {
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [

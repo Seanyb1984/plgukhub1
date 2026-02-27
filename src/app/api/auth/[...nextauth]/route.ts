@@ -59,11 +59,12 @@ export const authOptions = {
       }
     })
   ],
-  session: { 
-    strategy: "jwt" as const 
+  session: {
+    strategy: "jwt" as const
   },
-  pages: { 
-    signIn: "/login" 
+  trustHost: true,
+  pages: {
+    signIn: "/login"
   },
   callbacks: {
     async jwt({ token, user }: any) {

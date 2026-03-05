@@ -67,6 +67,24 @@ enum TreatmentJourneyStatus {
   CANCELLED
 }
 
+enum AppointmentStatus {
+  BOOKED
+  CONFIRMED
+  CHECKED_IN
+  IN_PROGRESS
+  COMPLETED
+  NO_SHOW
+  CANCELLED_BY_CLIENT
+  CANCELLED_BY_CLINIC
+}
+
+enum BookingSource {
+  RECEPTION
+  ONLINE
+  PHONE
+  WALK_IN
+}
+
 enum GovernanceFormType {
   FIRE_SAFETY_CHECK
   CLEANING_LOG
@@ -108,6 +126,10 @@ model Site {
   treatmentJourneys  TreatmentJourney[]
   treatmentEpisodes  TreatmentEpisode[]
   governanceLogs     GovernanceLog[]
+  rooms              Room[]
+  staffSchedules     StaffSchedule[]
+  siteTreatments     SiteTreatment[]
+  appointments       Appointment[]
 
   @@unique([name, brand])
   @@index([brand])
@@ -127,6 +149,8 @@ model User {
   siteId        String
   site          Site      @relation(fields: [siteId], references: [id])
   isActive      Boolean   @default(true)
+  colour        String?
+  isBookable    Boolean   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   lastLoginAt   DateTime?
@@ -140,6 +164,10 @@ model User {
   prescribedEpisodes    TreatmentEpisode[]  @relation("EpisodePrescriber")
   governanceLogs        GovernanceLog[]
   trainingSignoffs      StaffTraining[]
+  staffSchedules        StaffSchedule[]
+  scheduleOverrides     ScheduleOverride[]
+  appointments          Appointment[]       @relation("AppointmentPractitioner")
+  createdAppointments   Appointment[]       @relation("AppointmentCreatedBy")
 
   @@index([brand, siteId])
   @@index([role])
@@ -239,6 +267,7 @@ model Client {
   treatmentJourneys  TreatmentJourney[]
   treatmentEpisodes  TreatmentEpisode[]
   clinicalPhotos     ClinicalPhoto[]
+  appointments       Appointment[]
 
   @@index([status])
   @@index([email])
@@ -790,4 +819,155 @@ model SubjectAccessRequest {
 
   @@index([requestorEmail])
   @@index([status])
+}
+
+// ============================================
+// BOOKING & SCHEDULING
+// ============================================
+
+model Treatment {
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  brand             Brand
+  category          String   // wax_women, wax_men, menhancements, skincare, clippering, massage_men, massage_women, spray_tanning, lash_brow
+
+  parentId          String?
+  parent            Treatment?  @relation("TreatmentHierarchy", fields: [parentId], references: [id])
+  children          Treatment[] @relation("TreatmentHierarchy")
+
+  treatmentTypeKey  String?  // bridges to TreatmentEpisode.treatmentType
+
+  durationMins      Int      @default(30)
+  price             Int      @default(0)  // in pence
+  bookingBuffer     Int      @default(0)  // minutes buffer after appointment
+
+  isPom             Boolean  @default(false)
+  isOnlineBookable  Boolean  @default(true)
+  isActive          Boolean  @default(true)
+  requiresConsent   Boolean  @default(false)
+  requiresPatchTest Boolean  @default(false)
+
+  isAddOn           Boolean  @default(false)
+  addOnPrice        Int?     // pence, for add-ons with variable pricing
+
+  description       String?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  siteOfferings     SiteTreatment[]
+  appointments      Appointment[]
+
+  @@index([brand])
+  @@index([category])
+  @@index([parentId])
+  @@index([isActive])
+}
+
+model SiteTreatment {
+  siteId      String
+  site        Site      @relation(fields: [siteId], references: [id])
+  treatmentId String
+  treatment   Treatment @relation(fields: [treatmentId], references: [id])
+
+  @@id([siteId, treatmentId])
+  @@index([siteId])
+  @@index([treatmentId])
+}
+
+model StaffSchedule {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id])
+
+  dayOfWeek   Int      // 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri, 5=Sat, 6=Sun
+  startTime   String   // "09:00"
+  endTime     String   // "18:00"
+  isAvailable Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, siteId, dayOfWeek])
+  @@index([userId])
+  @@index([siteId])
+}
+
+model ScheduleOverride {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  date        DateTime @db.Date
+  isAvailable Boolean  @default(false)
+  startTime   String?  // override hours if available
+  endTime     String?
+  reason      String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id])
+
+  name        String
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  appointments Appointment[]
+
+  @@index([siteId])
+}
+
+model Appointment {
+  id                String            @id @default(cuid())
+  siteId            String
+  site              Site              @relation(fields: [siteId], references: [id])
+
+  clientId          String
+  client            Client            @relation(fields: [clientId], references: [id])
+
+  userId            String            // practitioner
+  user              User              @relation("AppointmentPractitioner", fields: [userId], references: [id])
+
+  treatmentId       String
+  treatment         Treatment         @relation(fields: [treatmentId], references: [id])
+
+  roomId            String?
+  room              Room?             @relation(fields: [roomId], references: [id])
+
+  startTime         DateTime
+  endTime           DateTime
+
+  status            AppointmentStatus @default(BOOKED)
+  source            BookingSource     @default(RECEPTION)
+
+  notes             String?
+  cancellationReason String?
+  cancelledAt       DateTime?
+  noShowAt          DateTime?
+
+  createdById       String?
+  createdBy         User?             @relation("AppointmentCreatedBy", fields: [createdById], references: [id])
+
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([siteId, startTime])
+  @@index([userId, startTime])
+  @@index([clientId])
+  @@index([status])
+  @@index([startTime])
 }
